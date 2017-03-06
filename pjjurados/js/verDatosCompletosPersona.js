@@ -4,10 +4,10 @@
 
 
 function cargarDatosPersona(){
-	
+	seleccionarMenu("liSor","opSor1");
 	var idPersona = $("#hfIdPer").val();
 	var idLote = $("#hfIdLote").val();
-	$.post("Negocios/personas.php", {oper: 'ver', idPersona: idPersona, idLote: idLote}, function(data){ 	 	
+	$.post("Negocios/personas.php", {oper: 'verhtml', idPersona: idPersona, idLote: idLote}, function(data){ 	 	
 		
 		var respuesta = parseInt(data);		
 		//alert(data);
@@ -50,6 +50,16 @@ function cargarDatosPersona(){
       
 }
 
+function cargarDatosPersonaHTML(){
+	seleccionarMenu("liSor","opSor1");
+	var idPersona = $("#hfIdPer").val();
+	var idLote = $("#hfIdLote").val();
+	$.post("Negocios/personas.php", {oper: 'verhtml', idPersona: idPersona, idLote: idLote}, function(data){ 	 	
+		$("#verInformacionDDJJ").html(data);
+	    
+	});
+      
+}
 
 function cargarDatosLote(){
 	
@@ -69,7 +79,7 @@ function cargarDatosLote(){
 		
 			$("#cbResultado").val(respuesta.idEstadoDDJJ);
 			$("#txtNotificacion").val(respuesta.FechaNotificacion);
-                        $("#txtIntimacion").val(respuesta.FechaIntimacion);
+            $("#txtIntimacion").val(respuesta.FechaIntimacion);
 			$("#txtRecepcion").val(respuesta.FechaRecepcionDDJJ);
 			$("#txtObservacionesEst").val(respuesta.ObservacionesEstado);
 			$("#cbImpedimento").val(respuesta.idTipoImpedimento);
@@ -105,8 +115,9 @@ function cargarDatosLote(){
 
 $(function() {
 	
-	cargarDatosPersona();
-	cargarDatosLote();
+	//cargarDatosPersona();
+	//cargarDatosLote();
+	cargarDatosPersonaHTML();
 	
 	
 });	

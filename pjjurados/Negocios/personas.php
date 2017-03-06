@@ -100,7 +100,7 @@ function listarXLote($idLote,$apellido,$nombre,$nroDoc,$tipoDoc) {
 								}
 								if($row["idEstadoDDJJ"] >= $ESTADOSDDJJ["NOTIFICADA"])
 								{
-									$tabla .= "<li><a class='btn tip' title='Generar Intimaci&oacute;n' href='pers_completarDDJJ.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Generar Intimaci&oacute;n'>
+									$tabla .= "<li><a class='btn tip' title='Generar Intimaci&oacute;n' href='pers_generarIntimacion.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Generar Intimaci&oacute;n'>
 									<i class='icon-paste'></i></a></li>";
 								}
 						  }
@@ -195,6 +195,131 @@ function verPersona($idPersona, $idLote) {
 		}
 	} catch ( Exception $e ) {
 		return "0";
+	}
+}
+
+function verPersonaHTML($idPersona, $idLote) {
+	try {
+		$base = new PDOConfig ();
+
+		$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,TD.Descripcion as TipoDoc,P.DNI,P.Sexo,P.CUIL,P.FechaNacimiento,P.Nacionalidad,P.LugarNacimiento,
+		P.Domicilio,P.idLocalidad,L.Descripcion as localidad,P.idCentroDistribucion,P.Circuito,P.CaracteristicaFijo,P.TelefonoFijo,
+		P.CaracteristicaCelu,P.TelefonoCelular,P.CorreoElectronico,P.Profesion,P.Ocupacion,P.Observaciones,
+		LP.idLP,LP.NroCedula,LP.FechaNotificacion,LP.ObservacionesEstado,LP.idEstadoDDJJ,LP.FechaIntimacion,LP.AptoJurado,LP.idTipoResultado
+		,LP.ObservacionesImpedimento, TI.Descripcion as Impedimiento
+		FROM personas P
+		INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
+		INNER JOIN localidades L ON P.idLocalidad = L.idLocalidad 
+		INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona AND LP.idLote = $idLote
+		LEFT JOIN tipoimpedimentos TI ON TI.idTipoImpedimento = LP.idTipoImpedimento
+		WHERE P.idPersona = $idPersona ";
+		// echo $sql;
+		$html = "";
+		$res = $base->query ( $sql );
+		if ($res) {
+			if ($row = $res->fetch ( PDO::FETCH_ASSOC )) {
+				if ($row ["FechaNacimiento"] != "") {
+					$fechaNac = date_create ( $row ["FechaNacimiento"] );
+					$row ["FechaNacimiento"] = date_format ( $fechaNac, 'd/m/Y' );
+				} else {
+					$row ["FechaNacimiento"] = "";
+				}
+
+				if ($row ["FechaNotificacion"] != "") {
+					$fechaNot = date_create ( $row ["FechaNotificacion"] );
+					$row ["FechaNotificacion"] = date_format ( $fechaNot, 'd/m/Y' );
+				} else {
+					$row ["FechaNotificacion"] = "";
+				}
+
+				
+
+				$html .= "<div class='row'>
+  							<div class='col'><b>Nombre y Apellido :</b> ".$row ["Nombre"]." ".$row ["Apellido"]."</div>
+							<div class='col'><b>Documento :</b> ".$row ["TipoDoc"]." ".$row ["DNI"]." </div>
+							<div class='col'><b>Ciul :</b> ".$row ["CUIL"]." </div>
+							<div class='col'><b>Nacionalidad :</b> ".$row ["Nacionalidad"]." </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Lugar Nacimiento :</b> ".$row ["LugarNacimiento"]."</div>
+							<div class='col'><b>Fecha de Nacimiento :</b> ".$row ["FechaNacimiento"]." </div>
+							<div class='col'><b>Domicilio :</b> ".$row ["Domicilio"]." ". $row ["localidad"]." </div>
+							<div class='col'><b>Telefonos :</b> ".$row ["CaracteristicaFijo"]."-".$row ["TelefonoFijo"]. " " .$row ["CaracteristicaCelu"]."-".$row ["TelefonoCelular"]. " </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Correo Electronico :</b> ".$row ["CorreoElectronico"]."</div>
+							<div class='col'><b>Profesión :</b> ".$row ["Profesion"]." </div>
+							<div class='col'><b>Ocupación :</b> ".$row ["Ocupacion"]." </div>
+							<div class='col'><b>Nro.Cedula :</b> ".$row ["NroCedula"]. " </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Es Apto? :</b> ".($row ["AptoJurado"] == "0" ? "No" : "Si")."</div>
+							<div class='col'><b>Resultado :</b> ".($row ["idTipoResultado"] == null ? "Sin Calificar" : "")." </div>
+							<div class='col'><b>Impedimiento :</b> ".$row ["Impedimiento"]." </div>
+							<div class='col'><b>Obs. Impedimiento :</b> ".$row ["ObservacionesImpedimento"]. " </div>
+						</div>";
+				if ($row ["FechaIntimacion"] != "") {
+					$fechaInt = date_create ( $row ["FechaIntimacion"] );
+					$row ["FechaIntimacion"] = date_format ( $fechaInt, 'd/m/Y' );
+					$html .= "<div class='row'>
+  							<div class='col'><b>Fecha Intimación :</b> ".$row ["FechaIntimacion"]."</div>
+							<div class='col'> </div>
+							<div class='col'> </div>
+							<div class='col'> </div>
+						</div>";
+				}
+				$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,P.DNI, TD.Descripcion AS tipoDoc,P.Sexo,
+				LP.idLP,LP.NroCedula,LP.idEstadoDDJJ,LPN.lpnfecha as FechaNotificacion,LPN.lpnobservacion as ObservacionesEstado, LOC.Descripcion AS Localidad,C.Nombre AS centro
+				FROM personas P
+				INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona
+				INNER JOIN lotespersonanotificacion LPN ON LPN.idLP = LP.idLP
+				INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
+				INNER JOIN localidades LOC ON P.idLocalidad = LOC.idLocalidad
+				LEFT JOIN centrodistribucion C ON P.idCentroDistribucion = C.idCentroDistribucion
+				WHERE LP.idPersona = $idPersona
+				ORDER BY P.Apellido,P.Nombre,LPN.idlotespersonanotificacion ";
+				$res = $base->query ( $sql );
+				if ($res) {
+					$html .= "<div class='row'>
+			  							<div class='col-4'><b>Notificaciones </b> </div>
+										
+									</div>";
+					foreach ( $res as $row ) {
+						if($row["FechaNotificacion"] != "")
+						{
+							$FechaNotificacion = date_create($row ["FechaNotificacion"]);
+							$row["FechaNotificacion"] = date_format( $FechaNotificacion, 'd/m/Y' );
+							$html .= "<div class='row'>
+			  							<div class='col'><b>Fecha :</b> ".$row ["FechaNotificacion"]."</div>
+										<div class='col'><b>Localidad :</b> ".$row ["Localidad"]." </div>
+										<div class='col'><b>Centro :</b> ".$row ["centro"]." </div>
+										<div class='col'><b>Observación :</b> ".$row ["ObservacionesEstado"]."</div>
+									</div>";
+						}
+				
+					}
+				
+				}
+				
+				//return json_encode ( $row );
+				return $html;
+			} else {
+				return "<div class='alert alert-error' style='margin-top: 16px;'>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+                        	Ha ocurrido un error al intentar recuperar la DDJJ
+                    	</div>";
+			}
+		} else {
+			return "<div class='alert alert-error' style='margin-top: 16px;'>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+                        	No existen datos para esta persona
+                    	</div>";
+		}
+	} catch ( Exception $e ) {
+		return "<div class='alert alert-error' style='margin-top: 16px;'>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+                        	Ha ocurrido al intentar conectarse a la base
+                    	</div>";
 	}
 }
 function actualizarPersona($idPers, $idLote, $apellido, $nombre, $nroDoc, $tipoDoc, $sexo, $cuil, 
@@ -1169,8 +1294,13 @@ if ($_POST) {
 			case 'ver' :
 				$idPers = $_POST ["idPersona"];
 				$idLote = $_POST ["idLote"];
-				$rta = verPersona ( $idPers, $idLote );
+				$rta = verPersona( $idPers, $idLote );
 				break;
+			case 'verhtml' :
+					$idPers = $_POST ["idPersona"];
+					$idLote = $_POST ["idLote"];
+					$rta = verPersonaHTML( $idPers, $idLote );
+					break;
 			
 			case 'modificar' :
 				$idPers = $_POST ["hfIdPer"];
@@ -1329,10 +1459,18 @@ if ($_POST) {
 		case "generarIntimacion":
 				$idLote = $_POST["hfIdLote"];
 				$personas = $_POST["personas"];
-				$plantilla = $_POST["hfArchiCedula"];				
+				$plantilla = $_POST["hfArchiCedula"];
 				//print_r($personas);
 				$rta = generarIntimaciones($idLote,$personas,$plantilla);
 				break;
+		case "GenerarPersXIntimacion":
+			$idLote = $_POST["hfIdLote"];
+			$unpersona = $_POST["hfIdPersona"];
+			$personas[0] = $unpersona;
+			$plantilla = $_POST["hfArchiCedula"];
+			//print_r($personas);
+			$rta = generarIntimaciones($idLote,$personas,$plantilla);
+			break;
 			
 		}
 	} catch ( Exception $e ) {

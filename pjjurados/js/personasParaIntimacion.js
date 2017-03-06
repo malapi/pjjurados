@@ -31,7 +31,42 @@ function buscarPersonas(){
 
 //===== File uploader =====//
 $(function(){	
-	seleccionarMenu("liSor","opSor5");
+	//alert($("#GenerarPersXIntimacion"));
+	if($("#oper").val() == 'GenerarPersXIntimacion'){
+		seleccionarMenu("liSor","opSor1");
+		var idPersona = $("#hfIdPersona").val();
+		var idLote = $("#hfIdLote").val();
+		$.post("Negocios/personas.php", {oper: 'ver', idPersona: idPersona, idLote: idLote}, function(data){ 	 	
+			
+			var respuesta = parseInt(data);		
+			//alert(data);
+		    if(isNaN(respuesta)){ 
+		    	// como no es un numero, significa que devolvio un json  
+		    	var datos = JSON.parse(data);
+		    	$("#txtPersona").html("&nbsp;&nbsp;N&deg; de C&eacute;dula:"+datos.NroCedula+" "+datos.Apellido+", "+datos.Nombre);
+		    }
+		});
+		    	
+		    	
+		 $.post("Negocios/notificaciones.php", {oper:'verUltima', hfIdSorteo:$("#hfIdLote").val()}, function(data){ 	 	
+	     		var respuesta = parseInt(data);	
+	     	    if(isNaN(respuesta)){    // como no es un numero, significa que devolvio un json
+	     	    	var datos = JSON.parse(data);
+	     	    	if(datos.PlantillaIntimacion != "" && datos.PlantillaIntimacion != null)
+	     	    	{
+		     	    	$("#hfArchiCedula").val(datos.PlantillaIntimacion);
+		     	    	$('#resultado').html("<a href='uploads/plantillas/" + datos.PlantillaIntimacion + "'>" + datos.PlantillaIntimacion + "</a>");     	    	
+	     	    	}else{
+	     	    		$("#hfArchiCedula").val("");
+		     	    	$('#resultado').html("");
+	     	    		
+	     	    	}
+	     	    }
+	     	});
+	} else {
+		seleccionarMenu("liSor","opSor5");
+	}
+	
 	
 	$("#btnSelectTodo").click(function(){
 		 $(".selCk").prop("checked", true);
@@ -101,7 +136,6 @@ $(function(){
 			status.html('<img src="img/elements/loaders/6.gif" alt="" style="float: left;">');
 		},
 		onComplete: function(file, response){
-			//On completion clear the status
 			status.text('');
 			//Add uploaded file to list
 			//alert(response);
@@ -125,6 +159,41 @@ $(function(){
 		$("#txtNombreB").val("");
 		$("#txtNroDocB").val("");
 		 buscarPersonas();
+	});
+	
+	
+	
+	$("#btnGenerarIntimacioPersona").click(function(){
+		if($("#hfArchiCedula").val() != ""){
+			$("#respuesta").html("");
+			$.ajax({
+                url: "Negocios/personas.php",
+                type: 'post',
+                data: $("#formBuscarPers").serialize(),
+                success: function(resp) {  
+            		if(resp != "0")
+            		{                			
+            		   $("#respuestaInt").html("<div class='alert alert-success' style='margin-top: 16px;'>" +
+                       " <button type='button' class='close' data-dismiss='alert'>×</button>"+
+                       " Se han generado las intimaciones. Descargar Archivo " + resp +
+                       "</div>	");                			
+            			
+            		}else
+            		$("#respuestaInt").html("<div class='alert alert-error'>" +
+                            "<button type='button' class='close' data-dismiss='alert'>×</button> Error al generar las Intimaciones</div>");
+                	
+                },error: function(xhr, status, error){	
+		        	var error = formatErrorMessage(xhr, error);			        	
+	           	     $("#respuestaInt").html("<div class='alert alert-error'>" +
+                     "<button type='button' class='close' data-dismiss='alert'>×</button>"+
+                     error + "</div>");
+				} 
+            });
+    
+		}else{
+			$("#respuestaInt").html("<div class='alert alert-error'>" +
+            "<button type='button' class='close' data-dismiss='alert'>×</button> Debe carga la plantilla para las notificaciones</div>");
+		}
 	});
 	
 	

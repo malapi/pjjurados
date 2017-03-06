@@ -92,11 +92,7 @@ if ($_GET) {
  
 		<div class="widget ">
  		<div class="well">
-	 		<div class='navbar'>
-				<div class='navbar-inner'>
-					<h6>Filtrar Persona del Lote</h6>
-				</div>
-			</div> 
+	 		
 			<!-- <form id="formModificarSorteo" method="POST" 		enctype="multipart/form-data">
 				<fieldset>					
 					 <div class="widget row-fluid"> 	
