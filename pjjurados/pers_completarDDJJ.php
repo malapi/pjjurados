@@ -8,6 +8,7 @@ if ($_GET) {
 }
 ?>
 
+
 <!-- Content -->
 <div id="content">
 	<!-- Content wrapper -->
@@ -15,8 +16,10 @@ if ($_GET) {
 		<!-- Breadcrumbs line -->
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
-				<li><a href="index.html">Sorteos</a></li>
-				<li><a href="forms.html">Personas</a></li>
+				<li><a href="#">Lotes</a></li>
+				<li><a href="#">Lotes Activos</a></li>
+				<li><a href="#">Personas por Lote</a></li>
+				<li><a href="#">DDJJ</a></li>
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->
@@ -24,8 +27,9 @@ if ($_GET) {
 		<!-- Page header -->
 		<div class="page-header">
 			<div class="page-title">
-				<h5>Resultados</h5>
+				<h5>Completar Declaraci&oacute;n Jurada</h5>
 			</div>
+			
 		</div>
 		<!-- /page header -->
 
@@ -41,11 +45,6 @@ if ($_GET) {
 
 					<div id="divResultado" class="span12">
 						<div class="widget row-fluid">
-							<div class="navbar">
-								<div class="navbar-inner">
-									<h6>Resultados</h6>
-								</div>
-							</div>
 							<div class="well">
 								<div class="row-fluid">
 									<div class="span4">
@@ -408,6 +407,8 @@ if ($_GET) {
 							<a id="btncancel"
 								href="lot_personasXLote.php?id=<?php echo $idL; ?>"
 								class="btn btn-default">Cancelar</a>
+								<button id="boton-top" type="button" class="btn ">Ir Arriba</button>
+								
 						</div>
 					</div>
 					<br /> <br />

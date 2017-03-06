@@ -37,8 +37,8 @@ function listarXLote($idLote,$apellido,$nombre,$nroDoc,$tipoDoc) {
 			$where .= " AND P.Nombre LIKE '%$nombre%'";
 		}
 		
-		$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,P.DNI, TD.Descripcion AS tipoDoc,P.Sexo, 
-		        LP.NroCedula,LP.idEstadoDDJJ, E.Descripcion AS estadoDDJJ, L.FechaHasta AS VencLote
+		$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,P.DNI, TD.Descripcion AS tipoDoc,P.Sexo, P.idCentroDistribucion,
+		        LP.NroCedula,LP.idEstadoDDJJ, E.Descripcion AS estadoDDJJ, L.FechaHasta AS VencLote,LP.FechaNotificacion,LP.ObservacionesEstado,LP.idLP
 				FROM personas P
 				INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona
 				INNER JOIN lotes L ON LP.idLote = L.idLote
@@ -77,6 +77,11 @@ function listarXLote($idLote,$apellido,$nombre,$nroDoc,$tipoDoc) {
 							<li><a class='btn tip' title='Ver Datos' href='pers_verDatosPersonas.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Actualizar Datos'>
 						   	<i class='icon-info-sign'></i></a></li>";
 
+						if($row["FechaNotificacion"] != "")
+						{
+							$FechaNotificacion = date_create($row ["FechaNotificacion"]);
+							$row["FechaNotificacion"] = date_format( $FechaNotificacion, 'd/m/Y' );
+						}
 						  if(compara_fechas($row["VencLote"], date("Y-m-d")) > 0) 		
 						  {	
 						   		
@@ -85,9 +90,19 @@ function listarXLote($idLote,$apellido,$nombre,$nroDoc,$tipoDoc) {
 				
 								if($row["idEstadoDDJJ"] >= $ESTADOSDDJJ["ENVIADA"])
 								{
-									$tabla .= "<li><a class='btn tip' title='Completar Declaraci�n Jurada' href='pers_completarDDJJ.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Completar Declaraci&oacute;n Jurada'>
+									$tabla .= "<li><a class='btn tip' title='Completar Declaraci&oacute;n Jurada' href='pers_completarDDJJ.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Completar Declaraci&oacute;n Jurada'>
 														<i class='icon-check'></i></a></li>";
-								}								
+								}
+								if(true)
+								{
+									$tabla .= "<li><a class='btn tip' title='Cargar Notificaci&oacute;n' href='#' onclick=\"cargarNotificacionUnPersona('".$row ["idLP"]."','".$row["FechaNotificacion"]."','".$row["ObservacionesEstado"]."','".$row["idCentroDistribucion"]."','".$row ["idPersona"]."');\">
+									<i class='icon-envelope-alt'></i></a></li>";
+								}
+								if($row["idEstadoDDJJ"] >= $ESTADOSDDJJ["NOTIFICADA"])
+								{
+									$tabla .= "<li><a class='btn tip' title='Generar Intimaci&oacute;n' href='pers_completarDDJJ.php?id=" . $row ["idPersona"] . "&idL=$idLote' data-original-title='Generar Intimaci&oacute;n'>
+									<i class='icon-paste'></i></a></li>";
+								}
 						  }
 				
                 $tabla .= "</ul></td></tr>";
@@ -98,13 +113,13 @@ function listarXLote($idLote,$apellido,$nombre,$nroDoc,$tipoDoc) {
 			
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&ensp;</button>
                         	Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&ensp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -811,7 +826,8 @@ function listarXCentro($idlote, $idCentro)
 }
 
 
-function  cargarNotificacion ($idPL,$notificacion,$observaciones){
+
+function  cargarNotificacion ($idPL,$notificacion,$observaciones,$idPersona){
 
 	try {
 		global $ESTADOSDDJJ;
@@ -820,10 +836,14 @@ function  cargarNotificacion ($idPL,$notificacion,$observaciones){
 		$idPL = $base->filtrar ( $idPL );
 		$notificacion = $base->filtrar ( $notificacion );
 		$observaciones = $base->filtrar ( $observaciones );
+		$idPersona = $base->filtrar ( $idPersona );
 	
 		$sql = "UPDATE lotespersonas SET FechaNotificacion = '".formatFecha($notificacion)."',
 		        ObservacionesEstado = '".$observaciones."', idEstadoDDJJ=".$ESTADOSDDJJ["NOTIFICADA"]." WHERE idLP = $idPL";
-		
+		if($idPersona != ""){
+			$sql .=" AND idPersona = ".$idPersona;
+		}
+		echo $sql;
 		$res = $base->query ( $sql );
 		if ($res) {
 			return "1";
@@ -1205,8 +1225,9 @@ if ($_POST) {
 				$idPL = $_POST ["hfIdLP"];
 				$notificacion = $_POST ["txtNotificacion"];
 				$observaciones = $_POST ["txtObservacionesEst"];
+				$idPersona = $_POST ["hfIdPersona"];
 							
-				$rta = cargarNotificacion ($idPL,$notificacion,$observaciones);
+				$rta = cargarNotificacion ($idPL,$notificacion,$observaciones,$idPersona);
 				break;
 
 		case 'verPersXIntimacion':

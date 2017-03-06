@@ -29,10 +29,8 @@ function precargarDatos(){
 
 //===== File uploader =====//
 $(function(){
-	
 	seleccionarMenu("liSor","opSor1");	
 	precargarDatos();
-	
 	$.post("Negocios/personas.php", {selected: '0', vdefaul: '...', oper: 'comboTD'}, function(data){      	
       	$("#cbTipoDocB").html(data);
     });

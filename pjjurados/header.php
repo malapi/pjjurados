@@ -1,5 +1,6 @@
 <?php 
 //include 'config.php';
+//error_reporting(E_ERROR | E_WARNING | E_PARSE);
 require_once("libs/Login.php");
 $oLogin=new Login();
 if(!$oLogin->activa()){
@@ -15,6 +16,10 @@ $nomUsuario = $oLogin->getUsuario();
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 <title>:: JURADOS ::</title>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
 <link href="css/plugins.css" rel="stylesheet" type="text/css" />
 <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
 <link href="css/icons.css" rel="stylesheet" type="text/css" />
@@ -25,8 +30,7 @@ $nomUsuario = $oLogin->getUsuario();
 
 <!-- <link href="css/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" /> -->
 <!--[if IE 8]><link href="css/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
- -->
+
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
 
@@ -81,7 +85,9 @@ $nomUsuario = $oLogin->getUsuario();
 	<div id="top">
 		<div class="fixed">
 			<a href="index.html" title="" class="logo"><img src="img/logoOfijuICircunscripcion.png" alt="" /></a>
-			<ul class="top-menu">	
+			<ul class="top-menu">
+			    
+			    <li><input type="button" onclick="history.back()"  class="btn" name="volver atras" value="&nbsp;&nbsp;&nbsp;volver atr&aacute;s&nbsp;&nbsp;"></li>
 				<li><a class="fullview"></a></li>			
 				<li class="dropdown">
 					<a class="user-menu" data-toggle="dropdown"><img src="img/usu.png" alt="logo usuario" />
@@ -150,3 +156,5 @@ $nomUsuario = $oLogin->getUsuario();
 		        
 		</div>
 		<!-- /sidebar -->
+		<a href="#" class="scrollup">Scroll</a>
+		

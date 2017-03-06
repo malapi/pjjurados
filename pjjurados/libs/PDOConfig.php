@@ -13,7 +13,7 @@ class PDOConfig extends PDO {
         $this->host = 'localhost';
         $this->database = 'pruebajur';
         $this->user = 'root';
-        $this->pass = 'eelcdr';      
+        $this->pass = '';      
         $this->debug = false;       
         
         $dns = $this->engine.':dbname='.$this->database.";host=".$this->host;

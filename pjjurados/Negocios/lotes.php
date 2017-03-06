@@ -476,7 +476,7 @@ function LotePlantilla($idLote) {
 	try {
 		$base = new PDOConfig ();
 		$idLote = $base->filtrar ( $idLote );
-		$idPlantilla = $base->filtrar ( $idPlantilla );
+		//$idPlantilla = $base->filtrar ( $idPlantilla );
 
 		$sql = "SELECT idPlantilla FROM lotes WHERE idLote = $idLote";
 		//echo $sql;		
@@ -656,7 +656,7 @@ function listadoParaDoc() {
 		//echo $sql;
 		$res = $base->query ( $sql );
 		if ($res) {
-		$tabla = "<div class='navbar'><div class='navbar-inner'><h6>Listado de Sorteos</h6></div></div>
+		$tabla = "
                     <div class='table-overflow'>
                         <table class='table table-striped table-bordered' id='data-table'>
 					    <thead>

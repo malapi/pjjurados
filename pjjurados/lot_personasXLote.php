@@ -39,7 +39,7 @@ if ($_GET) {
 						<div class="navbar">
 							<div class="navbar-inner">
 								<!--  <h6>Lote</h6>-->
-								<h6><label for="informacionLote" style="vertical-align: middle"  >Lala</label></h6>
+								<h6><label for="informacionLote" style="vertical-align: middle"  >Informacion del Lote</label></h6>
 							</div>
 						</div>
 						<!-- <div class="well">
@@ -163,24 +163,71 @@ if ($_GET) {
   <label class="mr-sm-2" for="txtNombreB">Nombre:</label>
   <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtNombreB" placeholder="Nombre">
 
-  <label class="mr-sm-2" for="inlineFormInputGroup">Nombre:</label>
+  <label class="mr-sm-2" for="inlineFormInputGroup">Tipo Documento:</label>
   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-    <div class="input-group-addon">@</div>
-    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nombre">
+    <select name="cbTipoDocB" id="cbTipoDocB" class="form-select-input" data-prompt-position="topLeft:-1,-5" placeholder="Seleccionar" > <option value="" >...</option>  </select>
   </div>
 
-  <div class="form-check mb-2 mr-sm-2 mb-sm-0">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
-  </div>
+<label class="mr-sm-2" for="txtNombreB">Nro Documento:</label>
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="txtNroDocB" placeholder="Nro. Documento">
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+
+
+  
+  <button id="btnBuscarPersona" type="button" class="btn btn-primary">Buscar</button>
+ <button id="btnTodas" type="button" class="btn">Todos</button>
 </form>
 
+<div id="mdlNotificacion" class="modal" style="display: none;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Cargar Notificaci&oacute;n</h3>
+			</div>
+			<div class="modal-body">
+				<form id="formCargarNot" method="POST">
+				<input type="hidden" name="hfIdLP" id="hfIdLP" />
+				<input type="hidden" name="hfIdCentro" id="hfIdCentro" />
+				<input type="hidden" name="hfIdPersona" id="hfIdPersona" />
+				<input type="hidden" name="oper" id="oper" value="cargaNotificacion" />
+				<div class="row-fluid">
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">Fecha Notificaci&oacute;n:</label>
+							<div class="controls">
+								<input type="text" class="datepicker validate[required] span8"
+									data-mask="99/99/9999" id="txtNotificacion"
+									data-prompt-position="topLeft:-1,-5" name="txtNotificacion"
+									placeholder="99/99/9999">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="control-group">
+							<label class="control-label">Observaciones:</label>
+							<div class="controls">
+								<textarea id="txtObservacionesEst" name="txtObservacionesEst"
+									class="span12"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+					<span id="respuestaNot"></span>
+					</div>
+				</div>
+				</form>	
+			</div>
+			<div class="modal-footer">
+				<a id="btnGuardarNotificacion" href="#" class="btn btn-primary">Guardar</a> 
+				<a id="btnClose" href="#" href="#"	class="btn">Cerrar</a>
+			</div>
+		</div>
+
+
 </div>
-
-
 			<div id="listadoDatos" class='table-overflow'></div>
 		</div>
 
@@ -191,4 +238,5 @@ if ($_GET) {
 <!-- /content -->
 <?php include("footer.php"); ?>
 <script type="text/javascript" src="js/personasXLote.js"></script>
+<script type="text/javascript" src="js/personasCargarNotificacion.js"></script>
 

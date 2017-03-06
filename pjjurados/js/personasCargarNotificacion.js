@@ -8,7 +8,17 @@ function cargarNotificacion(idLP,FechaNotificacion,ObservacionesEstado)
 	
 }
 
-
+function cargarNotificacionUnPersona(idLP,FechaNotificacion,ObservacionesEstado,idcentro,idPersona)
+{
+	$("#hfIdLP").val(idLP);
+	$("#hfIdCentro").val(idcentro);
+	$("#hfIdPersona").val(idPersona);
+	$("#txtNotificacion").val(FechaNotificacion);
+	$("#txtNotificacion").datepicker({dateFormat: 'dd-mm-yy'});
+	$("#txtObservacionesEst").val(ObservacionesEstado);	  
+	$("#mdlNotificacion").modal({"show" : true}); 
+	
+}
 $(function() {
 	
 	seleccionarMenu("liSor","opSor1");
@@ -63,6 +73,15 @@ $(function() {
 		
 	$("#btnGuardarNotificacion").click(function(){
 		if($("#formCargarNot").validationEngine('validate')){
+			idCentro = "";
+			idPersona = "";
+			if($("#hfIdCentro") != null){
+				idCentro =$("#hfIdCentro").val();
+				idPersona = $("#hfIdPersona").val()
+			} else {
+				idCentro =$("#cbCentro").val();
+			}
+				
 			$("#respuestaNot").html("");
 			$.ajax({
                 url: "Negocios/personas.php",
@@ -71,10 +90,20 @@ $(function() {
                 success: function(resp) {  
                 		if(resp == "1")
                 		{   
-                			$.post("Negocios/personas.php", {oper: 'listarXCentro', idLote: $("#hfIdSorteo").val(), idCentro: $("#cbCentro").val()}, function(data){
-                	        	 $("#listadoDatos").html(data);		    	   	
-                		    	   	$('.tip').tooltip();
-                		    	});
+                			
+                			if(idPersona == ""){
+                				$.post("Negocios/personas.php", {oper: 'listarXCentro', idLote: $("#hfIdSorteo").val(), idCentro: idCentro}, function(data){
+                   	        	 $("#listadoDatos").html(data);		    	   	
+                   		    	   	$('.tip').tooltip();
+                   		    	});
+                   			
+                			} else {
+                				$.post("Negocios/personas.php", {oper: 'listarXLote', idLote: $("#hfIdSorteo").val(), txtApellido:"",txtNombre:"",txtNroDoc:"",cbTipoDoc:""}, function(data){ 	 	
+                					$("#listadoDatos").html(data);
+                					$('#data-table').dataTable();
+                					$('.tip').tooltip();
+                					});
+                			}
                 			 
                 			 $("#mdlNotificacion").modal("hide"); 
                 			

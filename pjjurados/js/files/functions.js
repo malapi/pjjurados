@@ -54,12 +54,12 @@ function seleccionarMenu(li,opcion){
 	menuS.attr('id', 'current');
 	$('#'+opcion).addClass('current');
 	
-	$('.expand').collapsible({
+	/*$('.expand').collapsible({
 		defaultOpen: 'current,third',
 		cookieName: 'navAct',
 		cssOpen: 'subOpened',
 		speed: 200
-	});
+	});*/
 }
 
 $(function() {
@@ -645,19 +645,31 @@ $(function() {
 
 
 	//===== Collapsible plugin for main nav =====//	
-	$('.expand').collapsible({
-		//Malapi: Comento pues quiero el funcionamiento por defecto, es decir, que no se contraiga
-		//defaultOpen: 'current,third',
-		defaultOpen: 'all',
+	/*$('.expand').collapsible({
+		defaultOpen: 'current,third',
 		cookieName: 'navAct',
 		cssOpen: 'subOpened',
 		cssClose: 'subClosed',
 		speed: 200
-	});
+		
+	});*/
 
 
 	//===== Form elements styling =====//	
 	$(".ui-datepicker-month, .styled, .dataTables_length select").uniform({ radioClass: 'choice' });
+	
+	 $(window).scroll(function(){
+         if ($(this).scrollTop() > 100) {
+             $('.scrollup').fadeIn();
+         } else {
+             $('.scrollup').fadeOut();
+         }
+     });
+
+     $('.scrollup').click(function(){
+         $("html, body").animate({ scrollTop: 0 }, 600);
+         return false;
+     });
 	
 });
 

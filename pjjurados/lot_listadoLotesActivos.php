@@ -16,7 +16,7 @@
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Listado de Sorteos Activos</h5>
+				    	<h5>Listado de Lotes Activos</h5>
 				    	<span></span>
 			    	</div>
 			    </div>

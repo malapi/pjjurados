@@ -17,7 +17,7 @@
 			    <div class="page-header">
 			    	<div class="page-title">
 				    	<h5>Listado de Lotes</h5>
-				    	<span></span>
+				    	
 			    	</div>
 			    </div>
 			    <div class="span12">        
