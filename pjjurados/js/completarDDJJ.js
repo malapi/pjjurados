@@ -59,13 +59,12 @@ function precargarDatos(){
 		//alert(data);
 	    if(isNaN(respuesta)){ 
 	    	// como no es un numero, significa que devolvio un json  
-	    	
 	    	var datos = JSON.parse(data);
 	    	$("#hfIdLP").val(datos.idLP);
 	    	$("#txtApellido").val(datos.Apellido);
 	    	$("#txtNombre").val(datos.Nombre);
 	    	$("#txtNroDoc").val(datos.DNI);
-	    	$("#txtNroCedula").val(datos.NroCedula);
+	    	$("#txtPersona").html("&nbsp;&nbsp;N&deg; de C&eacute;dula:"+datos.NroCedula+" "+datos.Apellido+", "+datos.Nombre);
 	    	$("#cbSexo").val(datos.Sexo);
 	    	$("#txtCUIL").val(datos.CUIL);
 	    	$("#txtFechaNac").val(datos.FechaNacimiento);

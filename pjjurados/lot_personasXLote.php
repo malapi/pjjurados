@@ -224,6 +224,7 @@ if ($_GET) {
 				<a id="btnGuardarNotificacion" href="#" class="btn btn-primary">Guardar</a> 
 				<a id="btnClose" href="#" href="#"	class="btn">Cerrar</a>
 			</div>
+			<div id="listadoDatosNotificaciones" class='table-overflow'></div>
 		</div>
 
 

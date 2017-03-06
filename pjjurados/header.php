@@ -1,4 +1,5 @@
 <?php 
+//$zip = new ZipArchive();
 //include 'config.php';
 //error_reporting(E_ERROR | E_WARNING | E_PARSE);
 require_once("libs/Login.php");
@@ -7,6 +8,7 @@ if(!$oLogin->activa()){
 	header('location:index.php');
 }
 $nomUsuario = $oLogin->getUsuario();
+
 ?>
 
 <!DOCTYPE html>

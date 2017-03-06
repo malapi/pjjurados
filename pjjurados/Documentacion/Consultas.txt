@@ -1,0 +1,2 @@
+Cargar Notificación: Se pide guardar todas las notificaciones de un persona, pero esta informacion actualmente se guarda en la tabla lotepersona
+Generar Intimación: La seccion donde se realiza esto, actualmente solicita una plantilla, como seria en este caso? Se va a solicitar una plantilla para cada persona que se requiera intimar?

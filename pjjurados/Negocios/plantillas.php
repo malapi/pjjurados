@@ -17,7 +17,7 @@ function add($descripcion, $usu) {
 			return $base->lastInsertId ();
 		} else {
 			return "<div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         Ha ocurrido un error al intentar cargar lo datos
                     	</div>";
 		}
@@ -73,13 +73,13 @@ function delPregunta($idPlantilla, $idPregunta) {
 			return "1";
 		} else {
 			return "<div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         Ha ocurrido un error al intentar eliminar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -89,7 +89,7 @@ function verPreguntasXPlantillas($idPlantilla) {
 		$where = "";
 		$base = new PDOConfig ();
 		
-		$sql = "SELECT DISTINCT C.idCategoria,C.Descripcion 
+		$sql = "SELECT DISTINCT C.Orden,C.idCategoria,C.Descripcion 
 		FROM plantillas_preguntas PP
 		INNER JOIN preguntas E ON PP.idPregunta = E.idPregunta
 		INNER JOIN categorias C ON E.idCategoria = C.idCategoria
@@ -133,7 +133,7 @@ function verPreguntasXPlantillas($idPlantilla) {
 					$tabla .= "</ul></div></div>";
 				} else {
 					return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 				}
@@ -141,13 +141,13 @@ function verPreguntasXPlantillas($idPlantilla) {
 			return $tabla;
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -169,7 +169,7 @@ function ordenarPreguntas($idPlantilla, $lista) {
 					
 					$base->rollBack ();
 					return "<div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         Ha ocurrido un error al intentar actualizar los datos
                     	</div>";
 				}
@@ -179,7 +179,7 @@ function ordenarPreguntas($idPlantilla, $lista) {
 		return "1";
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -307,13 +307,13 @@ function table() {
 			return $tabla;
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -329,7 +329,7 @@ function verPlantillaParaCompletar($idLote) {
 		$idPlantilla = $test['idPlantilla'];
 		if ($idPlantilla != "") {
 			
-			$sql = "SELECT DISTINCT C.idCategoria,C.Descripcion
+			$sql = "SELECT DISTINCT C.Orden,C.idCategoria,C.Descripcion
 			FROM plantillas_preguntas PP
 			INNER JOIN preguntas E ON PP.idPregunta = E.idPregunta
 			INNER JOIN categorias C ON E.idCategoria = C.idCategoria
@@ -381,7 +381,7 @@ function verPlantillaParaCompletar($idLote) {
 						
 					} else {
 						return " <div class='alert alert-error' style='margin-top: 16px;'>
-				<button type='button' class='close' data-dismiss='alert'>�</button>
+				<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 					}
@@ -390,19 +390,19 @@ function verPlantillaParaCompletar($idLote) {
 				return $tabla;
 			} else {
 				return " <div class='alert alert-error' style='margin-top: 16px;'>
-						<button type='button' class='close' data-dismiss='alert'>�</button>
+						<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 			}
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-						<button type='button' class='close' data-dismiss='alert'>�</button>
+						<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -427,7 +427,7 @@ function verPlantillaCompleta($idLote, $idPersona){
 		$idPlantilla = $test['idPlantilla'];
 		if ($idPlantilla != "") {
 			
-			$sql = "SELECT DISTINCT C.idCategoria,C.Descripcion
+			$sql = "SELECT DISTINCT C.Orden,C.idCategoria,C.Descripcion
 			FROM plantillas_preguntas PP
 			INNER JOIN preguntas E ON PP.idPregunta = E.idPregunta
 			INNER JOIN categorias C ON E.idCategoria = C.idCategoria
@@ -519,7 +519,7 @@ function verPlantillaCompleta($idLote, $idPersona){
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}  
@@ -571,19 +571,19 @@ if ($_POST) {
 			
 			case 'plantXLote' :
 				$idLote = $_POST ["idLote"];
-				$rta = verPlantillaParaCompletar ( $idLote );
+				$rta = verPlantillaParaCompletar( $idLote );
 				break;
                             
-                         case 'planillaXPersona' :
+            case 'planillaXPersona' :
 				$idLote = $_POST ["idLote"];
-                                $idPersona = $_POST ["idPersona"];
+                $idPersona = $_POST ["idPersona"];
 				$rta = verPlantillaCompleta($idLote, $idPersona);
 				break;   
                             
 		}
 	} catch ( Exception $e ) {
 		echo " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al ejecutar la acci&oacute;n solicitada
                     	</div>";
 	}

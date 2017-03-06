@@ -259,13 +259,13 @@ function actualizarPersona($idPers, $idLote, $apellido, $nombre, $nroDoc, $tipoD
 			return "1";
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar Actulizar los datos de la persona
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -278,7 +278,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 	
 	global $ESTADOSDDJJ;
         global $IMPEDIMENTOS;
-	$respAct = actualizarPersona ( $idPers, $idLote, $apellido, $nombre, $nroDoc, $tipoDoc, $sexo, $cuil, $fechaNac, $domicilio, $profesion, $ocupacion, $carTF, $telFijo, $carTC, $telCelu, $email, $nacionalidad, $lugarNac, $localidad );
+	$respAct = actualizarPersona( $idPers, $idLote, $apellido, $nombre, $nroDoc, $tipoDoc, $sexo, $cuil, $fechaNac, $domicilio, $profesion, $ocupacion, $carTF, $telFijo, $carTC, $telCelu, $email, $nacionalidad, $lugarNac, $localidad );
 	if ($respAct == "1") {
 		$base = new PDOConfig ();
 		$cbResultado = $base->filtrar ( $cbResultado );
@@ -296,7 +296,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 		if ($FcNotif == "") {
 			$FcNotif = "NULL";
 		}else{
-			$FcNotif = "'".formatFecha($FcNotif )."'";
+			$FcNotif = "'".formatFecha($FcNotif)."'";
 		}
 		
 		if ($FcRecep == "") {
@@ -362,7 +362,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 							if (!$base->query ($sqlIn)) {
 								$base->rollBack ();
 								return " <div class='alert alert-error' style='margin-top: 16px;'>
-                                                                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                                                                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                                                                                 Ha ocurrido un error al intentar completar las respuestas de la DDJJ 1
                                                                         </div>";
 							}
@@ -370,7 +370,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 						}else{
 							$base->rollBack ();
 							return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido un error al intentar completar las respuestas de la DDJJ
                     	</div>";
 						}
@@ -383,7 +383,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 			} else {
 				$base->rollBack ();
 				return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido un error al intentar completar la DDJJ
                     	</div>";
 			}
@@ -391,7 +391,7 @@ function completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $ti
 			return "1";
 		} catch ( Exception $e ) {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 		}
@@ -501,13 +501,13 @@ function busquedaXLote($idL,$tipoDoc,$nroDoc,$apellido,$nombre,$soloAptos,$idEst
 			
 		} else {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-		<button type='button' class='close' data-dismiss='alert'>�</button>
+		<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 		Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -625,7 +625,7 @@ function  DDJJCompleta($idLote,$idPersona){
 	
 				} else {
 						return " <div class='alert alert-error' style='margin-top: 16px;'>
-				<button type='button' class='close' data-dismiss='alert'>�</button>
+				<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 					}
@@ -633,19 +633,19 @@ function  DDJJCompleta($idLote,$idPersona){
 				return $tabla;
 			} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-			<button type='button' class='close' data-dismiss='alert'>�</button>
+			<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 			}
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-			<button type='button' class='close' data-dismiss='alert'>�</button>
+			<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-			<button type='button' class='close' data-dismiss='alert'>�</button>
+			<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -701,13 +701,13 @@ function listarXLoteYLocalidad($idlote, $idLocalidad)
 					
 				} else {
 				return " <div class='alert alert-error' style='margin-top: 16px;'>
-						<button type='button' class='close' data-dismiss='alert'>�</button>
+						<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 						Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 						Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -738,19 +738,88 @@ function asociarCentroDist($idCentro,$personas){
 			return "1";
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar Actulizar los datos de la persona
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
 }
 
+function lotesPersonaNotificacion($idLP)
+{
+	try {
+		$where = "";
+		$base = new PDOConfig ();
 
+		$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,P.DNI, TD.Descripcion AS tipoDoc,P.Sexo,
+		LP.idLP,LP.NroCedula,LP.idEstadoDDJJ,LPN.lpnfecha as FechaNotificacion,LPN.lpnobservacion as ObservacionesEstado, LOC.Descripcion AS Localidad,C.Nombre AS centro
+		FROM personas P
+		INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona
+		INNER JOIN lotespersonanotificacion LPN ON LPN.idLP = LP.idLP
+		INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
+		INNER JOIN localidades LOC ON P.idLocalidad = LOC.idLocalidad
+		LEFT JOIN centrodistribucion C ON P.idCentroDistribucion = C.idCentroDistribucion
+		WHERE LP.idLP = $idLP 
+		ORDER BY P.Apellido,P.Nombre,LPN.idlotespersonanotificacion ";
+		//echo $sql;
+		$res = $base->query ( $sql );
+		if ($res) {
+			$tablainfo="";
+			$tabla = "<table class='table table-striped table-bordered' id='data-table'>
+					    <thead>
+					    <tr>
+							<th>Localidad</th>
+							<th>Centro Dist.</th>
+							<th>Fecha</th>
+							<th>Notificaci&oacute;n</th>
+					    </tr>
+					    </thead>
+					    <tbody>";
+			foreach ( $res as $row ) {
+				$modif = true;
+				$tablainfo = "<div class='navbar'><div class='navbar-inner'>
+								<h6><label  style='vertical-align: middle'  >".$row ["Nombre"]." ".$row ["Apellido"]." ".$row ["tipoDoc"] . " - " . $row ["DNI"].
+								"</label></h6>
+							</div>
+						</div>";
+						
+				if($row["FechaNotificacion"] != "")
+				{
+					$FechaNotificacion = date_create($row ["FechaNotificacion"]);
+					$row["FechaNotificacion"] = date_format( $FechaNotificacion, 'd/m/Y' );
+				}
+
+				$tabla .= "<tr>
+				<td>" . $row ["Localidad"] . "</td>
+				<td>" . $row ["centro"] . "</td>
+				<td>" . $row["FechaNotificacion"]. "</td>
+				<td>" . $row["ObservacionesEstado"]. "</td>
+				</tr>";
+			}
+
+			$tabla .= "</tbody</table>";
+			$tabla = $tablainfo.$tabla;
+			return $tabla;
+
+		} else {
+			return " <div class='alert alert-error' style='margin-top: 16px;'>
+						<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+						Error al consultar los datos
+                    	</div>";
+		}
+	} catch ( Exception $e ) {
+		return " <div class='alert alert-error' style='margin-top: 16px;'>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+						Ha ocurrido al intentar conectarse a la base
+                    	</div>";
+	}
+
+}
 
 function listarXCentro($idlote, $idCentro)
 {
@@ -812,13 +881,13 @@ function listarXCentro($idlote, $idCentro)
 				
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-						<button type='button' class='close' data-dismiss='alert'>�</button>
+						<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 						Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 						Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -826,7 +895,14 @@ function listarXCentro($idlote, $idCentro)
 }
 
 
-
+/**
+ * 06/03/2017 MaLaPi: ahora se debe guardar un historico de notificaciones por lo que se va a guardar en una tabla aparte. 
+ * @param unknown $idPL
+ * @param unknown $notificacion
+ * @param unknown $observaciones
+ * @param unknown $idPersona
+ * @return string
+ */
 function  cargarNotificacion ($idPL,$notificacion,$observaciones,$idPersona){
 
 	try {
@@ -838,24 +914,27 @@ function  cargarNotificacion ($idPL,$notificacion,$observaciones,$idPersona){
 		$observaciones = $base->filtrar ( $observaciones );
 		$idPersona = $base->filtrar ( $idPersona );
 	
-		$sql = "UPDATE lotespersonas SET FechaNotificacion = '".formatFecha($notificacion)."',
+		/*$sql = "UPDATE lotespersonas SET FechaNotificacion = '".formatFecha($notificacion)."',
 		        ObservacionesEstado = '".$observaciones."', idEstadoDDJJ=".$ESTADOSDDJJ["NOTIFICADA"]." WHERE idLP = $idPL";
 		if($idPersona != ""){
 			$sql .=" AND idPersona = ".$idPersona;
 		}
 		echo $sql;
+		*/
+		$sql = " INSERT INTO lotespersonanotificacion(idLP,lpnfecha,lpnobservacion) VALUES (".$idPL.",'".formatFecha($notificacion)."','".$observaciones."');";
+		$sql .=" UPDATE lotespersonas SET idEstadoDDJJ=".$ESTADOSDDJJ["NOTIFICADA"]." WHERE idLP = ".$idPL.";";
 		$res = $base->query ( $sql );
 		if ($res) {
 			return "1";
 		} else {
 			return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar Actulizar los datos de la persona
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -940,13 +1019,13 @@ function personasParaIntimacion($idL,$tipoDoc,$nroDoc,$apellido,$nombre){
 						
 	} else {
 	return " <div class='alert alert-error' style='margin-top: 16px;'>
-		<button type='button' class='close' data-dismiss='alert'>�</button>
+		<button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
 		Error al consultar los datos
                     	</div>";
 		}
 	} catch ( Exception $e ) {
 		return " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         Ha ocurrido al intentar conectarse a la base
                     	</div>";
 	}
@@ -968,7 +1047,7 @@ function generarIntimaciones($idLote,$personas,$arplantilla){
 			$fnombre =$idLote."_intimaciones.rtf";
 			$fsalida = "../uploads/archivosrtf/".$fnombre;
 			$plantilla = leerArchivo("../uploads/plantillas/$arplantilla");
-				
+			
 			$matriz=explode("sectd", $plantilla);
 			$cabecera=$matriz[0]."sectd";
 			$inicio=strlen($cabecera);
@@ -976,6 +1055,7 @@ function generarIntimaciones($idLote,$personas,$arplantilla){
 			$largo=$final-$inicio;
 			$cuerpo=substr($plantilla, $inicio, $largo);
 			//Paso no.3 Escribo el fichero
+			
 			$punt = fopen($fsalida, "w");
 			fputs($punt, $cabecera);
 				
@@ -991,6 +1071,7 @@ function generarIntimaciones($idLote,$personas,$arplantilla){
 			WHERE LP.idLote = $idLote AND P.idPersona IN $inPer
 			ORDER BY P.Apellido,P.Nombre ";
 			// echo $sql;
+			
 			$res = $base->query ( $sqlSe );
 			if ($res) {
 	
@@ -1011,24 +1092,25 @@ function generarIntimaciones($idLote,$personas,$arplantilla){
 					$despues=str_replace("#DIA#",date('d'),$despues);
 					$despues=str_replace("#MES#",date('m'),$despues);
 					$despues=str_replace("#ANIO#",date('Y'),$despues);
-                                        $despues=str_replace("#CENTRODISTRIBUCION#",utf8_decode($row["CentroDist"]),$despues);
+                    $despues=str_replace("#CENTRODISTRIBUCION#",utf8_decode($row["CentroDist"]),$despues);
 					fputs($punt,$despues);
+					
 					$saltopag="\n\\page \\par \n";
 					fputs($punt,$saltopag);
-	
+					
 					
 				}
 					
 				fputs($punt,"}");
 				fclose ($punt);
+				
 					
 			}
 	
-	
+		
 		$zip = new ZipArchive();
-	
+		//echo "lala dfd".$fsalida;
 		$filename = $fsalida.".zip";
-	
 		if($zip->open($filename,ZIPARCHIVE::CREATE)===true) {
 			$zip->addFile($fsalida,$fnombre);
 			$zip->close();
@@ -1162,12 +1244,12 @@ if ($_POST) {
 				
 				if ($cbResultado == $ESTADOSDDJJ ["COMPLETA"] && $cantResp > count ( $respuestas )) {
 					$rta = "<div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
-                        	No se ha completado la Declaraci�n Jurada
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
+                        	No se ha completado la Declaraci&nbsp;n Jurada
                     	</div>";
 				} else {
 					
-					$rta = completarDDJJ ( $idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $tipoDoc, $sexo, $cuil, $fechaNac, $domicilio, $profesion, $ocupacion, $carTF, $telFijo, $carTC, $telCelu, $email, $nacionalidad, $lugarNac, $localidad, $cbResultado, $FcNotif, $FcRecep, $ObsEstado, $Apto, $Impedimento, $ObsImpedimiento,
+					$rta = completarDDJJ($idPers, $idLote, $idLP, $apellido, $nombre, $nroDoc, $tipoDoc, $sexo, $cuil, $fechaNac, $domicilio, $profesion, $ocupacion, $carTF, $telFijo, $carTC, $telCelu, $email, $nacionalidad, $lugarNac, $localidad, $cbResultado, $FcNotif, $FcRecep, $ObsEstado, $Apto, $Impedimento, $ObsImpedimiento,
 							              $respuestas, $Usuario, $FcInt,$cargaWeb);
 				}				
 				break;
@@ -1220,6 +1302,10 @@ if ($_POST) {
 			$idCentro = $_POST ["idCentro"];
 			$rta = listarXCentro ($idLote,$idCentro);
 			break;
+		case "lotespersonanotificacion":
+			$idLP = $_POST ["idLP"];
+			$rta = lotesPersonaNotificacion($idLP);
+			break;
 
 		case 'cargaNotificacion' :
 				$idPL = $_POST ["hfIdLP"];
@@ -1251,7 +1337,7 @@ if ($_POST) {
 		}
 	} catch ( Exception $e ) {
 		echo " <div class='alert alert-error' style='margin-top: 16px;'>
-                        <button type='button' class='close' data-dismiss='alert'>�</button>
+                        <button type='button' class='close' data-dismiss='alert'>&nbsp;</button>
                         	Ha ocurrido al ejecutar la acci&oacute;n solicitada
                     	</div>";
 	}

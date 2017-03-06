@@ -10,7 +10,7 @@ include ("header.php");
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
 				<li><a href="#">Lotes</a></li>
-				<li><a href="#">Personas Por Lote</a></li>
+				<li><a href="#">Generar Intimaciones</a></li>
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->
@@ -25,11 +25,6 @@ include ("header.php");
 		<!-- /page header -->
 
 		<div class="widget">
-			<div class='navbar'>
-				<div class='navbar-inner'>
-					<h6>Persona incluidas en el Lote</h6>
-				</div>
-			</div>
 			<form id="formBuscarPers" method="POST">
 				<fieldset>
 					<!-- General form elements -->

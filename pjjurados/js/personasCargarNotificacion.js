@@ -13,10 +13,14 @@ function cargarNotificacionUnPersona(idLP,FechaNotificacion,ObservacionesEstado,
 	$("#hfIdLP").val(idLP);
 	$("#hfIdCentro").val(idcentro);
 	$("#hfIdPersona").val(idPersona);
-	$("#txtNotificacion").val(FechaNotificacion);
+	//$("#txtNotificacion").val(FechaNotificacion);
 	$("#txtNotificacion").datepicker({dateFormat: 'dd-mm-yy'});
-	$("#txtObservacionesEst").val(ObservacionesEstado);	  
+	//$("#txtObservacionesEst").val(ObservacionesEstado);	  
 	$("#mdlNotificacion").modal({"show" : true}); 
+	$.post("Negocios/personas.php", {oper: 'lotespersonanotificacion', idLP: idLP}, function(data){
+   	 $("#listadoDatosNotificaciones").html(data);		    	   	
+   	   	$('.tip').tooltip();
+   	}); 
 	
 }
 $(function() {

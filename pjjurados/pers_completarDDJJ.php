@@ -47,17 +47,15 @@ if ($_GET) {
 						<div class="widget row-fluid">
 							<div class="well">
 								<div class="row-fluid">
-									<div class="span4">
-                                                                            <div class="control-group">
-                                                                                <label class="control-label">N&deg; de C&eacute;dula:</label>
-                                                                                <div class="controls">
-                                                                                        <input type="text" class="validate[required] span8"
-                                                                                                id="txtNroCedula" name="txtNroCedula" readonly="readonly">
-                                                                                </div>
-                                                                            </div>
+									<div class="span4"> <label id="txtPersona" name="txtPersona"></label> </div>
+                                     <div class="span4">
+										<div class="control-group">
+											<label class="radio inline"> 
+											<input name="ckCargaWeb" id="ckCargaWeb" value="1" type="checkbox" > Carga V&iacute;a Web
+											</label> 
+										</div>
 									</div>
 								</div>
-
 								<div class="row-fluid">
 									<div class="span7">
 										<div class="control-group">
@@ -77,7 +75,8 @@ if ($_GET) {
 										</div>
 									</div>
 								</div>
-								<div class="row-fluid">
+								<!-- <div class="row-fluid"> -->
+									<!-- Malapi: Lo quito, pues ahora hay un historico
 									<div class="span4">
 										<div class="control-group">
 											<label class="control-label">Fecha Notificaci&oacute;n:</label>
@@ -89,7 +88,9 @@ if ($_GET) {
 													placeholder="99/99/9999">
 											</div>
 										</div>
-									</div>
+										
+									</div> -->
+									<!-- MaLaPi: Lo quito para que solo se guarde en Generar Intimación
 									<div class="span4">
 										<div class="control-group">
 											<label class="control-label">Fecha Intimaci&oacute;n:</label>
@@ -101,8 +102,39 @@ if ($_GET) {
 													placeholder="99/99/9999">
 											</div>
 										</div>
+									</div> -->
+									
+								<!-- </div> -->
+								<!--  Malapi: Lo quito, pues ahora hay un historico; el de Notificaciones Persona
+								 <div class="row-fluid"> 
+									<div class="span12">
+										<div class="control-group">
+											<label class="control-label">Observaciones:</label>
+											<div class="controls">
+												<textarea id="txtObservacionesEst"
+													name="txtObservacionesEst"
+													class="validate[funcCall[valOb]] span12"></textarea>
+											</div>
+										</div>
 									</div>
-									<div class="span4">
+								</div> -->
+								
+
+</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="divDDJJ" class="span12" style="display: none;">
+						<div class="page-header">
+							<div class="page-title">
+								<h5>Completar Declaraci&oacute;n Jurada</h5>
+							</div>
+						</div>
+						<!-- <div class="widget row-fluid"> -->
+							<div class="well">
+								<div class="row">
+								    <div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Fecha Recepci&oacute;n DDJJ:</label>
 											<div class="controls">
@@ -114,51 +146,7 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row-fluid">
-									<div class="span12">
-										<div class="control-group">
-											<label class="control-label">Observaciones:</label>
-											<div class="controls">
-												<textarea id="txtObservacionesEst"
-													name="txtObservacionesEst"
-													class="validate[funcCall[valOb]] span12"></textarea>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row-fluid">
-									<div class="span12">
-										<div class="control-group">
-											<label class="radio inline"> 
-											<input name="ckCargaWeb" id="ckCargaWeb" value="1" type="checkbox" > Carga V&iacute;a Web
-											</label> 
-										</div>
-									</div>
-								</div>
-
-
-							</div>
-						</div>
-					</div>
-
-					<div id="divDDJJ" class="span12" style="display: none;">
-						<div class="page-header">
-							<div class="page-title">
-								<h5>Completar Declaraci&oacute;n Jurada</h5>
-							</div>
-						</div>
-						<!-- /page header -->
-
-						<div class="widget row-fluid">
-							<div class="navbar">
-								<div class="navbar-inner">
-									<h6>Datos Personales</h6>
-								</div>
-							</div>
-							<div class="well">
-								<div class="row-fluid">
-									<div class="span6">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Apellido:</label>
 											<div class="controls">
@@ -168,7 +156,7 @@ if ($_GET) {
 										</div>
 									</div>
 
-									<div class="span6">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Nombre:</label>
 											<div class="controls">
@@ -177,10 +165,7 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="row-fluid">
-									<div class="span3">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Tipo Documento:</label>
 											<div class="controls">
@@ -192,7 +177,7 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-									<div class="span3">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Nro Documento:</label>
 											<div class="controls">
@@ -201,7 +186,38 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-									<div class="span4">
+									
+								</div>
+
+								<div class="row">
+									<div class="col-sm">
+										<div class="control-group">
+											<label class="control-label">Nro CUIL:</label>
+											<div class="controls">
+												<input type="text" id="txtCUIL" name="txtCUIL"
+													class="span12" />
+											</div>
+										</div>
+									</div>
+									<div class="col-sm">
+										<div class="control-group">
+											<label class="control-label">Nacionalidad:</label>
+											<div class="controls">
+												<input type="text" id="txtNacionalidad"
+													name="txtNacionalidad" class="span12" />
+											</div>
+										</div>
+									</div>
+									<div class="col-sm">
+										<div class="control-group">
+											<label class="control-label">Lugar de Nacimiento:</label>
+											<div class="controls">
+												<input type="text" id="txtLugarNac" name="txtLugarNac"
+													class="span12" />
+											</div>
+										</div>
+									</div>
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Fecha Nacimiento:</label>
 											<div class="controls">
@@ -212,8 +228,8 @@ if ($_GET) {
 									</div>
 								</div>
 
-								<div class="row-fluid">
-									<div class="span3">
+								<div class="row">
+									<!-- <div class="span3">
 										<div class="control-group">
 											<label class="control-label">Sexo:</label>
 											<div class="controls">
@@ -226,17 +242,18 @@ if ($_GET) {
 												</select>
 											</div>
 										</div>
-									</div>
-									<div class="span3">
+									</div> -->
+									<div class="col-sm">
 										<div class="control-group">
-											<label class="control-label">Nro CUIL:</label>
+											<label class="control-label">Domicilio:</label>
 											<div class="controls">
-												<input type="text" id="txtCUIL" name="txtCUIL"
-													class="span12" />
+												<input type="text" id="txtDomicilio" name="txtDomicilio"
+													class="validate[required] span12" />
 											</div>
 										</div>
 									</div>
-									<div class="span6">
+									
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Localidad:</label>
 											<div class="controls">
@@ -248,44 +265,7 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-
-								</div>
-								<div class="row-fluid">
-									<div class="span12">
-										<div class="control-group">
-											<label class="control-label">Domicilio:</label>
-											<div class="controls">
-												<input type="text" id="txtDomicilio" name="txtDomicilio"
-													class="validate[required] span12" />
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="row-fluid">
-									<div class="span6">
-										<div class="control-group">
-											<label class="control-label">Profesi&oacute;n:</label>
-											<div class="controls">
-												<input type="text" id="txtProfesion" name="txtProfesion"
-													class="span12" />
-											</div>
-										</div>
-									</div>
-
-									<div class="span6">
-										<div class="control-group">
-											<label class="control-label">Ocupaci&oacute;n:</label>
-											<div class="controls">
-												<input type="text" id="txtOcupacion" name="txtOcupacion"
-													class="span12" />
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="row-fluid">
-									<div class="span3">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Telefono Fijo:</label>
 											<div class="controls">
@@ -296,7 +276,7 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-									<div class="span3">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Telefono Celular:</label>
 											<div class="controls">
@@ -307,7 +287,9 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-									<div class="span6">
+								</div>
+								<div class="row">
+									<div class="col-sm">
 										<div class="control-group">
 											<label class="control-label">Email:</label>
 											<div class="controls">
@@ -316,38 +298,34 @@ if ($_GET) {
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="row-fluid">
-									<div class="span6">
+									<div class="col-sm">
 										<div class="control-group">
-											<label class="control-label">Nacionalidad:</label>
+											<label class="control-label">Profesi&oacute;n:</label>
 											<div class="controls">
-												<input type="text" id="txtNacionalidad"
-													name="txtNacionalidad" class="span12" />
-											</div>
-										</div>
-									</div>
-									<div class="span6">
-										<div class="control-group">
-											<label class="control-label">Lugar de Nacimiento:</label>
-											<div class="controls">
-												<input type="text" id="txtLugarNac" name="txtLugarNac"
+												<input type="text" id="txtProfesion" name="txtProfesion"
 													class="span12" />
 											</div>
 										</div>
 									</div>
+									<div class="col-sm">
+										<div class="control-group">
+											<label class="control-label">Ocupaci&oacute;n:</label>
+											<div class="controls">
+												<input type="text" id="txtOcupacion" name="txtOcupacion"
+													class="span12" />
+											</div>
+										</div>
+									</div>
+									<div class="col-sm">
+										
+									</div>
 								</div>
 							</div>
 							<!-- /well -->
-						</div>
+						<!-- </div> -->
 						<!-- /general form elements -->
-
-						<!-- Plantilla correspondiente al lote -->
-						<div class="span12" id="completarPlantilla"></div>
-
-						<div class="well"></div>
-
-
+						<!-- Plantilla correspondiente al lote-->
+						<div  id="completarPlantilla"></div> 
 						<div class="widget row-fluid">
 							<div class="navbar">
 								<div class="navbar-inner">
