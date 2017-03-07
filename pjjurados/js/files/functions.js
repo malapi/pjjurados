@@ -62,6 +62,10 @@ function seleccionarMenu(li,opcion){
 	});*/
 }
 
+function seleccionarMenuConFormulario(formulario){	
+	seleccionarMenu($("#"+'liMenu').val(),$("#"+'itemMenu').val());
+}
+
 $(function() {
 	
 	//===== Hide/show sidebar =====//

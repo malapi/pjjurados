@@ -370,7 +370,7 @@ function actualizarPersona($idPers, $idLote, $apellido, $nombre, $nroDoc, $tipoD
 		
 		$sql = "UPDATE personas SET Apellido = '$apellido',Nombre = '$nombre',
 		                            idTipoDocumento = $tipoDoc,DNI = $nroDoc,
-		                            Sexo ='$sexo',CUIL = '$cuil',FechaNacimiento =$fechaNac,
+		                            ".($sexo != "" ? "Sexo ='$sexo'," : "")."CUIL = '$cuil',FechaNacimiento =$fechaNac,
 		                            Nacionalidad = '$nacionalidad',LugarNacimiento = '$lugarNac',
 									Domicilio = '$domicilio',idLocalidad=$localidad,
 									CaracteristicaFijo=$carTF,TelefonoFijo ='$telFijo',

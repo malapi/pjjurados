@@ -7,8 +7,8 @@
 			    <!-- Breadcrumbs line -->
 			    <div class="crumbs">
 		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="#">Lotes</a></li>
-		                <li><a href="#">Nuevo Lote</a></li>
+		                <li><a href="#">Sorteos</a></li>
+		                <li><a href="#">Nuevo Sorteo para Juicio</a></li>
 		            </ul>
 			    </div>
 			    <!-- /breadcrumbs line -->
@@ -16,7 +16,8 @@
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Nuevo Lote</h5>
+				    	<h5>Nuevo Sorteo para Juicio</h5>
+				    	<span></span>
 			    	</div>
 			    </div>
 			    <!-- /page header -->
@@ -26,6 +27,8 @@
 					<fieldset>
 						<!-- General form elements -->
 						<div class="widget row-fluid">	
+							<input type="hidden" name="liMenu" id="liMenu" value="liSorteojuicio" />
+							<input type="hidden" name="itemMenu" id="itemMenu" value="opSorteoJuicio1" />
 							<input type="hidden" name="oper" id="oper" value="add" />					    
 							<div class="well">	
 						    <div class="row-fluid">					    	
@@ -56,16 +59,7 @@
 						            <div class="controls"><textarea id="txtObs" name="txtObs" class="span12" rows="3"></textarea></div>
 						        </div>	
 						    </div>
-						    <div class="row-fluid">    
-						         <div class="control-group">
-						        	<div id="container">
-									    <div id="upload" class="btn btn-primary"><span><i class="ico-file"> </i> Adjuntar Archivos </span></div>
-										<span id="status" ></span>
-										<table id="files" ></table>		
-										<span id="resultado" ></span>
-									</div>		         
-						         </div>
-						      </div>   
+						    
 						       <div class="row-fluid">  
 								<div class="control-group">
 								<div id="respuesta"></div>
@@ -92,8 +86,7 @@
 		</div>
 		<!-- /content -->
 <?php include("footer.php"); ?>
-<script type="text/javascript" src="js/plugins/ajaxupload.3.5.js"></script>
-<script type="text/javascript" src="js/nuevoLote.js"></script>
+<script type="text/javascript" src="js/juicio_nuevojuicio.js"></script>
 
 
 
