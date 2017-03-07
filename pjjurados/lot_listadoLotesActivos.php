@@ -17,11 +17,8 @@
 			    <div class="page-header">
 			    	<div class="page-title">
 				    	<h5>Listado de Lotes Activos</h5>
-				    	<span></span>
 			    	</div>
 			    </div>
-			   
-						
 				<div id="listadoDatos" class="widget">
 				</div>
 							

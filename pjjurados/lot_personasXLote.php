@@ -171,8 +171,9 @@ if ($_GET) {
 
   
   <button id="btnBuscarPersona" type="button" class="btn btn-primary">Buscar</button>
- <button id="btnTodas" type="button" class="btn">Todos</button>
+ 	<button id="btnTodas" type="button" class="btn">Todos</button>
 </form>
+</div>
 
 <div id="mdlNotificacion" class="modal" style="display: none;">
 			<div class="modal-header">
@@ -224,7 +225,7 @@ if ($_GET) {
 		</div>
 
 
-</div>
+
 			<div id="listadoDatos" class='table-overflow'></div>
 		</div>
 

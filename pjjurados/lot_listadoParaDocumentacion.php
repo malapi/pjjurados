@@ -16,9 +16,8 @@
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Listado de Lotes</h5>
-				    	
-			    	</div>
+				    	<h5>Generar Documentaci&oacute;n</h5>
+				   </div>
 			    </div>
 			    <div class="span12">        
 	            <div id="listadoDatos" class="widget">

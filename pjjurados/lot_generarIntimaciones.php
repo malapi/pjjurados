@@ -14,103 +14,44 @@ include ("header.php");
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->
-
-		<!-- Page header -->
 		<div class="page-header">
 			<div class="page-title">
-				<h5>Personas Por Lote</h5>
-				<span></span>
+				<h5>Generar Intimaciones</h5>
 			</div>
 		</div>
-		<!-- /page header -->
-
 		<div class="widget">
-			<form id="formBuscarPers" method="POST">
-				<fieldset>
-					<!-- General form elements -->
+			<div class="well">
+			<form id="formBuscarPers" class="form-inline" method="POST">
 					<input type="hidden" name="oper" id="oper" value="verPersXIntimacion" />
-					<div class="widget row-fluid">	
-						<div class="well">
-						<div class="row-fluid">
-						<div class="span12">
-								<div class="control-group">
-									<label class="control-label">Lote:</label>
-									<div class="controls">
-										<select name="cbLote" id="cbLote" class="validate[required] span12" data-prompt-position="topLeft:-1,-5" >
+					<label class="mr-sm-2">Lote:
+										<select name="cbLote" id="cbLote" class="validate[required]" style='width:auto;' data-prompt-position="topLeft:-1,-5" >
                                                 <option value="">...</option>
-                                            </select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row-fluid">
-								<div class="span2">
-								<div class="control-group">
-									<label class="control-label">Tipo Documento:</label>
-									<div class="controls">
-									<select name="cbTipoDocB" id="cbTipoDocB" class="span12" 
+                                            </select></label>
+				<label class="mr-sm-2">Tipo Documento:
+				<select name="cbTipoDocB" style='width:auto;' id="cbTipoDocB" class="span12" 
 									data-prompt-position="topLeft:-1,-5" >
                                                 <option value="">...</option>
-                                            </select>
-									</div>
-								</div>
-								</div>								
-								<div class="span4">
-								<div class="control-group">
-									<label class="control-label">Nro Documento:</label>
-									<div class="controls">
-										<input type="text" id="txtNroDocB" name="txtNroDocB"
-											class="span12" />
-									</div>
-								</div>
-								</div>
-							</div>						
-							<div class="row-fluid">
-								<div class="span6">
-								<div class="control-group">
-									<label class="control-label">Apellido:</label>
-									<div class="controls">
-										<input type="text" id="txtApellidoB" name="txtApellidoB"
-											class="span12" />
-									</div>
-								</div>
-								</div>								
-								<div class="span6">
-								<div class="control-group">
-									<label class="control-label">Nombre:</label>
-									<div class="controls">
-										<input type="text" id="txtNombreB" name="txtNombreB"
-											class="span12" />
-									</div>
-								</div>
-								</div>
-							</div>							
-							
-							<div class="row-fluid">
-								<div class="span12">
-								 <div class="control-group">
-                                        <label class="control-label">Plantilla Para C&eacute;dula Intimaci&oacute;n:</label>
+                                            </select></label>
+				<label class="mr-sm-2">Nro Documento:
+					<input type="text" id="txtNroDocB" name="txtNroDocB"
+											class="span12" /></label>
+				<label class="mr-sm-2">Apellido:
+								<input type="text" id="txtApellidoB" name="txtApellidoB"
+											class="span12" /></label>
+				<label class="mr-sm-2">Nombre:
+				<input type="text" id="txtNombreB" name="txtNombreB"
+											class="span12" /></label>
+				<label class="mr-sm-2">Plantilla Para C&eacute;dula Intimaci&oacute;n:
                                         <div class="controls" >
                                             <div id="upload" class="btn btn-primary"><span><i class="ico-file"> </i> Adjuntar Plantilla </span></div>
 											<span id="status" ></span>	
 											<span id="resultado" ></span>                                            
-                                        </div>
-                                  </div>
-								</div>
-							</div>
-							<div class="row-fluid">
-								<div class="span12" id="respuesta"></div>
-							</div>	
-							<div class="row-fluid">
-								<div class="form-actions align-right">
-									<button id="btnBuscarPersona" type="button" class="btn btn-info">Buscar</button>
-									<button id="btnTodas" type="button" class="btn">Todos</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</fieldset>
+                                        </div></label>
+                <div class="span12" id="respuesta"></div>
+				<button id="btnBuscarPersona" type="button" class="btn btn-info">Buscar</button>
+				<button id="btnTodas" type="button" class="btn">Todos</button>
 			</form>
+			
 			<form id="formGenerarInt" method="POST">
 			<input type="hidden" name="hfArchiCedula" id="hfArchiCedula" value="" />
 			<input type="hidden" name="oper" id="oper" value="generarIntimacion" />

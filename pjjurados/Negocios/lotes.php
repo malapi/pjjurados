@@ -547,8 +547,7 @@ function listado($descripcion, $fechaDesde, $fechaHasta, $todo) {
 		// echo $sql;
 		$res = $base->query ( $sql );
 		if ($res) {
-		$tabla = "<div class='navbar'><div class='navbar-inner'><h6>Listado de Sorteos</h6></div></div>
-                    <div class='table-overflow'>
+		$tabla = "  <div class='table-overflow'>
                         <table class='table table-striped table-bordered' id='data-table'>
 					    <thead>
 					    <tr>
