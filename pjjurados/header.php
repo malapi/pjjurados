@@ -79,6 +79,7 @@ $nomUsuario = $oLogin->getUsuario();
 
 <script type="text/javascript" src="js/files/functions.js"></script>
 
+
 </head>
 
 <body>

@@ -9,6 +9,20 @@ function endsWith($haystack, $needle) {
 	return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
 }
 
+function generarParametrosParaSubmit($obj,$accion){
+	$cadena = "[";
+	foreach ($obj as $key=>$value){
+		if(!is_numeric($key)){
+			$cadena .="{ name: '".$key."', value:'".$value."'},";
+			//echo $key." ".$value;
+		}
+	}
+	if($accion != ""){
+		$cadena .="{ name: '"."accion"."', value:'".$accion."'},";
+	}
+	$cadena .= "]";
+	return $cadena;
+}
 function data_submitted() {
 	$_AAux= array();
     if (!empty($_POST)) 

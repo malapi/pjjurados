@@ -15,7 +15,7 @@ function cargarTablaPrincipal(){
 $(function(){
 	seleccionarMenuConFormulario('#formNuevoSorteo');
 	//alert("lala");
-	$("#btnGuardarJuicio").click(function(){
+	$("#btnSortearJuicio").click(function(){
 		//$(location).attr("href", "comments.php?aid=1");
 		
 		$("#respuesta").html('');

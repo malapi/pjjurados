@@ -72,13 +72,40 @@ class juicio extends BaseDatos{
 	
 
 	public function  seleccionar($data){
-
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
-
 		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
-
 		return parent::selecionar($sql) ;
 
+	}
+	
+	public function  verTabla($data){
+		$where =$this->cadenaWhereSql($data,$this->prefijo);
+		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
+		$resultado =parent::selecionar($sql);
+		$tabla = ""; 
+		$tabla = "  <div class='table-overflow'>
+                        <table class='table table-striped table-bordered' id='data-table'>
+					    <thead>
+					    <tr>
+					        <th>Localidad</th>
+							<th>Acciones</th>
+					    </tr>
+					    </thead>
+					    <tbody>";
+		//foreach ( $res as $row ) {
+			$tabla .= "<tr>
+							<td>" . "Lala" . "</td>
+							<td class='tac'>
+								<ul class='table-controls'>
+								<li><a class='btn tip' title='Modificar' href='#' data-original-title='Edit entry' onclick=\"editar('". "Lala" ."','"."Lala2"."')\">
+										<i class='icon-edit'></i></a></li>
+								<ul>
+							</td>
+							</tr>";
+		//}
+		$tabla .= "</tbody</table></div>";
+		return  $tabla;
+	
 	}
 
 	}

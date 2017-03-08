@@ -21,12 +21,18 @@ class C_juicio extends Session{
 		if ($data['accion']=='eliminar')
 
 			$resp = $obj->eliminar($data);
+		
+		if ($data['accion']=='sortear')
+			$resp = $this->sortear($data);
 
 		return $resp ;
 
 	}
 
 	
+	public function sortear($data){
+		print_object($data);
+	}
 
 	
 
