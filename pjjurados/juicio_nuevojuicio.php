@@ -1,4 +1,5 @@
-<?php include("header.php"); ?>
+<?php include_once("configuracion.php");
+include("header.php"); ?>
 
 		<!-- Content -->
 		<div id="content">
@@ -29,36 +30,36 @@
 						<div class="widget row-fluid">	
 							<input type="hidden" name="liMenu" id="liMenu" value="liSorteojuicio" />
 							<input type="hidden" name="itemMenu" id="itemMenu" value="opSorteoJuicio1" />
+							<input type="hidden" name="juicio_accion" id="juicio_accion" value="nuevo" />
+							
 							<input type="hidden" name="oper" id="oper" value="add" />					    
 							<div class="well">	
-						    <div class="row-fluid">					    	
-						        <div class="control-group">
-						            <label class="control-label">Descripci&oacute;n:</label>
-						            <div class="controls"><input type="text" id="txtDescripcion" name="txtDescripcion" class="validate[required] span12" /></div>
-						        </div>
-						    </div>
-						    <div class="row-fluid">
-						       <div class="span4">				        
-						       <div class="control-group">
-                                    <label class="control-label">Fecha Inicio:</label>
-                                    <div class="controls">
-                                    <input type="text" class="validate[required] span10" data-mask="99/99/9999" id="txtFechaDesde" name="txtFechaDesde" placeholder="99/99/9999" ></div>
-                                </div>
-                                </div>
-                                 <div class="span4">	
-                                <div class="control-group">
-                                    <label class="control-label">Fecha Finalizaci&oacute;n:</label>
-                                    <div class="controls">
-                                     <input type="text" class="validate[required] span10" data-mask="99/99/9999" id="txtFechaHasta" name="txtFechaHasta" placeholder="99/99/9999" /></div>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="row-fluid">    
-						        <div class="control-group">
-						            <label class="control-label">Observaciones:</label>
-						            <div class="controls"><textarea id="txtObs" name="txtObs" class="span12" rows="3"></textarea></div>
-						        </div>	
-						    </div>
+						          
+			<input  type="hidden"  name="idjuicio" id="idjuicio" value="0" ></input>
+			<div class="form-group">
+					<label class="col-sm-2 control-label" for="jufecha" > jufecha:  </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="text" name="jufecha" id="jufecha" data-options="required:true"></input>
+					</div>
+					</div>
+			<div class="form-group">
+					<label class="col-sm-2 control-label" for="jujueces" > jujueces:  </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="text" name="jujueces" id="jujueces" data-options="required:true"></input>
+					</div>
+					</div>
+			<div class="form-group">
+					<label class="col-sm-2 control-label" for="judescripcion" > judescripcion:  </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="text" name="judescripcion" id="judescripcion" data-options="required:true"></input>
+					</div>
+					</div>
+			<div class="form-group">
+					<label class="col-sm-2 control-label" for="juobservacion" > juobservacion:  </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="text" name="juobservacion" id="juobservacion" data-options="required:true"></input>
+					</div>
+					</div>
 						    
 						       <div class="row-fluid">  
 								<div class="control-group">
@@ -67,7 +68,7 @@
 								</div>                         
 						        <div class="row-fluid">
 						         <div class="form-actions align-right">
-	                                <button id="btnGuardarLote" type="button" class="btn btn-info">Guardar</button>
+	                                <button id="btnGuardarJuicio" type="button" class="btn btn-info">Guardar</button>
 	                                <button id="btnCancel" type="button" class="btn">Cerrar</button>
 	                            </div>
 	                            </div>

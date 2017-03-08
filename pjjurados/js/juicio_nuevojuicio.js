@@ -1,26 +1,14 @@
-/**
- * 
- */
-
 $(function(){
-	
-	//seleccionarMenu("liSor","opSor3");
 	seleccionarMenuConFormulario('#formNuevoSorteo');
-	
-	
-	
-	$("#btnGuardarLote").click(function(){
+	$("#btnGuardarJuicio").click(function(){
 		$("#respuesta").html('');
-		if($("#formNuevoSorteo").validationEngine('validate')){	
+		//if($("#btnGuardarJuicio").validationEngine('validate')){	
 			
 			$("#respuesta").html('<img src="img/elements/loaders/6.gif" alt="" style="float: left;">');
 			$.ajax({
-                url: "Negocios/lotesss.php",
+                url: "Negocios/accionjuicio.php",
                 type: 'post',
-                data: {oper:"add",descripcion: $("#txtDescripcion").val(),fechaDesde: $("#txtFechaDesde").val(),
-                	   fechaHasta: $("#txtFechaHasta").val(),observaciones: $("#txtObs").val(), archivos: archivos},
-                	   
-                	   
+                data: $('#formNuevoSorteo').serialize(),
                 success: function(resp) {
                 	if(!isNaN(resp))
                 	{
@@ -41,7 +29,7 @@ $(function(){
 				} 
             });
 			
-		}
+		//}
 	});
 	
 	
