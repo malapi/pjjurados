@@ -78,7 +78,7 @@ class juicio extends BaseDatos{
 
 	}
 	
-	public function  verTabla($data){
+	/*public function  verTabla($data){
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
 		$resultado =parent::selecionar($sql);
@@ -106,6 +106,6 @@ class juicio extends BaseDatos{
 		$tabla .= "</tbody</table></div>";
 		return  $tabla;
 	
-	}
+	}*/
 
 	}
