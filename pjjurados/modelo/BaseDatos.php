@@ -7,7 +7,8 @@ class BaseDatos extends PDO {
 	 private $host = "localhost";
 	 //private $host = "192.9.200.230";
 	 private $dbuser = "root";
-	 private $dbpass = "";
+	 //private $dbpass = "";
+	 private $dbpass = "eelcdr";
 	 private $tipo_de_base = "mysql";
 
 	
@@ -112,13 +113,13 @@ public function eliminar($consulta){
   
 
   private function tieneSequencia($consulta){ 
-  	try {
+  	/*try {
 		$nombre_seq = "";
 		$aux = str_replace('"','',str_replace('\'','',$consulta));
 		$consultaSeq = "SELECT  table_schema, table_name, substring(column_default FROM E'\\\(\'([a-z_.]+)') AS secuencia
 FROM information_schema.columns
 WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( replace('$aux','INTO','') , 'INSERT',''),'(',1) )";
-		//echo $consultaSeq;
+		echo $consultaSeq;
 		$result = $this->selecionar($consultaSeq);
         if (count($result)>0 ) //	Es una tabla que tiene vinculada una secuencia	
 			$nombre_seq =  $result[0][2];
@@ -126,8 +127,26 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		return $nombre_seq;
 	}catch(PDOException $e) {
 		echo " Ha surgido un error. Detalle: " .$e->getMessage();
-	}
-  }
+	}*/
+  	try {
+  		
+  		
+  	$sql=" SELECT  COLUMN_NAME, DATA_TYPE,COLUMN_KEY,EXTRA,TABLE_NAME
+  	FROM INFORMATION_SCHEMA.COLUMNS
+  	WHERE TABLE_SCHEMA = '".$this->dbname."'";
+  	if($tabla!=null){
+  		$sql .=" AND TABLE_NAME = trim(SUBSTRING_INDEX(SUBSTRING_INDEX('".$consulta."', '(', 1),'INSERT INTO',-1)) AND EXTRA = 'auto_increment'";
+  	}
+  	$result = $this->selecionar($sql);
+  	if (count($result)>0 ) //	Es una tabla que tiene vinculada una secuencia
+  		$nombre_seq =  $result[0][4];
+  	$this->cerrar();
+  	return $nombre_seq;
+  	
+  	}catch(PDOException $e) {
+  		echo " Ha surgido un error. Detalle: " .$e->getMessage();
+  	}
+  	}
 
   
   public function darReferenciasForaneas($tabla,$columna){
@@ -175,8 +194,21 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   		//Por cada columna
   		if($arrValor['EXTRA']!='auto_increment'){
   			$stsql .=$arrValor['COLUMN_NAME'].",";
+  			echo $arrValor['DATA_TYPE'];
   			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  				$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  				if($arrValor['DATA_TYPE']=='date' || $arrValor['DATA_TYPE']=='timestamp'){
+  					//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
+  					if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false || strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
+  						//Estoy enviando una funcion, pues no envio ni el - ni el /
+  						$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
+  					} else {
+  						$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  					}
+  					
+  				} else {
+  					$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  				}
+  				
   			}else{
   				$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
   			}
@@ -188,7 +220,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	$stvalues =substr_replace($stvalues," ",-1);
   	$stvalues .="); ";
   	$sqlInsert=$stsql." ".$stvalues;
-  	echo $sqlInsert;
+  	echo "<br>".$sqlInsert."<br>";
   	return  $sqlInsert;
   }
   public function generaUpdate($tabla,$dato){
@@ -265,12 +297,16 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		$sentencia = $this->prepare($consulta);
 		if ($sentencia->execute()) {
 			// verifico si la tabla en la que se desea insertar tiene vinculada una secuencia
-			$nombre_seq = $this->tieneSequencia($consulta);
-  			if ($nombre_seq!="")
-				$id = $this->lastInsertId($nombre_seq);
+			//$nombre_seq = $this->tieneSequencia($consulta);
+  			//if ($nombre_seq!=""){
+  				//$id = $this->lastInsertId($nombre_seq);
+  				$id =  $this->lastInsertId();
+  			//}
+				
 		
 		}
 		$this->cerrar();
+		echo $sql." ".$id;
 		return $id;
 	}catch(PDOException $e) {
 		echo " Ha surgido un error. Detalle: " .$e->getMessage();

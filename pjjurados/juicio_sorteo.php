@@ -47,6 +47,12 @@ $datos = data_submitted();
 					<input class="easyui-textbox form-control" type="text" name="selhombres" id="selhombres" data-options="required:true"></input>
 					</div>
 					</div>
+			<div class="form-group">
+					<label class="col-sm-2 control-label" for="seleccionprevia" >Sorteados en otra seleccci&oacute;n?: </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="checkbox" name="seleccionprevia" id="seleccionprevia" data-options="required:true"></input>
+					</div>
+					</div>
 			 <div class="row-fluid">  
 							<div class="control-group">
 								<div id="respuesta"></div>

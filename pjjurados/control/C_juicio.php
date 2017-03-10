@@ -32,6 +32,16 @@ class C_juicio extends Session{
 	
 	public function sortear($data){
 		print_object($data);
+		$obj= new personaseleccion();
+		//$obj= new juicio();
+		print_object($data);
+		$respuesta = $obj->sortear($data);
+		if(count($respuesta)>0){
+			$data['seleccionados']=$respuesta;
+			$obj->guardarSorteo($data);
+			//print_object($respuesta);
+		}
+		
 	}
 
 	
