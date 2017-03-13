@@ -26,6 +26,7 @@ $datos = data_submitted();
 			    <!-- /page header -->
 		
 	    		<div class="span12" id="divNueva">        
+	    		<div id="divformNuevoSorteo" name="divformNuevoSorteo">
 	            <form id="formNuevoSorteo" method="POST" >
 						<!-- General form elements -->
 						<div class="widget row-fluid">	
@@ -69,6 +70,7 @@ $datos = data_submitted();
 					 
  					
 				</form>
+				</div>
 				<!-- /basic inputs -->
 				<div id="listadoDatos" class="widget">
 				

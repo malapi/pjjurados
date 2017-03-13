@@ -75,8 +75,14 @@ class personaseleccion extends BaseDatos{
 
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
-
+		$sql = "SELECT *,".$this->textoCombo." as textocombo 
+				 FROM ".$this->nombreTabla."
+				 natural join seleccion
+				 natural join lotes
+				 natural join juicio
+				 join personas  USING(idPersona)
+				 WHERE true ".$where;
+         //echo $sql;
 		return parent::selecionar($sql) ;
 
 	}
@@ -106,14 +112,16 @@ class personaseleccion extends BaseDatos{
 		if ($data ['selmujeres'] > 0) {
 			$where = "	AND Sexo = 'F'";
 			$sqlF = $sql.$where;
-			 echo $sqlF;
+			 //echo $sqlF;
 			$resultado = parent::selecionar ($sqlF);
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selmujeres']) {
 				for($i = 0; $i <= $data ['selmujeres'] - 1; $i ++) {
 					
 					$indSeleccionar = rand ( 0, count ( $resultado ) - 1 );
-					echo "<br> sel F " . $indSeleccionar ." <br>";
-					$seleccionados[count ( $seleccionados )] = $resultado [$indSeleccionar];
+					//echo "<br> sel F " . $indSeleccionar ." <br>";
+					$un = $resultado[$indSeleccionar];
+					$un['psnrobolilla']=$indSeleccionar;
+					$seleccionados[count($seleccionados )] = $un;
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
 			}
@@ -122,14 +130,15 @@ class personaseleccion extends BaseDatos{
 		if ($data ['selhombres'] > 0) {
 			$where = "	AND Sexo = 'M' ";
 			$sqlM = $sql.$where;
-			echo $sqlM;
+			//echo $sqlM;
 			$resultado = parent::selecionar ( $sqlM );
 			// echo $sql;
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selhombres']) {
 				for($i = 0; $i <= $data ['selhombres'] - 1; $i ++) {
 					$indSeleccionar = rand ( 0, count ( $resultado ) - 1 );
-					echo "<br> sel M " . $indSeleccionar ." <br> ";
-					$seleccionados [count ( $seleccionados )] = $resultado [$indSeleccionar];
+					//echo "<br> sel M " . $indSeleccionar ." <br> ";
+					$un['psnrobolilla']=$indSeleccionar;
+					$seleccionados[count($seleccionados )] = $un;
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
 			}
@@ -148,14 +157,15 @@ class personaseleccion extends BaseDatos{
 					$un['sefecha']='now()';
 					$idseleccion = $obj->insertar($un);
 				}
-				$un['psnroordenseleccion']=$i++;
+				$i++;
+				$un['psnroordenseleccion']=$i;
 				$un['idjuicio']=$un['idjuicio'];
 				$un['idLote']=$un['idLotePersona'];
-				$un['psfechaseleccion']='now()';
-				$un['psfechafinseleccion']='curdate() + INTERVAL 3 YEAR;';
+				$un['psfechaseleccion']='CURRENT_TIMESTAMP';
+				$un['psfechafinseleccion']='DATE_ADD(CURDATE(),INTERVAL 3 YEAR)';
 				$un['idseleccion'] = $idseleccion;
 				$this->insertar($un);
-				$i++;
+				
 			}	
 		}
 		

@@ -23,6 +23,46 @@ function generarParametrosParaSubmit($obj,$accion){
 	$cadena .= "]";
 	return $cadena;
 }
+
+function convertir_Fecha($valor){
+	$date = new DateTime($valor);
+	$fecha = $date->format('d-m-Y');
+	return $fecha;
+}
+function is_Date($str){
+
+	$str = str_replace('/', '-', $str);
+	$stamp = strtotime($str);
+	if (is_numeric($stamp)){
+
+		$month = date( 'm', $stamp );
+		$day   = date( 'd', $stamp );
+		$year  = date( 'Y', $stamp );
+
+		return checkdate($month, $day, $year);
+
+	}
+	return false;
+}
+
+
+function data_submitted_cadena($cadena) {
+	$_AAux= array();
+	$_AAux2= array();
+	if (!empty($cadena))
+		$_AAux =explode("&",$cadena);
+	if (count($_AAux)){
+		foreach ($_AAux as $indice => $valor) {
+			$valor =explode("=",$valor);
+			if ($valor[1]=="")
+				$_AAux2[$valor[0]] = 'null';
+			else
+				$_AAux2[$valor[0]] = $valor[1];
+		}
+	}
+	return $_AAux2;
+
+}
 function data_submitted() {
 	$_AAux= array();
     if (!empty($_POST)) 
@@ -52,7 +92,7 @@ function __autoload($class_name){
       //print_object($directorys) ;
         foreach($directorys as $directory){
           if(file_exists($directory.$class_name . '.php')){  
-          	     echo "se incluyo".$directory.$class_name . '.php';
+          	   //  echo "se incluyo".$directory.$class_name . '.php';
             	require_once($directory.$class_name . '.php');
                 return;
             }           

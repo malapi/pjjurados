@@ -1,19 +1,34 @@
 function cargarTablaPrincipal(){
-	$.post("libs/datagridhtml.php", {control:"juicio"
-		,juicio_accion:"verTabla"
-		,tabla:"Id:idjuicio#Fecha Juicio:jufecha#Jueces:jujueces#Descripcion:judescripcion#Observacion:juobservacion"
+	$.post("libs/datagridhtml.php", {dataForm:$('#formNuevoSorteo').serialize(),control:"personaseleccion"
+		,personaseleccion_accion:"verTabla"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
 		,eventos:[{titulo:"Editar",href:"juicio_nuevojuicio.php",icono:"icon-edit",accion:"editar"}
 		,{titulo:"Sortear",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
 		]
-					}, function(data){      	
-		$("#listadoDatos").html(data);
-		$('#data-table').dataTable();
-		$('.tip').tooltip();
+					}, function(data){
+						if(data.search("<tbody></tbody>")<0){
+							//alert("oculto");
+							$('#divformNuevoSorteo').hide();
+							$('#divformNuevoSorteo').after("<div class='alert alert-success'>" +
+	                                "<button type='button' class='close' data-dismiss='alert'>×</button>" +
+	                                "" +"El sorteo ya fue realizado"+""+
+	                                "</div>" );
+							
+						}
+						
+						$("#listadoDatos").html(data);
+						$('#data-table').dataTable();
+						$('.tip').tooltip();
 		}); 
+	
+	
+	
+	
 }
 
 $(function(){
 	seleccionarMenuConFormulario('#formNuevoSorteo');
+	
 	//alert("lala");
 	$("#btnSortearJuicio").click(function(){
 		//$(location).attr("href", "comments.php?aid=1");

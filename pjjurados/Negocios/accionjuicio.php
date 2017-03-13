@@ -2,7 +2,7 @@
 include_once('../configuracion.php');
 $datos = data_submitted();
 $resp = true;
-print_object($datos);
+//print_object($datos);
 //$datos['accion'] = $datos['juicio_accion'];
 $objws = new C_juicio();
 $tipoMensaje='info';

@@ -194,23 +194,36 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   		//Por cada columna
   		if($arrValor['EXTRA']!='auto_increment'){
   			$stsql .=$arrValor['COLUMN_NAME'].",";
-  			echo $arrValor['DATA_TYPE'];
+  			//echo $arrValor['DATA_TYPE'];
   			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
   				if($arrValor['DATA_TYPE']=='date' || $arrValor['DATA_TYPE']=='timestamp'){
-  					//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
-  					if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false || strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
-  						//Estoy enviando una funcion, pues no envio ni el - ni el /
-  						$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
-  					} else {
-  						$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  					if($dato[$arrValor['COLUMN_NAME']] == ''){
+  						//Verifico que si es una Fecha, el nulo es el valor null
+  						$stvalues.="null,";
+  					}else {
+  						//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
+  						if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false
+  								|| strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
+  							//Estoy enviando una funcion, pues no envio ni el - ni el /
+  							$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
+  						} else {
+  							$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  						}
   					}
+  					
   					
   				} else {
   					$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."',";
   				}
   				
   			}else{
-  				$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
+  				//Verifico que si es un Nro, el nulo es el valor null
+  				if($dato[$arrValor['COLUMN_NAME']] == ''){
+  					$stvalues.="null,";
+  				} else {
+  					$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
+  				}
+  				
   			}
   			
   		}
@@ -220,7 +233,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	$stvalues =substr_replace($stvalues," ",-1);
   	$stvalues .="); ";
   	$sqlInsert=$stsql." ".$stvalues;
-  	echo "<br>".$sqlInsert."<br>";
+  	//echo "<br>".$sqlInsert."<br>";
   	return  $sqlInsert;
   }
   public function generaUpdate($tabla,$dato){
@@ -306,7 +319,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		
 		}
 		$this->cerrar();
-		echo $sql." ".$id;
+		//echo $sql." ".$id;
 		return $id;
 	}catch(PDOException $e) {
 		echo " Ha surgido un error. Detalle: " .$e->getMessage();

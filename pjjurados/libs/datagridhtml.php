@@ -1,10 +1,15 @@
 <?php
 include_once('../configuracion.php');
 $datos = data_submitted();
-$datos['accion'] = $datos['juicio_accion'];
+$datos['accion'] = $datos[$datos['control'].'_accion'];
 $control = "C_".$datos['control'];
 $objws = new $control();
-
+if($datos['dataForm']!=''){
+	$dataForm = data_submitted_cadena($datos['dataForm']);
+	unset($datos['dataForm']);
+	$datos = array_merge($dataForm, $datos);
+	//print_object($datos);
+}
 $table = "";
 if($datos['accion'] == 'verTabla'){
 	$resultado = $objws->buscar($datos);
@@ -31,7 +36,12 @@ if($datos['accion'] == 'verTabla'){
 	foreach ($resultado as $uno){
 		$tabla .="<tr>";
 		foreach ($arraycampos as $campo){
-			$tabla .="<td>" . $uno[$campo] . "</td>";
+			if(is_Date($uno[$campo])){
+				$tabla .="<td>".convertir_Fecha($uno[$campo]). "</td>";
+			} else {
+				$tabla .="<td>" . $uno[$campo] . "</td>";
+			}
+			
 		}
 		if($datos['eventos'] != ''){
 			$tabla .= "	<td class='tac'>
@@ -57,7 +67,7 @@ if($datos['accion'] == 'verTabla'){
 	
 	
 	
-	$tabla .= "</tbody</table></div>";
+	$tabla .= "</tbody></table></div>";
 	//echo $objws->abm($datos);
 
 }

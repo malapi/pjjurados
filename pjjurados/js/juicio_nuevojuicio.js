@@ -3,7 +3,8 @@ function cargarTablaPrincipal(){
 		,juicio_accion:"verTabla"
 		,tabla:"Id:idjuicio#Fecha Juicio:jufecha#Jueces:jujueces#Descripcion:judescripcion#Observacion:juobservacion"
 		,eventos:[{titulo:"Editar",href:"juicio_nuevojuicio.php",icono:"icon-edit",accion:"editar"}
-		,{titulo:"Sortear",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
+		,{titulo:"Sorteo",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
+		,{titulo:"Emitir Listados",href:"juicio_emitirlistados.php",icono:"icon-download",accion:"listados"}
 		]
 					}, function(data){      	
 		$("#listadoDatos").html(data);
