@@ -1,8 +1,8 @@
 <?php 
 
-class juicio extends BaseDatos{ 
+class personaselecciondocumentotipos extends BaseDatos{ 
 
-		private $nombreTabla='juicio';
+		private $nombreTabla='personaselecciondocumentotipos';
 
 		private $prefijo= array("id","completar");
 
@@ -72,21 +72,13 @@ class juicio extends BaseDatos{
 	
 
 	public function  seleccionar($data){
+
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
+
 		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
+
 		return parent::selecionar($sql) ;
 
 	}
-	
-	public function  listados($data){
-		$where =$this->cadenaWhereSql($data,$this->prefijo);
-		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
-		return parent::selecionar($sql) ;
-	
-	}
-
-	
-	
-	
 
 	}

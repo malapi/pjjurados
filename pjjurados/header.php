@@ -127,7 +127,7 @@ $nomUsuario = $oLogin->getUsuario();
 			            	<a href="#" title="Sorteo" id="" class="expand"><i class="icon-filter"></i>Sorteos <strong>></strong></a>
 			                <ul>
 			                	 <li><a id="opSorteoJuicio1" href="juicio_nuevojuicio.php" title="Nuevo Sorteo para Juicio">Sorteo para Juicio</a></li>
-			                     <li><a id="opSorteoJuicio2" href="lot_listadoLotesActivos.php" title="Listados respaldatorios">Emitir Listados </a></li>
+			                     <li><a id="opSorteoJuicio2" href="juicio_audienciaseleccion.php" title="Fichas por Persona">Fichas por Persona </a></li>
 			                </ul>
 			            </li>
 			             <li id="liDoc"><a href="#" title="" class="expand"><i class="icon-paste"></i>Documentaci&oacute;n  <strong>></strong></a>

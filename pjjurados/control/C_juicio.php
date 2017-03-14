@@ -21,11 +21,37 @@ class C_juicio extends Session{
 		
 		if ($data['accion']=='sortear')
 			$resp = $this->sortear($data);
+		if ($data['accion']=='listados')
+			$resp = $this->generarListados($data);
 
 		return $resp ;
 
 	}
 
+	public function generarListados($data){
+		//print_object($data);
+		$obj= new juicionotificaciones();
+		//Primero elimino los archivos para el juicio
+		$obj->eliminar($data);
+		
+		
+		$un['idjuicio'] = $data['idjuicio'];
+		
+		
+		$un['jnfechageneracion'] = "now()";
+		$un['jndescripcion'] = "cédulas de citación";
+		$un['jnnombrearchivo'] = "10_cedula.rtf.zip";
+		$un['jnnombreplantilla'] = "plantilla_cedulas.rtf";
+		$obj->insertar($un);
+		
+		$un['jndescripcion'] = "Listado de Partes";
+		$un['jnnombrearchivo'] = "10_partes.xls.zip";
+		//$un['jnnombreplantilla'] = "plantilla_cedulas.rtf";
+		$obj->insertar($un);
+		return true;
+	
+	}
+	
 	
 	public function sortear($data){
 		//print_object($data);
@@ -46,15 +72,16 @@ class C_juicio extends Session{
 	public function buscar($data){
 
 		$obj= new juicio();
-
 		if (isset($data['page'])){
-
 			return $obj->seleccionarPaginado(null,$data);
-
 		} else {
-
-			return $obj->seleccionar($data);
-
+			$resultado = array();
+			if(isset($data['operacion']) && $data['operacion'] =='listados'){
+				$resultado = $obj->seleccionar($data);
+			} else {
+				$resultado =$obj->seleccionar($data); 
+			}
+			return $resultado;
 		}
 
 	

@@ -54,7 +54,7 @@ function data_submitted_cadena($cadena) {
 	if (count($_AAux)){
 		foreach ($_AAux as $indice => $valor) {
 			$valor =explode("=",$valor);
-			if ($valor[1]=="")
+			if ($valor[1]=="" || $valor[1]=="0")
 				$_AAux2[$valor[0]] = 'null';
 			else
 				$_AAux2[$valor[0]] = $valor[1];

@@ -277,17 +277,30 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	//print_object($resultado);
   	$stsql=" DELETE FROM ".$tabla." WHERE ";
   	$stwhere="";
-  	foreach ($resultado as $clave => $arrValor){
-  		//Por cada columna
+  	$stwheresinclave="";
+  	foreach ($resultado as $clave => $arrValor){ //Por cada columna
   		if($arrValor['COLUMN_KEY']=='PRI'){
-  			
-  			$stwhere .=$arrValor['COLUMN_NAME']."=";
-  			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  				$stwhere.="'".$dato[$arrValor['COLUMN_NAME']]."' AND ";
-  			}else{
-  				$stwhere.="".$dato[$arrValor['COLUMN_NAME']]." AND ";
+  			if($dato[$arrValor['COLUMN_NAME']]!= ''){
+  				$stwhere .=$arrValor['COLUMN_NAME']."=";
+  				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
+  					$stwhere.="'".$dato[$arrValor['COLUMN_NAME']]."' AND ";
+  				}else{
+  					$stwhere.="".$dato[$arrValor['COLUMN_NAME']]." AND ";
+  				}	
+  			}
+  		} else {
+  			if($dato[$arrValor['COLUMN_NAME']]!= ''){
+  				$stwheresinclave .=$arrValor['COLUMN_NAME']."=";
+  				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
+  					$stwheresinclave.="'".$dato[$arrValor['COLUMN_NAME']]."' AND ";
+  				}else{
+  					$stwheresinclave.="".$dato[$arrValor['COLUMN_NAME']]." AND ";
+  				}
   			}
   		}
+  	}
+  	if($stwhere==""){
+  		$stwhere = $stwheresinclave;
   	}
   	$stwhere .=" true ";
   	$stwhere .="; ";

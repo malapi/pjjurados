@@ -4,9 +4,9 @@ class personaseleccionresultadotipos extends BaseDatos{
 
 		private $nombreTabla='personaseleccionresultadotipos';
 
-		private $prefijo= array("id","completar");
+		private $prefijo= array("id","psrt","completar");
 
-		private $textoCombo = "'completartexto'";
+		private $textoCombo = "psrtdescripcion";
 
 				
 		public function  cadenaWhereSql($data,$prefijo){

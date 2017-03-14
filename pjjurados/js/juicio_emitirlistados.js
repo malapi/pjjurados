@@ -1,24 +1,27 @@
 function cargarTablaPrincipal(){
-	$.post("libs/datagridhtml.php", {control:"juicio"
-		,juicio_accion:"verTabla"
-		,tabla:"Id:idjuicio#Fecha Juicio:jufecha#Jueces:jujueces#Descripcion:judescripcion#Observacion:juobservacion"
-		,eventos:[{titulo:"Editar",href:"juicio_nuevojuicio.php",icono:"icon-edit",accion:"editar"}
-		,{titulo:"Sorteo",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
-		,{titulo:"Emitir Listados",href:"juicio_emitirlistados.php",icono:"icon-download",accion:"listados"}
-		,{titulo:"Audiencia",href:"juicio_audienciaseleccion.php",icono:"icon-eye-open",accion:"audiencia"}
-		
+	$.post("libs/datagridhtml.php", {dataForm:$('#formEmitirListados').serialize(),control:"juicionotificaciones"
+		,juicionotificaciones_accion:"verTabla"
+		,tabla:"Juicio:judescripcion#Fecha Creacion:jnfechageneracion#Plantilla:jnnombreplantilla#Archivo:jnnombrearchivo#Descripcion:jndescripcion"
+		,eventos:[{titulo:"Descargar",href:"juicio_nuevojuicio.php",icono:"icon-download",accion:"descargar"}
 		]
-					}, function(data){      	
-		$("#listadoDatos").html(data);
-		$('#data-table').dataTable();
-		$('.tip').tooltip();
+					}, function(data){
+						
+						
+						$("#listadoDatos").html(data);
+						$('#data-table').dataTable();
+						$('.tip').tooltip();
 		}); 
+	
+	
+	
+	
 }
 
 $(function(){
-	seleccionarMenuConFormulario('#formNuevoSorteo');
+	seleccionarMenuConFormulario('#formEmitirListados');
+	
 	//alert("lala");
-	$("#btnGuardarJuicio").click(function(){
+	$("#btn_formEmitirListados_Generar").click(function(){
 		//$(location).attr("href", "comments.php?aid=1");
 		
 		$("#respuesta").html('');
@@ -28,7 +31,7 @@ $(function(){
 			$.ajax({
                 url: "Negocios/accionjuicio.php",
                 type: 'post',
-                data: $('#formNuevoSorteo').serialize(),
+                data: $('#formEmitirListados').serialize(),
                 success: function(resp) {
                 	//alert(resp);
                 	var resp = eval('('+resp+')');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 13-03-2017 a las 17:49:01
+-- Tiempo de generación: 14-03-2017 a las 16:40:48
 -- Versión del servidor: 5.7.17-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -167,6 +167,29 @@ INSERT INTO `juicio` (`idjuicio`, `jufecha`, `jujueces`, `judescripcion`, `juobs
 (5, '2017-03-08', 'rwer', 'rwerwe modificada', 'rwrwer'),
 (6, '2017-12-12', 'malaa', 'judescripcion dsdasdasd', 'juobservacion'),
 (7, '2017-03-08', 'rwer', 'rwerwe', 'rwrwer dsadasdsadsadsadsd');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `juicionotificaciones`
+--
+
+CREATE TABLE `juicionotificaciones` (
+  `idjuicionotificaciones` int(11) NOT NULL,
+  `idjuicio` int(11) NOT NULL,
+  `jnnombreplantilla` varchar(150) NOT NULL,
+  `jnnombrearchivo` varchar(150) NOT NULL,
+  `jnfechageneracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `jndescripcion` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `juicionotificaciones`
+--
+
+INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`) VALUES
+(15, 1, 'plantilla_cedulas.rtf', '10_cedula.rtf.zip', '2017-03-14 13:37:34', 'cÃ©dulas de citaciÃ³n'),
+(16, 1, 'plantilla_cedulas.rtf', '10_partes.xls.zip', '2017-03-14 13:37:34', 'Listado de Partes');
 
 -- --------------------------------------------------------
 
@@ -2640,8 +2663,30 @@ CREATE TABLE `personaselecciondocumento` (
   `psdfechafin` datetime NOT NULL,
   `psdarchivo` text NOT NULL,
   `idPersona` int(11) NOT NULL,
-  `idseleccion` int(11) NOT NULL
+  `idseleccion` int(11) NOT NULL,
+  `idpersonaselecciondocumentotipos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personaselecciondocumentotipos`
+--
+
+CREATE TABLE `personaselecciondocumentotipos` (
+  `idpersonaselecciondocumentotipos` int(11) NOT NULL,
+  `psdtdescripcion` varchar(150) NOT NULL,
+  `psdtactivo` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `personaselecciondocumentotipos`
+--
+
+INSERT INTO `personaselecciondocumentotipos` (`idpersonaselecciondocumentotipos`, `psdtdescripcion`, `psdtactivo`) VALUES
+(1, 'Excusación', 1),
+(2, 'Recusación', 1),
+(3, 'Otros', 1);
 
 -- --------------------------------------------------------
 
@@ -3018,6 +3063,13 @@ ALTER TABLE `juicio`
   ADD PRIMARY KEY (`idjuicio`);
 
 --
+-- Indices de la tabla `juicionotificaciones`
+--
+ALTER TABLE `juicionotificaciones`
+  ADD PRIMARY KEY (`idjuicionotificaciones`),
+  ADD KEY `idjuicio` (`idjuicio`);
+
+--
 -- Indices de la tabla `localidades`
 --
 ALTER TABLE `localidades`
@@ -3088,7 +3140,14 @@ ALTER TABLE `personaseleccion`
 ALTER TABLE `personaselecciondocumento`
   ADD PRIMARY KEY (`idpersonaselecciondocumento`),
   ADD KEY `idseleccion` (`idseleccion`),
-  ADD KEY `idPersona` (`idPersona`);
+  ADD KEY `idPersona` (`idPersona`),
+  ADD KEY `idpersonaselecciondocumentotipos` (`idpersonaselecciondocumentotipos`);
+
+--
+-- Indices de la tabla `personaselecciondocumentotipos`
+--
+ALTER TABLE `personaselecciondocumentotipos`
+  ADD PRIMARY KEY (`idpersonaselecciondocumentotipos`);
 
 --
 -- Indices de la tabla `personaseleccionresultadotipos`
@@ -3198,6 +3257,11 @@ ALTER TABLE `estadosddjj`
 ALTER TABLE `juicio`
   MODIFY `idjuicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
+-- AUTO_INCREMENT de la tabla `juicionotificaciones`
+--
+ALTER TABLE `juicionotificaciones`
+  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
 -- AUTO_INCREMENT de la tabla `localidades`
 --
 ALTER TABLE `localidades`
@@ -3237,6 +3301,11 @@ ALTER TABLE `personas`
 --
 ALTER TABLE `personaselecciondocumento`
   MODIFY `idpersonaselecciondocumento` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `personaselecciondocumentotipos`
+--
+ALTER TABLE `personaselecciondocumentotipos`
+  MODIFY `idpersonaselecciondocumentotipos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `personaseleccionresultadotipos`
 --
@@ -3308,6 +3377,12 @@ ALTER TABLE `centrodistribucion`
   ADD CONSTRAINT `centrodistribucion_ibfk_1` FOREIGN KEY (`idLocalidad`) REFERENCES `localidades` (`idLocalidad`);
 
 --
+-- Filtros para la tabla `juicionotificaciones`
+--
+ALTER TABLE `juicionotificaciones`
+  ADD CONSTRAINT `juicionotificaciones_ibfk_1` FOREIGN KEY (`idjuicio`) REFERENCES `juicio` (`idjuicio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `lotes`
 --
 ALTER TABLE `lotes`
@@ -3358,7 +3433,8 @@ ALTER TABLE `personaseleccion`
 --
 ALTER TABLE `personaselecciondocumento`
   ADD CONSTRAINT `personaselecciondocumento_ibfk_1` FOREIGN KEY (`idseleccion`) REFERENCES `seleccion` (`idseleccion`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `personaselecciondocumento_ibfk_2` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `personaselecciondocumento_ibfk_2` FOREIGN KEY (`idPersona`) REFERENCES `personas` (`idPersona`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `personaselecciondocumento_ibfk_3` FOREIGN KEY (`idpersonaselecciondocumentotipos`) REFERENCES `personaselecciondocumentotipos` (`idpersonaselecciondocumentotipos`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `plantillas_preguntas`

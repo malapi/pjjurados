@@ -26,13 +26,13 @@ $datos = data_submitted();
 			    <!-- /page header -->
 		
 	    		<div class="span12" id="divNueva">        
-	    		<div id="divformNuevoSorteo" name="divformNuevoSorteo">
-	            <form id="formNuevoSorteo" method="POST" >
+	    		<div id="divformEmitirListados" name="divformEmitirListados">
+	            <form id="formEmitirListados" method="POST" >
 						<!-- General form elements -->
 						<div class="widget row-fluid">	
 							<input type="hidden" name="liMenu" id="liMenu" value="liSorteojuicio" />
 							<input type="hidden" name="itemMenu" id="itemMenu" value="opSorteoJuicio1" />
-							<input type="hidden" name="accion" id="accion" value="sorteo" />
+							<input type="hidden" name="accion" id="accion" value="listados" />
 							<input  type="hidden"  name="idjuicio" id="idjuicio" value="0" ></input>
 							<div class="well">	
 						    
@@ -44,7 +44,7 @@ $datos = data_submitted();
 								</div>                         
 						        <div class="row-fluid">
 						         <div class="form-actions align-right">
-	                                <button id="btnSortearJuicio" type="button" class="btn btn-info">Generar</button>
+	                                <button id="btn_formEmitirListados_Generar" type="button" class="btn btn-info">Generar</button>
 	                                <button id="btnCancel" type="button" class="btn">Cerrar</button>
 	                            </div>
 	                            </div>
@@ -66,7 +66,7 @@ $datos = data_submitted();
 		</div>
 		<!-- /content -->
 <?php include("footer.php"); ?>
-<script type="text/javascript" src="js/juicio_sorteo.js"></script>
+<script type="text/javascript" src="js/juicio_emitirlistados.js"></script>
 <script type="text/javascript">
 var $_POST = <?php echo json_encode($datos); ?>;
 if($_POST != ""){
