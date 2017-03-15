@@ -245,12 +245,16 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	foreach ($resultado as $clave => $arrValor){
   		//Por cada columna
   		if($arrValor['COLUMN_KEY']!='PRI'){
-  			$stsql .=$arrValor['COLUMN_NAME']."=";
-  			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  				$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
-  			}else{
-  				$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
+  			if($dato[$arrValor['COLUMN_NAME']]!= ''){ 
+  				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
+  				$stsql .=$arrValor['COLUMN_NAME']."=";
+  				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
+  					$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  				}else{
+  					$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
+  				}
   			}
+  			
   				
   		} else{
   			$stwhere .=$arrValor['COLUMN_NAME']."=";

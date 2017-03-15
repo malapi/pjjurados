@@ -1,3 +1,34 @@
+function submit(action, method, values) {
+    var form = $('<form/>', {
+        action: action,
+        method: method
+    });
+    $.each(values, function() {
+        form.append($('<input/>', {
+            type: 'hidden',
+            name: this.name,
+            value: this.value
+        }));    
+    });
+    //cargarFormulario('#formNuevoSorteo',values);
+    form.appendTo('body').submit();
+    
+}
+
+function cargarFormulario(valores){
+	//alert(valores);
+	$.each(valores, function(key, valor) {
+		//alert(key+" "+valor);
+		$('#'+key).val(valor);
+	});
+	/*$.each(valores, function() {
+        alert(this.name);
+        //$('#formNuevoSorteo.#'+this.name).val(this.value);
+    });*/
+	
+}
+
+
 function cargarCombos(){
 	$(".ui-autocomplete-input").each(function( index ) {
 		//alert( index + ": " + $(this).attr('id') );
@@ -61,5 +92,26 @@ function cargarCombos(){
    
     
 	
+	
+}
+
+
+function cargarCalendario(){
+	$('input[type=date]').each(function (index, element) {
+        /* Create a hidden clone, which will contain the actual value */
+        var clone = $(this).clone();
+        clone.insertAfter(this);
+        clone.hide();
+        /* Rename the original field, used to contain the display value */
+        $(this).attr('id', $(this).attr('id') + '-display');
+        $(this).attr('name', $(this).attr('name') + '-display');
+        /* Create the datepicker with the desired display format and alt field */
+        $(this).datepicker({ dateFormat: "dd/mm/yy", altField: "#" + clone.attr("id"), altFormat: "yy-mm-dd" });
+        /* Finally, parse the value and change it to the display format */
+        if ($(this).attr('value')) {
+            var date = $.datepicker.parseDate("yy-mm-dd", $(this).attr('value'));
+            $(this).attr('value', $.datepicker.formatDate("dd/mm/yy", date));
+        }
+    });
 	
 }

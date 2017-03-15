@@ -48,8 +48,14 @@ if($datos['accion'] == 'verTabla'){
 						<ul class='table-controls'>";
 			foreach ($datos['eventos'] as $un){
 				$cadena = generarParametrosParaSubmit($uno,$un['accion']);
-				$tabla .= "<li><a class='btn tip' title='".$un['titulo']."' href='#' data-original-title='Edit entry' onclick=\"submit('".$un['href']."', 'POST',".$cadena.")\">
-					";
+				$tabla .= "<li><a class='btn tip' title='".$un['titulo']."' href='#' data-original-title='Edit entry' onclick=";
+				
+				if(isset($un['href'])){
+					$tabla .="\"submit('".$un['href']."', 'POST',".$cadena.")\">";
+				}
+				if(isset($un['js'])){
+					$tabla .="\"".$un['js']."(".$cadena.")\">";
+				}
 				if($un['icono']!=""){
 					$tabla .="<i class='".$un['icono']."'></i></a></li>";
 				}
