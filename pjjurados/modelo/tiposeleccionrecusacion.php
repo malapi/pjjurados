@@ -4,9 +4,9 @@ class tiposeleccionrecusacion extends BaseDatos{
 
 		private $nombreTabla='tiposeleccionrecusacion';
 
-		private $prefijo= array("id","completar");
+		private $prefijo= array("id","trs","completar");
 
-		private $textoCombo = "'completartexto'";
+		private $textoCombo = "trsdescripcion";
 
 				
 		public function  cadenaWhereSql($data,$prefijo){

@@ -3,7 +3,6 @@ include("header.php");
 $datos = data_submitted();
 //print_object($datos);
 ?>
-
 		<!-- Content -->
 		<div id="content">
 			<!-- Content wrapper -->
@@ -61,12 +60,10 @@ $datos = data_submitted();
 			<div class="col">
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="idpersonaseleccionresultadotipos" > Resultado Seleccion:  </label>
-						<div class="col-sm-4">
-						<select  class="form-control" name="idpersonaseleccionresultadotipos" id="idpersonaseleccionresultadotipos"
-						data-options='[{clavetabla:"idpersonaseleccionresultadotipos",campotablamostrar:"textocombo",control:"personaseleccionresultadotipos"}]'
-						data-prompt-position="topLeft:-1,-5" >
-						 <!-- <option value="">...</option> -->
-						</select>
+						<div class="ui-widget">
+						<input  class="ui-autocomplete-input form-control" name="idpersonaseleccionresultadotipos" id="idpersonaseleccionresultadotipos"
+						data-options='[{clavetabla:"idpersonaseleccionresultadotipos",campofiltrar:"psrtdescripcion",campotablamostrar:"textocombo",control:"personaseleccionresultadotipos"}]'></input>
+						
 						</div>
 						</div>
 				</div>
@@ -86,7 +83,7 @@ $datos = data_submitted();
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="psfechaexcusacion" > Fecha Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psfechaexcusacion" id="psfechaexcusacion" data-options="required:true"></input>
+					<input class="datepicker form-control" type="text" name="psfechaexcusacion" id="psfechaexcusacion" data-options="required:true" placeholder="99/99/9999"></input>
 					</div>
 					</div>
 			   
@@ -99,7 +96,7 @@ $datos = data_submitted();
 						<label class="col-sm-2 control-label" for="idtiposeleccionrecusacion" > Recusaci&oacute;n:  </label>
 						<div class="ui-widget">
 						<input class="ui-autocomplete-input form-control" type="text" name="idtiposeleccionrecusacion" id="idtiposeleccionrecusacion"
-						data-options='[{clavetabla:"idpersonaseleccionresultadotipos",campofiltrar:"psrtdescripcion",campotablamostrar:"textocombo",control:"personaseleccionresultadotipos"}]'></input>
+						data-options='[{clavetabla:"idtiposeleccionrecusacion",campofiltrar:"trsdescripcion",campotablamostrar:"textocombo",control:"tiposeleccionrecusacion"}]'></input>
 						</div>
 						</div>
 			   </div>

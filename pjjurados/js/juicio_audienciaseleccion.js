@@ -26,53 +26,7 @@ function cargarTablaPrincipal(){
 	
 }
 
-function cargarCombos(){
-	
-	
-	
-	var opciones = eval($('#idtiposeleccionrecusacion').data('options'));
-	opciones = opciones[0];
-	//alert(opciones.campotablamostrar+" "+opciones.clavetabla + " "+opciones.control);
-	/*$.post("libs/datacombohtml.php", opciones , function(data){
-						
-						alert(data);
-						$("#idpersonaseleccionresultadotipos").html(data);
-						//$('#data-table').dataTable();
-						//$('.tip').tooltip();
-		}); 
-	*/
-	
-    $( "#idtiposeleccionrecusacion" ).autocomplete({
-        source: function( request, response ) {
-            $.ajax( {
-              url: "libs/datacombohtml.php",
-              dataType: "jsonp",
-              data: {
-                filtro:request.term
-                ,control:opciones.control
-                ,campotabla:opciones.campofiltrar
-              },
-              success: function( data ) {
-            	  response( $.map( data, function( item ) {
-                      return {
-                          label: item.idpersonaseleccionresultadotipos,
-                          value: item.psrtdescripcion
-                      }
-                  }));
-            	  
-               // response( data );
-              }
-            } );
-          },
-        minLength: 1,
-        select: function( event, ui ) {
-          alert( "Selected: " + ui.item.value + " aka " + ui.item.id );
-        }
-      });
-    
-	
-	
-}
+
 
 $(function(){
 	seleccionarMenuConFormulario('#formAudiencia');
@@ -89,7 +43,7 @@ $(function(){
 			$.ajax({
                 url: "Negocios/accionjuicio.php",
                 type: 'post',
-                data: $('#formNuevoSorteo').serialize(),
+                data: $('#formAudiencia').serialize(),
                 success: function(resp) {
                 	//alert(resp);
                 	var resp = eval('('+resp+')');

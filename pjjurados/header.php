@@ -78,6 +78,7 @@ $nomUsuario = $oLogin->getUsuario();
 <script type="text/javascript" src="js/files/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="js/files/functions.js"></script>
+<script type="text/javascript" src="js/files/utiles.js"></script>
 
 
 </head>

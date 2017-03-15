@@ -17,6 +17,8 @@
 /* # General styles
 ================================================== */
 
+input.ui-autocomplete-loading { background:url('../img/icons/ajax-loader.gif') no-repeat right center; }
+
 html { height: 100%; background: url(../img/backgrounds/main.png); font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 body { margin: 0; min-height: 100%; background-image: url(../img/backgrounds/body_line.png); background-repeat: repeat-y; background-position: 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 20px; color: #555; position: relative; }
 
