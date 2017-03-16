@@ -20,8 +20,10 @@ $nomUsuario = $oLogin->getUsuario();
 <title>:: JURADOS ::</title>
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+ -->
+ 
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="css/plugins.css" rel="stylesheet" type="text/css" />
 <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
 <link href="css/icons.css" rel="stylesheet" type="text/css" />
@@ -128,7 +130,7 @@ $nomUsuario = $oLogin->getUsuario();
 			            	<a href="#" title="Sorteo" id="" class="expand"><i class="icon-filter"></i>Sorteos <strong>></strong></a>
 			                <ul>
 			                	 <li><a id="opSorteoJuicio1" href="juicio_nuevojuicio.php" title="Nuevo Sorteo para Juicio">Sorteo para Juicio</a></li>
-			                     <li><a id="opSorteoJuicio2" href="juicio_audienciaseleccion.php" title="Fichas por Persona">Fichas por Persona </a></li>
+			                     <li><a id="opSorteoJuicio2" href="ficha_persona.php" title="Fichas por Persona">Fichas por Persona </a></li>
 			                </ul>
 			            </li>
 			             <li id="liDoc"><a href="#" title="" class="expand"><i class="icon-paste"></i>Documentaci&oacute;n  <strong>></strong></a>

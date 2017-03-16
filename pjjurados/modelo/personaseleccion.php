@@ -173,5 +173,148 @@ class personaseleccion extends BaseDatos{
 		return $seleccionados;
 	}
 	
+	public function consultar($dato){
+		//print_object($dato);
+		$sql = "SELECT idPersona,Nombre,Apellido,DNI,
+				GROUP_CONCAT(DISTINCT CASE WHEN psnroordenseleccion is null THEN '' ELSE psnroordenseleccion END ORDER BY psnroordenseleccion DESC SEPARATOR ' ') as psnroordenseleccion,
+				GROUP_CONCAT(DISTINCT CASE WHEN psnrobolilla is null THEN '' ELSE psnrobolilla END ORDER BY psnrobolilla DESC SEPARATOR ' ') as psnrobolilla,
+				GROUP_CONCAT(DISTINCT CASE WHEN psnrojurado is null THEN 0 ELSE psnrojurado END ORDER BY psnrojurado DESC SEPARATOR ' ') as psnrojurado,
+				GROUP_CONCAT(DISTINCT CASE WHEN lp.idLote is null THEN '' ELSE lp.idLote END ORDER BY lp.idLote DESC SEPARATOR ' ') as idLote
+			FROM personas as p
+			NATURAL JOIN lotespersonas as lp
+			LEFT JOIN personaseleccion as ps USING(idPersona)
+			LEFT JOIN juicio as j using(idjuicio)
+			WHERE ";
+		$where = " true ";
+		$sqlFinal =" GROUP BY idPersona,Nombre,Apellido,DNI"; 
+		
+		if(isset($dato['Nombre']) && $dato['Nombre'] != '' && $dato['Nombre'] != 'null'){
+			$where .=" AND Nombre like '%".$dato['Nombre']."%'";
+		}
+		if(isset($dato['Apellido']) && $dato['Apellido'] != '' && $dato['Apellido'] != 'null'){
+			$where .=" AND Apellido like '%".$dato['Apellido']."%'";
+		}
+		if(isset($dato['DNI']) && $dato['DNI'] != '' && $dato['DNI'] != 'null'){
+			$where .=" AND DNI = ".$dato['Apellido']."";
+		}
+		
+		if(isset($dato['fueseleccionada']) && $dato['fueseleccionada'] != '' && $dato['fueseleccionada'] != 'null'){
+			if($dato['fueseleccionada'] == 'si') 
+					$where .=" AND psnrobolilla is not null ";
+			else 
+				$where .=" AND psnrobolilla is null ";
+		}
+		if(isset($dato['psasiste']) && $dato['psasiste'] != '' && $dato['psasiste'] != 'null'){
+			$where .=" AND psasiste = ".$dato['psasiste']."";
+		}
+		if(isset($dato['idtiposeleccionrecusacion']) && $dato['idtiposeleccionrecusacion'] != '' && $dato['idtiposeleccionrecusacion'] != 'null'){
+			$where .=" AND idtiposeleccionrecusacion = ".$dato['idtiposeleccionrecusacion']."";
+		}
+		if(isset($dato['pscaracter']) && $dato['pscaracter'] != '' && $dato['pscaracter'] != 'null'){
+			$where .=" AND pscaracter like '%".$dato['pscaracter']."%'";
+		}
+		if(isset($dato['fueJurado']) && $dato['fueJurado'] != '' && $dato['fueJurado'] != 'null'){
+			if($dato['fueJurado'] == 'si')
+				$where .=" AND psnrojurado is not null ";
+			else
+				$where .=" AND psnrojurado is null ";
+		}
+		if(isset($dato['sinnrojurado']) && $dato['sinnrojurado'] != '' && $dato['sinnrojurado'] != 'null'){//Fue desingado pero quedo sin nro de Jurado
+			if($dato['sinnrojurado'] == 'si') //Fue desingado
+				$where .=" AND pscaracter is not null AND psnrojurado is not null ";
+			else
+				$where .=" AND pscaracter is not null AND  psnrojurado is null ";
+		}
+		$sql = $sql.$where.$sqlFinal;
+		//echo $sql;
+		return parent::selecionar($sql) ;
+		
+	}
+	
+	public function mostrarInformacionPersona($dato){
+		print_object($dato);
+		$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,TD.Descripcion as TipoDoc,P.DNI,P.Sexo,P.CUIL,DATE_FORMAT(P.FechaNacimiento,'%d/%m/%Y') as FechaNacimiento
+				,P.Nacionalidad,P.LugarNacimiento,
+		P.Domicilio,P.idLocalidad,L.Descripcion as localidad,P.idCentroDistribucion,P.Circuito,P.CaracteristicaFijo,P.TelefonoFijo,
+		P.CaracteristicaCelu,P.TelefonoCelular,P.CorreoElectronico,P.Profesion,P.Ocupacion,P.Observaciones,
+		LP.idLP,LP.NroCedula,LP.idEstadoDDJJ,DATE_FORMAT(LP.FechaIntimacion,'%d/%m/%Y') as FechaIntimacion ,LP.AptoJurado,LP.idTipoResultado
+		,LP.ObservacionesImpedimento, TI.Descripcion as Impedimiento
+		FROM personas P
+		INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
+		INNER JOIN localidades L ON P.idLocalidad = L.idLocalidad
+		INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona 
+		LEFT JOIN tipoimpedimentos TI ON TI.idTipoImpedimento = LP.idTipoImpedimento
+		WHERE P.idPersona = ".$dato['idPersona'] ;
+		// echo $sql;
+		$html = "<b>lala</>";
+		$res = parent::selecionar($sql);
+		foreach($res as $row){
+			
+		
+		
+				$html .= "<div class='row'>
+  							<div class='col'><b>Nombre y Apellido :</b> ".$row ["Nombre"]." ".$row ["Apellido"]."</div>
+							<div class='col'><b>Documento :</b> ".$row ["TipoDoc"]." ".$row ["DNI"]." </div>
+							<div class='col'><b>Ciul :</b> ".$row ["CUIL"]." </div>
+							<div class='col'><b>Nacionalidad :</b> ".$row ["Nacionalidad"]." </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Lugar Nacimiento :</b> ".$row ["LugarNacimiento"]."</div>
+							<div class='col'><b>Fecha de Nacimiento :</b> ".$row ["FechaNacimiento"]." </div>
+							<div class='col'><b>Domicilio :</b> ".$row ["Domicilio"]." ". $row ["localidad"]." </div>
+							<div class='col'><b>Telefonos :</b> ".$row ["CaracteristicaFijo"]."-".$row ["TelefonoFijo"]. " " .$row ["CaracteristicaCelu"]."-".$row ["TelefonoCelular"]. " </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Correo Electronico :</b> ".$row ["CorreoElectronico"]."</div>
+							<div class='col'><b>Profesión :</b> ".$row ["Profesion"]." </div>
+							<div class='col'><b>Ocupación :</b> ".$row ["Ocupacion"]." </div>
+							<div class='col'><b>Nro.Cedula :</b> ".$row ["NroCedula"]. " </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Es Apto? :</b> ".($row ["AptoJurado"] == "0" ? "No" : "Si")."</div>
+							<div class='col'><b>Resultado :</b> ".($row ["idTipoResultado"] == null ? "Sin Calificar" : "")." </div>
+							<div class='col'><b>Impedimiento :</b> ".$row ["Impedimiento"]." </div>
+							<div class='col'><b>Obs. Impedimiento :</b> ".$row ["ObservacionesImpedimento"]. " </div>
+						</div>";
+				$html .= "<div class='row'>
+  							<div class='col'><b>Fecha Intimación :</b> ".$row ["FechaIntimacion"]."</div>
+							<div class='col'> </div>
+							<div class='col'> </div>
+							<div class='col'> </div>
+						</div>";
+				
+				
+		}
+		
+				$sql = "SELECT P.idPersona,P.Apellido,P.Nombre,P.idTipoDocumento,P.DNI, TD.Descripcion AS tipoDoc,P.Sexo,
+				LP.idLP,LP.NroCedula,LP.idEstadoDDJJ,DATE_FORMAT(LPN.lpnfecha,'%d/%m/%Y') as FechaNotificacion,LPN.lpnobservacion as ObservacionesEstado, LOC.Descripcion AS Localidad,C.Nombre AS centro
+				FROM personas P
+				INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona
+				INNER JOIN lotespersonanotificacion LPN ON LPN.idLP = LP.idLP
+				INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
+				INNER JOIN localidades LOC ON P.idLocalidad = LOC.idLocalidad
+				LEFT JOIN centrodistribucion C ON P.idCentroDistribucion = C.idCentroDistribucion
+				WHERE LP.idPersona = ".$dato['idPersona']."
+				ORDER BY P.Apellido,P.Nombre,LPN.idlotespersonanotificacion ";
+				$res = parent::selecionar($sql);
+				if($res){
+					$html .= "<div class='row'>
+			  							<div class='col-4'><b>Notificaciones </b> </div>
+					
+									</div>";
+				foreach($res as $row){
+					$html .= "<div class='row'>
+			  							<div class='col'><b>Fecha :</b> ".$row ["FechaNotificacion"]."</div>
+					  									<div class='col'><b>Localidad :</b> ".$row ["Localidad"]." </div>
+					  											<div class='col'><b>Centro :</b> ".$row ["centro"]." </div>
+										<div class='col'><b>Observación :</b> ".$row ["ObservacionesEstado"]."</div>
+												</div>";
+					
+				}
+				}
+			return $html;
+		
+	}
+	
 
 	}
