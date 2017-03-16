@@ -204,7 +204,8 @@ $datos = data_submitted();
 					</div>
 				</div>
 				</form>	
-				<div id="listadoDatosDocumentos" class="widget"> </div>
+				<div id="listadoDatosDocumentos" class="widget">
+			</div>
 			</div>  
 				<!-- /basic inputs -->
 				<div id="listadoDatos" class="widget">

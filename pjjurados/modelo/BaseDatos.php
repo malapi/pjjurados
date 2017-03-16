@@ -237,7 +237,6 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	return  $sqlInsert;
   }
   public function generaUpdate($tabla,$dato){
-  	
   	$resultado =$this->darMetaData($tabla);
   	//print_object($resultado);
   	$stsql=" UPDATE ".$tabla." SET ";
@@ -246,6 +245,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   		//Por cada columna
   		if($arrValor['COLUMN_KEY']!='PRI'){
   			if(isset($dato[$arrValor['COLUMN_NAME']]) && $dato[$arrValor['COLUMN_NAME']]!= ''){ 
+  			if($dato[$arrValor['COLUMN_NAME']]!= ''){ 
   				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
   				$stsql .=$arrValor['COLUMN_NAME']."=";
   				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
@@ -274,6 +274,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	return  $sqlUpdate;
   	 
   	 
+  }
   }
   
   public function generaDelete($tabla,$dato){

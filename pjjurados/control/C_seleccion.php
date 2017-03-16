@@ -25,6 +25,12 @@ class C_seleccion extends Session{
 		if ($data['accion']=='guardarDocumento')
 			
 			$resp = $this->guardarDocumento($data);
+		if ($data['accion']=='consultar') {
+			$obj = new personaseleccion();
+			$resp = $obj->mostrarInformacionPersona($data);
+		}
+		
+			
 
 		return $resp ;
 
@@ -36,6 +42,20 @@ class C_seleccion extends Session{
 		$resp = $obj->insertar($data);
 		return $resp;
 	}
+	public function buscarInformacionCompleta($data){
+	
+		$html ="";
+		if ($data['accion']=='consultar') {
+			$obj = new personaseleccion();
+			$html = $obj->mostrarInformacionPersona($data);
+		}
+	
+			
+	
+		return $html ;
+	
+	}
+	
 	
 
 	public function buscar($data){

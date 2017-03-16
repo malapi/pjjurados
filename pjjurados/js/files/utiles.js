@@ -29,18 +29,12 @@ function cargarFormulario(valores){
 		
 		if(key == 'idpersonaseleccionresultadotipos'){
 			
-			setAutocompletCurrentValue('#'+key,value);
+			setAutocompletCurrentValue('#'+key,valor);
 		} else {
 			
 		}
 	});
-	/*$.each(valores, function() {
-        alert(this.name);
-        //$('#formNuevoSorteo.#'+this.name).val(this.value);
-    });*/
-	
 }
-
 
 function cargarCombos(){
 	$(".ui-autocomplete-input").each(function( index ) {

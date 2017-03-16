@@ -5,6 +5,7 @@ $datos['accion'] = $datos[$datos['control'].'_accion'];
 $control = "C_".$datos['control'];
 $objws = new $control();
 $idtabla = "";
+//print_object($datos);
 if(isset($datos['dataForm']) && $datos['dataForm']!=''){
 	$dataForm = data_submitted_cadena($datos['dataForm']);
 	unset($datos['dataForm']);

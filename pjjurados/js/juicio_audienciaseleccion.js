@@ -29,7 +29,7 @@ function cargarTablaPrincipal(){
 }
 
 function cargarTablaDocumentos(){
-	$.post("libs/datagridhtml.php", {dataForm:"idseleccion="+$('#idseleccion').val()+"&idPersona="+$('#idPersona').val()
+	$.post("libs/datagridhtml.php", {dataForm:"idseleccion="+$('#idseleccion').val()+"&idPersona="+$('#idPersona').val()+""
 	//$('#formAudiencia').serialize()
 		,control:"personaselecciondocumento"
 		,tablahtml:"personaselecciondocumento"
