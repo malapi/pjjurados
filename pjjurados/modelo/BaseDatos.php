@@ -7,8 +7,8 @@ class BaseDatos extends PDO {
 	 private $host = "localhost";
 	 //private $host = "192.9.200.230";
 	 private $dbuser = "root";
-	 //private $dbpass = "";
-	 private $dbpass = "eelcdr";
+	 private $dbpass = "";
+	 //private $dbpass = "eelcdr";
 	 private $tipo_de_base = "mysql";
 
 	
@@ -245,12 +245,16 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	foreach ($resultado as $clave => $arrValor){
   		//Por cada columna
   		if($arrValor['COLUMN_KEY']!='PRI'){
-  			$stsql .=$arrValor['COLUMN_NAME']."=";
-  			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  				$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
-  			}else{
-  				$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
+  			if(isset($dato[$arrValor['COLUMN_NAME']]) && $dato[$arrValor['COLUMN_NAME']]!= ''){ 
+  				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
+  				$stsql .=$arrValor['COLUMN_NAME']."=";
+  				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
+  					$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  				}else{
+  					$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
+  				}
   			}
+  			
   				
   		} else{
   			$stwhere .=$arrValor['COLUMN_NAME']."=";

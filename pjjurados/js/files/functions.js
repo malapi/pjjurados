@@ -1,32 +1,4 @@
-function submit(action, method, values) {
-    var form = $('<form/>', {
-        action: action,
-        method: method
-    });
-    $.each(values, function() {
-        form.append($('<input/>', {
-            type: 'hidden',
-            name: this.name,
-            value: this.value
-        }));    
-    });
-    //cargarFormulario('#formNuevoSorteo',values);
-    form.appendTo('body').submit();
-    
-}
 
-function cargarFormulario(valores){
-	//alert(valores);
-	$.each(valores, function(key, valor) {
-		//alert(key+" "+valor);
-		$('#'+key).val(valor);
-	});
-	/*$.each(valores, function() {
-        alert(this.name);
-        //$('#formNuevoSorteo.#'+this.name).val(this.value);
-    });*/
-	
-}
 
 function acceptDec(e)
 {

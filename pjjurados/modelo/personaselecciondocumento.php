@@ -72,11 +72,11 @@ class personaselecciondocumento extends BaseDatos{
 	
 
 	public function  seleccionar($data){
-
+		//print_object($data);
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
 		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
-
+		//echo $sql;
 		return parent::selecionar($sql) ;
 
 	}

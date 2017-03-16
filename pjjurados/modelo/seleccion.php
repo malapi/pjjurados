@@ -34,8 +34,10 @@ class seleccion extends BaseDatos{
 	 
 
 	function editar($data){
-
-		return parent::actualizar(parent::generaUpdate($this->nombreTabla, $data));
+		//$resp = parent::actualizar(parent::generaUpdate($this->nombreTabla, $data));
+		$obj = new personaseleccion();
+		$resp = $obj->editar($data);
+		return $resp;
 
 	}
 

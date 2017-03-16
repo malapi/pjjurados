@@ -51,7 +51,7 @@ $datos = data_submitted();
 					<div class="form-group">
 					<label class="col-sm-2 control-label" for="psasisteobservacion" > Asis.Obs.:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psasisteobservacion" id="psasisteobservacion" data-options="required:true"></input>
+					<input class="easyui-textbox form-control" type="text" name="psasisteobservacion" id="psasisteobservacion" ></input>
 					</div>
 					</div>
 				</div>
@@ -75,7 +75,7 @@ $datos = data_submitted();
 			   <div class="form-group">
 					<label class="col-sm-2 control-label" for="psexcusacion" > Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psexcusacion" id="psexcusacion" data-options="required:true"></input>
+					<input class="easyui-textbox form-control" type="text" name="psexcusacion" id="psexcusacion" ></input>
 					</div>
 					</div>
 				</div>
@@ -83,7 +83,7 @@ $datos = data_submitted();
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="psfechaexcusacion" > Fecha Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
-					<input class="datepicker form-control" type="text" name="psfechaexcusacion" id="psfechaexcusacion" data-options="required:true" placeholder="99/99/9999"></input>
+					<input class="form-control validate[required]" type="date" name="psfechaexcusacion" id="psfechaexcusacion"  placeholder="99/99/9999"></input>
 					</div>
 					</div>
 			   
@@ -104,7 +104,7 @@ $datos = data_submitted();
 			   <div class="form-group">
 					<label class="col-sm-2 control-label" for="psrecusacioncausa" >Recusaci&oacute;n Causa:</label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psrecusacioncausa" id="psrecusacioncausa" data-options="required:true"></input>
+					<input class="easyui-textbox form-control" type="text" name="psrecusacioncausa" id="psrecusacioncausa" ></input>
 					</div>
 					</div>
 			   </div>
@@ -122,7 +122,7 @@ $datos = data_submitted();
 			   <div class="form-group">
 					<label class="col-sm-2 control-label" for="psnrojurado" > Nro. Jurado:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psnrojurado" id="psnrojurado" data-options="required:true"></input>
+					<input class="easyui-textbox form-control" type="text" name="psnrojurado" id="psnrojurado" ></input>
 					</div>
 					</div>
 			   </div>
@@ -132,22 +132,17 @@ $datos = data_submitted();
 			   	<div class="form-group">
 					<label class="col-sm-2 control-label" for="psobservacion" > No Designaciones:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psobservacion" id="psobservacion" data-options="required:true"></input>
+					<input class="easyui-textbox form-control" type="text" name="psobservacion" id="psobservacion" ></input>
 					</div>
 					</div>
 			   	</div>
 			   	<div class="col">
 			   	</div>
 			</div>
-			 			<div class="row-fluid">  
-							<div class="control-group">
-								<div id="respuesta"></div>
-							</div> 
-						</div>   
-						                      
 						<div class="row-fluid">
 						         <div class="form-actions align-right">
-	                                <button id="btnSortearJuicio" type="button" class="btn btn-info">Sortear</button>
+	                                <button id="btnSortearJuicio" type="button" class="btn btn-info">Guardar</button>
+	                                <button id="btnDocumentos" type="button" class="btn btn-info">Documentos</button>
 	                                <button id="btnCancel" type="button" class="btn">Cerrar</button>
 	                            </div>
 	                    </div>
@@ -156,19 +151,85 @@ $datos = data_submitted();
 				</div><!-- <div class="widget row-fluid">  -->						
 				</form>
 				</div>
+				<div class="row-fluid">  
+							<div class="control-group">
+								<div id="respuesta"></div>
+							</div> 
+				</div> 
+				
+			<div id="mdlSeleccionDocumentos">
+			<form id="formCargarDocumento" method="POST" class="form-inline">
+				 <input  type="hidden"  name="idpersonaselecciondocumento" id="idpersonaselecciondocumento" value="0" ></input>
+				 <input  type="hidden"  name="idseleccion" id="idseleccion" value="0" ></input>
+				 <input  type="hidden"  name="idPersona" id="idPersona" value="0" ></input>
+				 <input  type="hidden"  name="psdarchivo" id="psdarchivo" value="" ></input>
+				 <input  type="hidden" name="personaselecciondocumento_accion" id="personaselecciondocumento_accion" value="guardarDocumento"></input>
+			<div class="form-group">
+					<label class="control-label" for="psdfechafin" >Fecha Vto.Documento:  </label>
+					<div class="col-sm-4">
+					<input class="form-control" type="date" name="psdfechafin" id="psdfechafin" placeholder="99/99/9999" ></input>
+					</div>
+					</div>
+			<div class="form-group">
+					<label class="control-label" for="psddescripcion" >Obs.:  </label>
+					<div class="col-sm-4">
+					<input class="easyui-textbox form-control" type="text" name="psddescripcion" id="psddescripcion" ></input>
+					</div>
+					</div>
+			<div class="form-group">
+						<label class="control-label" for="idpersonaselecciondocumentotipos" >Tipo Documento:</label>
+						<div class="ui-widget">
+						<input class="ui-autocomplete-input form-control" type="text" name="idpersonaselecciondocumentotipos" id="idpersonaselecciondocumentotipos"
+						data-options='[{clavetabla:"idpersonaselecciondocumentotipos",campofiltrar:"psdtdescripcion",campotablamostrar:"textocombo",control:"personaselecciondocumentotipos"}]'></input>
+						</div>
+						</div>
+			<div class="row-fluid">    
+						         <div class="control-group">
+						        	<div id="container">
+									    <div id="upload" class="btn btn-primary"><span><i class="ico-file"> </i> Adjuntar Archivos </span></div>
+										<span id="status" ></span>
+										<table id="files" ></table>		
+										<span id="resultado" ></span>
+									</div>		         
+						         </div>
+						      </div>   
+				<div class="row-fluid">
+						         <div class="form-actions align-right">
+	                                <button id="btnGuardarDocumento" type="button" class="btn btn-info">Guardar Documento</button>
+	                            </div>
+	                    </div>
+				<div class="row-fluid">
+					<div class="span12">
+					<span id="respuestaDocumento"></span>
+					</div>
+				</div>
+				</form>	
+				<div id="listadoDatosDocumentos" class="widget"> </div>
+			</div>  
 				<!-- /basic inputs -->
 				<div id="listadoDatos" class="widget">
 				
 				</div>
 
 		
-		    </div>
+		    
 		    <!-- /content wrapper -->
 
+		   
+				
+		</div>
+		    
+		    
+		    
+		    
+		    
+		    
 		</div>
 		<!-- /content -->
 <?php include("footer.php"); ?>
+<script type="text/javascript" src="js/plugins/ajaxupload.3.5.js"></script>
 <script type="text/javascript" src="js/juicio_audienciaseleccion.js"></script>
+
 <script type="text/javascript">
 var $_POST = <?php echo json_encode($datos); ?>;
 if($_POST != ""){

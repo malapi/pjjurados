@@ -62,7 +62,8 @@ class Archivo{
 	 */
 	private function getTipoArchivo($archivo){
 		if($archivo!=''){
-			$extension=end(explode('.',$archivo));
+			$var = explode('.',$archivo);
+			$extension=end($var);
 			return $extension;
 		}
 	}

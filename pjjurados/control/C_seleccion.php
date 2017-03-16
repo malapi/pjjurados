@@ -21,13 +21,21 @@ class C_seleccion extends Session{
 		if ($data['accion']=='eliminar')
 
 			$resp = $obj->eliminar($data);
+		
+		if ($data['accion']=='guardarDocumento')
+			
+			$resp = $this->guardarDocumento($data);
 
 		return $resp ;
 
 	}
 
 	
-
+	public function guardarDocumento($data){
+		$obj = new personaselecciondocumento();
+		$resp = $obj->insertar($data);
+		return $resp;
+	}
 	
 
 	public function buscar($data){

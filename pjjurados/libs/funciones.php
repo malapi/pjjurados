@@ -49,17 +49,19 @@ function is_Date($str){
 function data_submitted_cadena($cadena) {
 	$_AAux= array();
 	$_AAux2= array();
-	if (!empty($cadena))
+	if (!empty($cadena) && is_string($cadena)){
 		$_AAux =explode("&",$cadena);
-	if (count($_AAux)){
-		foreach ($_AAux as $indice => $valor) {
-			$valor =explode("=",$valor);
-			if ($valor[1]=="" || $valor[1]=="0")
-				$_AAux2[$valor[0]] = 'null';
-			else
-				$_AAux2[$valor[0]] = $valor[1];
+		if (count($_AAux)){
+			foreach ($_AAux as $indice => $valor) {
+				$valor =explode("=",$valor);
+				if ($valor[1]=="" || $valor[1]=="0")
+					$_AAux2[$valor[0]] = 'null';
+					else
+						$_AAux2[$valor[0]] = $valor[1];
+			}
 		}
 	}
+	
 	return $_AAux2;
 
 }
