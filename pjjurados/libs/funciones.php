@@ -1,4 +1,82 @@
 <?php  
+function leerArchivo_2($ruta)
+{
+	//echo "lala ".$ruta;
+	$texto = file($ruta);
+	$tamano = sizeof($texto);
+	$todo = "";
+	for($n=0;$n<$tamano;$n++) {
+		$todo = $todo.$texto[$n];
+	}
+	return $todo;
+}
+
+function generarArchivoRTF($datos,$mapeo,$nombreplantilla,$nombreArchivo){
+	
+	//print_object($datos);
+	$fnombre =$nombreArchivo;
+	$fsalida = "../uploads/archivosrtf/".$fnombre;
+	$fsalidaRetorno = "uploads/archivosrtf/".$fnombre;
+	//echo "<br>lala ".$fsalida;
+	$plantilla = leerArchivo_2("../uploads/plantillas/".$nombreplantilla);
+	
+	$matriz=explode("sectd", $plantilla);
+	$cabecera=$matriz[0]."sectd";
+	$inicio=strlen($cabecera);
+	$final=strrpos($plantilla,"}");
+	
+	//echo "<br>Final ".$final;
+	//echo "<br>Inicio ".$inicio;
+	$largo=$final-$inicio;
+	//echo "<br>Largo ".$largo;
+	$cuerpo=substr($plantilla, $inicio, $largo);
+	
+	//$cuerpo=$plantilla;
+	//Paso no.3 Escribo el fichero
+		
+	$punt = fopen($fsalida, "w");
+	fputs($punt, $cabecera);
+	
+	
+	
+	foreach ($datos as $row ) {
+ 		$despues=$cuerpo;
+ 		foreach ($mapeo as $columna) {
+ 			if(strrpos($despues,$columna['tagplantilla'])>0){
+ 				$despues=str_replace($columna['tagplantilla'], utf8_decode($row[$columna['tagvalor']]),$despues);
+ 			}
+ 			
+ 		}
+//  		echo "<br>NOMBRE ".strrpos($despues,"#NOMBRE");
+//  		echo "<br>APELLIDO ".strrpos($despues,"#APELLIDO");
+//  		echo "<br>DNI ".strrpos($despues,"#DNI");
+// // 		//print_object($row);
+// // 		//echo $cuerpo;
+ 		
+//  		$despues=str_replace("#APELLIDO", utf8_decode($row["Apellido"]),$despues);
+//  		$despues=str_replace("#DNI",$row["DNI"],$despues);
+		fputs($punt,$despues);
+		$saltopag="\n\\page \\par \n";
+		fputs($punt,$saltopag);
+	}
+	fputs($punt,"}");
+	fclose ($punt);
+	
+	$zip = new ZipArchive();
+	//echo "lala dfd".$fsalida;
+	$filename = $fsalida.".zip";
+	
+	if($zip->open($filename,ZIPARCHIVE::CREATE)===true) {
+					$zip->addFile($fsalida,$fnombre);
+					$zip->close();
+					$inputFileName = $fsalida;
+					unlink($inputFileName);
+	}
+	
+	return $fsalidaRetorno.".zip";
+}
+
+
 function startsWith($haystack, $needle) {
 	// search backwards starting from haystack length characters from the end
 	return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;

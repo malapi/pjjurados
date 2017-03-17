@@ -2,9 +2,8 @@ function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formEmitirListados').serialize(),control:"juicionotificaciones"
 		,juicionotificaciones_accion:"verTabla"
 		,tabla:"Juicio:judescripcion#Fecha Creacion:jnfechageneracion#Plantilla:jnnombreplantilla#Archivo:jnnombrearchivo#Descripcion:jndescripcion"
-		,eventos:[{titulo:"Descargar",href:"juicio_nuevojuicio.php",icono:"icon-download",accion:"descargar"}
-		]
-					}, function(data){
+		,eventos:[]
+	}, function(data){
 						
 						
 						$("#listadoDatos").html(data);

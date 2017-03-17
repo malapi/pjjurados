@@ -14,8 +14,8 @@ class PDOConfig extends PDO {
         $this->database = 'pruebajur';
         $this->user = 'root';
         //$this->pass = '';      
-        //$this->pass = 'eelcdr';
-        $this->pass = 'eurePass';
+        $this->pass = 'eelcdr';
+        //$this->pass = 'eurePass';
         $this->debug = false;       
         
         $dns = $this->engine.':dbname='.$this->database.";host=".$this->host;

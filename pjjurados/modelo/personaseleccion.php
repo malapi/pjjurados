@@ -78,7 +78,7 @@ class personaseleccion extends BaseDatos{
 
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,DATE_FORMAT(psfechaexcusacion,'%d/%m/%Y') as psfechaexcusaciondisplay,".$this->textoCombo." as textocombo 
+		$sql = "SELECT *,".$this->textoCombo." as textocombo 
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
 				 natural join lotes

@@ -197,6 +197,7 @@ function redondearDecimal($num)
 
 function leerArchivo($ruta)
 {
+	//echo "lala ".$ruta;
 	$texto = file($ruta);
 	$tamano = sizeof($texto);
 	$todo = "";

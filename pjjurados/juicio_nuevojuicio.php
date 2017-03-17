@@ -34,31 +34,84 @@ $datos = data_submitted();
 							<input type="hidden" name="accion" id="accion" value="nuevo" />
 							<input  type="hidden"  name="idjuicio" id="idjuicio" value="0" ></input>
 							<div class="well">	
-						    
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="jufecha" > Fecha del Juicio:  </label>
+			<div class="row">
+			<div class="col">
+				<div class="form-group">
+						<label class="control-label" for="jufechainicio" > Fecha Inicio del Juicio:  </label>
+						<div class="col-sm-4">
+						<input class="form-control" type="date" name="jufechainicio" id="jufechainicio"></input>
+						</div>
+						</div>
+				</div>
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="jufechafin" > Fecha Final del Juicio:  </label>
 					<div class="col-sm-4">
-					<input class="form-control" type="date" name="jufecha" id="jufecha" data-options="required:true"></input>
+					<input class="form-control" type="date" name="jufechafin" id="jufechafin"></input>
 					</div>
 					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="jujueces" > Jueces:  </label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="jufechaaudiencia" > Fecha Audiencia:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="jujueces" id="jujueces" data-options="required:true"></input>
+					<input class="form-control" type="date" name="jufechaaudiencia" id="jufechaaudiencia"></input>
 					</div>
 					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="judescripcion" > Descripci&oacute;n:  </label>
+				</div>
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="judireccionaudiencia" >Dir. Audiencia:  </label>
+					<div class="col-sm-4">
+					<input class="form-control" type="text" name="judireccionaudiencia" id="judireccionaudiencia" ></input>
+					</div>
+					</div>
+				</div>
+			</div>				   
+			<div class="row">
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="judescripcion" > Descripci&oacute;n:  </label>
 					<div class="col-sm-4">
 					<input class="easyui-textbox form-control" type="text" name="judescripcion" id="judescripcion" data-options="required:true"></input>
 					</div>
 					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="juobservacion" > Observaci&oacute;n:  </label>
+				</div>
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="junroconvocatoria" > Nro.Convocatoria:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="juobservacion" id="juobservacion" data-options="required:true"></input>
+					<input class="form-control" type="text" name="junroconvocatoria" id="junroconvocatoria" ></input>
 					</div>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="jujueces" > Jueces:  </label>
+					<div class="col-sm-4">
+					<input class="form-control" type="text" name="jujueces" id="jujueces" ></input>
+					</div>
+					</div>
+				</div>
+				<div class="col">
+				<div class="form-group">
+					<label class="control-label" for="juobservacion" > Observaci&oacute;n:  </label>
+					<div class="col-sm-4">
+					<textarea class="form-control" type="text" name="juobservacion" id="juobservacion" ></textarea>
+					</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
 						    
 						       <div class="row-fluid">  
 								<div class="control-group">

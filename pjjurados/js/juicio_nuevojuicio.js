@@ -1,7 +1,8 @@
 function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {control:"juicio"
 		,juicio_accion:"verTabla"
-		,tabla:"Id:idjuicio#Fecha Juicio:jufecha#Jueces:jujueces#Descripcion:judescripcion#Observacion:juobservacion"
+			
+		,tabla:"Id:idjuicio#Fecha Audiencia:jufechaaudiencia#Fecha inicio:jufechainicio#Fecha Final:jufechafin#Jueces:jujueces#Descripcion:judescripcion#Observacion:juobservacion"
 		,eventos:[{titulo:"Editar",href:"juicio_nuevojuicio.php",icono:"icon-edit",accion:"editar"}
 		,{titulo:"Sorteo",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
 		,{titulo:"Emitir Listados",href:"juicio_emitirlistados.php",icono:"icon-download",accion:"listados"}
