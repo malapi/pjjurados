@@ -41,8 +41,8 @@ $datos = data_submitted();
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="psasiste" > Asiste?:  </label>
 					<div class="form-check form-check-inline">
-					<input  type="radio" name="psasiste" id="psasiste" value='1' checked="checked" ><span>Si</span></input>
-					<input  type="radio" name="psasiste" id="psasiste" value='0'><span>No</span></input>
+					<input  type="radio" name="psasiste" id="psasiste" value='2' checked="checked" ><span>Si</span></input>
+					<input  type="radio" name="psasiste" id="psasiste" value='1'><span>No</span></input>
 					
 					</div>
 					</div>
@@ -232,10 +232,13 @@ $datos = data_submitted();
 <script type="text/javascript" src="js/juicio_audienciaseleccion.js"></script>
 
 <script type="text/javascript">
-var $_POST = <?php echo json_encode($datos); ?>;
-if($_POST != ""){
-	cargarFormulario($_POST);
-}
+$(function(){
+	var $_POST = <?php echo json_encode($datos); ?>;
+	if($_POST != ""){
+		cargarFormulario($_POST);
+	}
+			
+});
 </script>
 
 

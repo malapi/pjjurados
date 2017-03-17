@@ -187,11 +187,12 @@ $(function(){
 	cargarCalendario();
 	//cargarTablaDocumentos();
 	$('#mdlSeleccionDocumentos').hide();
-	if($('#idPersona').val() != '0'){
-		$('#divformAudiencia').show();
-	} else {
-		$('#divformAudiencia').hide();
-	}
+	
+//	if($('#idPersona').val() != '0'){
+//		$('#divformAudiencia').show();
+//	} else {
+//		$('#divformAudiencia').hide();
+//	}
 	
 	
 	

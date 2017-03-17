@@ -34,7 +34,10 @@ class personaseleccion extends BaseDatos{
 	 
 
 	function editar($data){
-
+		if($data['psasiste'] != "null"){
+			$data['psasiste']=$data['psasiste'] - 1;
+		}
+			 
 		return parent::actualizar(parent::generaUpdate($this->nombreTabla, $data));
 
 	}
@@ -75,14 +78,16 @@ class personaseleccion extends BaseDatos{
 
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,".$this->textoCombo." as textocombo 
+		$sql = "SELECT *,DATE_FORMAT(psfechaexcusacion,'%d/%m/%Y') as psfechaexcusaciondisplay,".$this->textoCombo." as textocombo 
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
 				 natural join lotes
 				 natural join juicio
 				 join personas  USING(idPersona)
+				 LEFT JOIN tiposeleccionrecusacion USING(idtiposeleccionrecusacion)
+				 LEFT JOIN personaseleccionresultadotipos USING(idpersonaseleccionresultadotipos) 
 				 WHERE true ".$where;
-         //echo $sql;
+        // echo $sql;
 		return parent::selecionar($sql) ;
 
 	}
@@ -248,19 +253,22 @@ class personaseleccion extends BaseDatos{
 		P.CaracteristicaCelu,P.TelefonoCelular,P.CorreoElectronico,P.Profesion,P.Ocupacion,P.Observaciones,
 		LP.idLP,LP.NroCedula,LP.idEstadoDDJJ,DATE_FORMAT(LP.FechaIntimacion,'%d/%m/%Y') as FechaIntimacion ,LP.AptoJurado,LP.idTipoResultado
 		,LP.ObservacionesImpedimento, TI.Descripcion as Impedimiento
+		,lo.Descripcion, lo.CantidadSorteados, lo.Observaciones
 		FROM personas P
 		INNER JOIN tipodocumentos TD ON P.idTipoDocumento = TD.idTipoDocumento
 		INNER JOIN localidades L ON P.idLocalidad = L.idLocalidad
-		INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona 
+		INNER JOIN lotespersonas LP ON P.idPersona = LP.idPersona
+		INNER JOIN lotes lo ON lo.idLote = LP.idLote
 		LEFT JOIN tipoimpedimentos TI ON TI.idTipoImpedimento = LP.idTipoImpedimento
 		WHERE P.idPersona = ".$dato['idPersona'] ;
 		// echo $sql;
 		$html = "<H1> Informacion Personal </H1>";
 		$res = parent::selecionar($sql);
+		//if($res) {
+			$i=0;	
+		
 		foreach($res as $row){
-			
-		
-		
+			if($i==0){
 				$html .= "<div class='row'>
   							<div class='col'><b>Nombre y Apellido :</b> ".$row ["Nombre"]." ".$row ["Apellido"]."</div>
 							<div class='col'><b>Documento :</b> ".$row ["TipoDoc"]." ".$row ["DNI"]." </div>
@@ -286,13 +294,22 @@ class personaseleccion extends BaseDatos{
 							<div class='col'><b>Obs. Impedimiento :</b> ".$row ["ObservacionesImpedimento"]. " </div>
 						</div>";
 				$html .= "<div class='row'>
-  							<div class='col'><b>Fecha Intimación :</b> ".$row ["FechaIntimacion"]."</div>
+  							<div class='col'><b>Fecha Intimacion :</b> ".$row ["FechaIntimacion"]."</div>
 							<div class='col'> </div>
 							<div class='col'> </div>
 							<div class='col'> </div>
 						</div>";
+			} $i++;
+			
+			$html .= "<div class='row'>
+  							<div class='col'><b>Lote :</b> ".$row ["Descripcion"]."</div>
+							<div class='col'><b>Cant.Sorteados :</b> ".$row ["CantidadSorteados"]." </div>
+							<div class='col'><b>Lote Observacion:</b> ".$row ["Observaciones"]." </div>
+							<div class='col'> </div>
+						</div>";
 				
 				
+		//}
 		}
 		return $html;
 		}
@@ -310,9 +327,11 @@ class personaseleccion extends BaseDatos{
 				LEFT JOIN centrodistribucion C ON P.idCentroDistribucion = C.idCentroDistribucion
 				WHERE LP.idPersona = ".$dato['idPersona']."
 				ORDER BY P.Apellido,P.Nombre,LPN.idlotespersonanotificacion ";
+				//echo $sql;
 				$res = parent::selecionar($sql);
 				
 				$html="";
+				//print_object($res);
 				if($res){
 					$html = "<h1>Notificaciones</h1>";
 					
@@ -337,8 +356,14 @@ class personaseleccion extends BaseDatos{
 	
 		$sql = "SELECT idjuicio, DATE_FORMAT(jufecha,'%d/%m/%Y') as jufecha, jujueces, judescripcion, juobservacion
 				,idseleccion
-				,psnroordenseleccion,psexcusacion,psrecusacioncausa,pscaracter,psasiste,psasisteobservacion,psobservacion,idtiposeleccionrecusacion
-				,idpersonaseleccionresultadotipos,psnrojurado,psfechaexcusacion,psfechaseleccion,psfechafinseleccion,psnrobolilla
+				,psnroordenseleccion
+				,psexcusacion,psrecusacioncausa,pscaracter,CASE WHEN psasiste is null THEN 'No' ELSE 'SI' END as psasiste
+				,CASE WHEN psasisteobservacion is Null THEN '' ELSE psasisteobservacion END as psasisteobservacion
+				,CASE WHEN psobservacion is Null THEN '' ELSE psobservacion END as psobservacion
+				,idtiposeleccionrecusacion,CASE WHEN trsdescripcion is null THEN '' ELSE trsdescripcion END as trsdescripcion
+				,idpersonaseleccionresultadotipos, CASE WHEN psrtdescripcion is null THEN '' ELSE psrtdescripcion END as psrtdescripcion
+				,psnrojurado,DATE_FORMAT(psfechaexcusacion,'%d/%m/%Y') as psfechaexcusacion,DATE_FORMAT(psfechaseleccion,'%d/%m/%Y') as psfechaseleccion,psfechafinseleccion
+				,psnrobolilla
 				FROM personas P
 				NATURAL JOIN lotespersonas as lp
 				NATURAL JOIN personaseleccion as ps
@@ -348,6 +373,7 @@ class personaseleccion extends BaseDatos{
 				LEFT JOIN  tiposeleccionrecusacion tsr USING(idtiposeleccionrecusacion)
 				WHERE LP.idPersona = ".$dato['idPersona']."
 				ORDER BY ps.idseleccion";
+		//echo $sql;
 		//echo $sql;
 		$res = parent::selecionar($sql);
 	
@@ -361,9 +387,23 @@ class personaseleccion extends BaseDatos{
 					  					<div class='col'><b>Jueces :</b> ".$row ["jujueces"]." </div>
 										<div class='col'><b>Observaciones :</b> ".$row ["juobservacion"]."</div>
 							</div>";
+				$html .= "<h4>Audiencia</h4>";
 				$html .= "<div class='row'>
 			  							<div class='col'><b>Nro.Seleccion :</b> ".$row ["psnroordenseleccion"]."</div>
 					  					<div class='col'><b>Nro.Bolilla :</b> ".$row ["psnrobolilla"]." </div>
+					  					<div class='col'><b>Asistio? :</b> ".$row ["psasiste"]." </div>
+					  					<div class='col'><b>Obs.Asistencia :</b> ".$row ["psasisteobservacion"]." </div>
+					  					<div class='col'><b>Resultado :</b> ".$row ["psrtdescripcion"]." </div>
+					  	</div>";
+				$html .= "<h4>Excusacion y Recusacion</h4>";
+				$html .= "<div class='row'>
+			  							<div class='col'><b>Excusacion :</b> ".$row ["psexcusacion"]."</div>
+					  					<div class='col'><b>Fecha Vto. Excusacion :</b> ".$row ["psfechaexcusacion"]." </div>
+			  							<div class='col'><bRecusacion :</b> ".$row ["trsdescripcion"]." </div>
+					  					<div class='col'><b>Causa Recusacion :</b> ".$row ["psrecusacioncausa"]." </div>
+					  					
+					  	</div>";
+				$html .= "<div class='row'>	  							
 					  					<div class='col'><b>Nro. Jurado :</b> ".$row ["psnrojurado"]." </div>
 										<div class='col'><b>Caracter :</b> ".$row ["pscaracter"]."</div>
 							</div>";

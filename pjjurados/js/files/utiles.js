@@ -22,34 +22,44 @@ function setAutocompletCurrentValue(id, value) {
 	}
 
 function cargarFormulario(valores){
+	//alert("form");
 	//alert(valores);
 	$.each(valores, function(key, valor) {
 		//alert(key+" "+valor);
-		$('#'+key).val(valor);
-		
-		if(key == 'idpersonaseleccionresultadotipos'){
-			
-			setAutocompletCurrentValue('#'+key,valor);
-		} else {
-			
+		if(valor != 'null'){
+			if($('#'+key+"-displayfecha").length)
+			{
+				//alert(valor+" "+valor.split(' ')[0]);
+				var parsedDate = $.datepicker.parseDate('yy-mm-dd', valor.split(' ')[0]);
+				//alert(parsedDate);
+				
+				$('#'+key+"-displayfecha").val($.datepicker.formatDate("dd/mm/yy", parsedDate));
+				   
+			} 
+			$('#'+key).val(valor);
 		}
+			
 	});
 }
 
 function cargarCombos(){
+	//alert("combos");
 	$(".ui-autocomplete-input").each(function( index ) {
 		//alert( index + ": " + $(this).attr('id') );
 		var opciones = eval($("#"+$(this).attr('id')).data('options'));
 		opciones = opciones[0];
 		var autoCompelteElement = this;
 		var formElementName = $(this).attr('name');
-		var hiddenElementID  = formElementName + '_autocomplete_hidden';
-		/* change name of orig input */
-		$(this).attr('name', formElementName + '_autocomplete_label');
-		/* create new hidden input with name of orig input */
-		$(this).after("<input type=\"hidden\" name=\"" + formElementName + "\" id=\"" + hiddenElementID + "\" />");
+		//var hiddenElementID  = formElementName + '_autocomplete_hidden';
 		
-		$("#"+$(this).attr('id')).autocomplete({
+		//$(this).attr('name', formElementName + '_autocomplete_label');
+		/* change name of orig input */
+		
+		$(this).attr('style', ' visibility: hidden;');
+		/* create new hidden input with name of orig input */
+		$(this).before("<input type=\"text\" name=\"" + opciones.campofiltrar + "\" id=\"" + opciones.campofiltrar + "\" />");
+		
+		$("#"+opciones.campofiltrar).autocomplete({
 		        source: function( request, response ) {
 		            $.ajax( {
 		              url: "libs/datacombo.php",
@@ -77,8 +87,8 @@ function cargarCombos(){
 		        select: function( event, ui ) {
 		          //alert( "Selected: " + ui.item.value + " aka " + ui.item.id );
 		        	var selectedObj = ui.item;
-					$(autoCompelteElement).val(selectedObj.label);
-					$('#'+hiddenElementID).val(selectedObj.id);
+					$('#'+opciones.campofiltrar).val(selectedObj.label);
+					$('#'+formElementName).val(selectedObj.id);
 		        }
 		      });
 		  
@@ -86,32 +96,19 @@ function cargarCombos(){
 	
 	
 	
-	//alert(opciones.campotablamostrar+" "+opciones.clavetabla + " "+opciones.control);
-	/*$.post("libs/datacombohtml.php", opciones , function(data){
-						
-						alert(data);
-						$("#idpersonaseleccionresultadotipos").html(data);
-						//$('#data-table').dataTable();
-						//$('.tip').tooltip();
-		}); 
-	*/
-	
-   
-    
-	
-	
 }
 
 
 function cargarCalendario(){
+	//alert('calendarios')
 	$('input[type=date]').each(function (index, element) {
         /* Create a hidden clone, which will contain the actual value */
         var clone = $(this).clone();
         clone.insertAfter(this);
         clone.hide();
         /* Rename the original field, used to contain the display value */
-        $(this).attr('id', $(this).attr('id') + '-display');
-        $(this).attr('name', $(this).attr('name') + '-display');
+        $(this).attr('id', $(this).attr('id') + '-displayfecha');
+        $(this).attr('name', $(this).attr('name') + '-displayfecha');
         /* Create the datepicker with the desired display format and alt field */
         $(this).datepicker({ dateFormat: "dd/mm/yy", altField: "#" + clone.attr("id"), altFormat: "yy-mm-dd" });
         /* Finally, parse the value and change it to the display format */

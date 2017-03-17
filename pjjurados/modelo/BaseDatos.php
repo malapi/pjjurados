@@ -238,12 +238,15 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   }
   public function generaUpdate($tabla,$dato){
   	$resultado =$this->darMetaData($tabla);
-  	//print_object($resultado);
+  	//print_object($dato);
   	$stsql=" UPDATE ".$tabla." SET ";
   	$stwhere=" WHERE ";
   	foreach ($resultado as $clave => $arrValor){
   		//Por cada columna
+  		//print_object($arrValor);
+  		//echo $arrValor['COLUMN_NAME'] ." ".$arrValor['COLUMN_KEY'];
   		if($arrValor['COLUMN_KEY']!='PRI'){
+  			//echo $arrValor['COLUMN_NAME'];
   			if(isset($dato[$arrValor['COLUMN_NAME']]) && $dato[$arrValor['COLUMN_NAME']]!= ''){ 
   			if($dato[$arrValor['COLUMN_NAME']]!= ''){ 
   				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
@@ -254,7 +257,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   					$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
   				}
   			}
-  			
+  			}	
   				
   		} else{
   			$stwhere .=$arrValor['COLUMN_NAME']."=";
@@ -274,7 +277,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   	return  $sqlUpdate;
   	 
   	 
-  }
+  
   }
   
   public function generaDelete($tabla,$dato){
