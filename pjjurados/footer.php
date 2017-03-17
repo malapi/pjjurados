@@ -1,5 +1,5 @@
-
-	</div><!-- /content container -->
+<script type="text/javascript" src="js/files/cargar_utiles.js"></script>
+</div><!-- /content container -->
 	<!-- Footer -->
 	<div id="footer">
 		<div class="copyrights">&copy;  Poder Judicial Neuqu&eacute;n | Oficina Judicial Penal<br />
@@ -9,7 +9,5 @@
 		</div>
 	</div>
 	<!-- /footer -->
-
-
 </body>
 </html>

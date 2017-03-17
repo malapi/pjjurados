@@ -28,18 +28,6 @@ class C_fichapersona extends Session{
 
 	}
     
-	/*
-	 * [idjuicio] => null
-    [idPersona] => null
-    [idseleccion] => null
-    [Nombre] => null
-    [Apellido] => null
-    [DNI] => null
-    [psasiste] => null
-    [idtiposeleccionrecusacion] => null
-    [sinnrojurado] => null
-    [fueJurado] => null
-    [pscaracter] => null*/
 	
 	public function buscar($data){
 		//print_object($data);

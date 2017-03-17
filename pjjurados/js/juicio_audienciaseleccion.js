@@ -183,8 +183,8 @@ function cargarDocumento(cadena){
 
 $(function(){
 	seleccionarMenuConFormulario('#formAudiencia');
-	cargarCombos();
-	cargarCalendario();
+	//cargarCombos();
+	//cargarCalendario();
 	//cargarTablaDocumentos();
 	$('#mdlSeleccionDocumentos').hide();
 	

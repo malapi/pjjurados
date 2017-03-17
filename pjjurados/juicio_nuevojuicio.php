@@ -38,7 +38,7 @@ $datos = data_submitted();
 			<div class="form-group">
 					<label class="col-sm-2 control-label" for="jufecha" > Fecha del Juicio:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="jufecha" id="jufecha" data-options="required:true"></input>
+					<input class="form-control" type="date" name="jufecha" id="jufecha" data-options="required:true"></input>
 					</div>
 					</div>
 			<div class="form-group">

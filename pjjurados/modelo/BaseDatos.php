@@ -1,15 +1,15 @@
-<?php 
+<?php include_once("../libs/PDOConfig.php");
 ///http://php.net/manual/es/ref.pdo-pgsql.php
 
 
-class BaseDatos extends PDO { 
-	 private $dbname = "pruebajur";
+class BaseDatos extends PDOConfig { 
+	 /*private $dbname = "pruebajur";
 	 private $host = "localhost";
 	 //private $host = "192.9.200.230";
 	 private $dbuser = "root";
 	 private $dbpass = "";
 	 //private $dbpass = "eelcdr";
-	 private $tipo_de_base = "mysql";
+	 private $tipo_de_base = "mysql";*/
 
 	
 	
@@ -18,8 +18,8 @@ class BaseDatos extends PDO {
 	 public function __construct() {
 	 	//Sobreescribo el método constructor de la clase PDO.
 	 	try{
-	 		parent::__construct($this->tipo_de_base.':host='.$this->host.';dbname='.$this->dbname, $this->dbuser, 
-	 				$this->dbpass);
+	 		//$this->dbname= parent::
+	 		parent::__construct();
 	 		 
 	 		
 	 	}catch(PDOException $e){	 		 
@@ -28,9 +28,9 @@ class BaseDatos extends PDO {
 	 	}
 	 }
 	 
-	 public function darBaseDatos(){
-	 	return $this->dbname;
-	 }
+// 	 public function darBaseDatos(){
+// 	 	return $this->dbname;
+// 	 }
   
   
 /**  public function iniciar(){
@@ -152,7 +152,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   public function darReferenciasForaneas($tabla,$columna){
   	$sql = "SELECT  REFERENCED_TABLE_NAME as tablareferenciada,	REFERENCED_COLUMN_NAME as columnareferenciada
    			FROM information_schema.KEY_COLUMN_USAGE
-   			WHERE TABLE_SCHEMA = '".$this->dbname."' 
+   			WHERE TABLE_SCHEMA = '".parent::getDatabase()."' 
   				AND REFERENCED_TABLE_NAME is not null";
   	if($tabla!=null){
   		$sql.="	AND TABLE_NAME = '".$tabla."'";
@@ -167,7 +167,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   public function darMetaData($tabla){
   	$sql=" SELECT  COLUMN_NAME, DATA_TYPE,COLUMN_KEY,EXTRA
   	FROM INFORMATION_SCHEMA.COLUMNS
-  	WHERE TABLE_SCHEMA = '".$this->dbname."'";
+  	WHERE TABLE_SCHEMA = '".parent::getDatabase()."'";
   	if($tabla!=null){
   		$sql .=" AND TABLE_NAME = '".$tabla."'"; 
   	}

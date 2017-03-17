@@ -14,12 +14,7 @@ function submit(action, method, values) {
     form.appendTo('body').submit();
     
 }
-function setAutocompletCurrentValue(id, value) {
-	alert(id);
-	   $(id).val(value);
-	   var textToShow = $(id).find(":selected").text();
-	   $(id).parent().find("span").find("input").val(textToShow);
-	}
+
 
 function cargarFormulario(valores){
 	//alert("form");
@@ -47,52 +42,56 @@ function cargarCombos(){
 	$(".ui-autocomplete-input").each(function( index ) {
 		//alert( index + ": " + $(this).attr('id') );
 		var opciones = eval($("#"+$(this).attr('id')).data('options'));
-		opciones = opciones[0];
-		var autoCompelteElement = this;
-		var formElementName = $(this).attr('name');
-		//var hiddenElementID  = formElementName + '_autocomplete_hidden';
+		if(opciones != null){
+			//alert("combos "+opciones);
+			opciones = opciones[0];
+			var autoCompelteElement = this;
+			var formElementName = $(this).attr('name');
+			//var hiddenElementID  = formElementName + '_autocomplete_hidden';
+			
+			//$(this).attr('name', formElementName + '_autocomplete_label');
+			/* change name of orig input */
+			
+			$(this).attr('style', ' visibility: hidden;');
+			/* create new hidden input with name of orig input */
+			$(this).before("<input type=\"text\" name=\"" + opciones.campofiltrar + "\" id=\"" + opciones.campofiltrar + "\" />");
+			
+			$("#"+opciones.campofiltrar).autocomplete({
+			        source: function( request, response ) {
+			            $.ajax( {
+			              url: "libs/datacombo.php",
+			              dataType: "jsonp",
+			              data: {
+			                filtro:request.term
+			                ,control:opciones.control
+			                ,campotabla:opciones.campofiltrar
+			              },
+			              success: function( data ) {
+			            	  response( $.map( data, function(item) {
+			                      return {
+			                          label: item[opciones.campofiltrar],
+			                          value: item[opciones.campofiltrar],
+			                          id: item[opciones.clavetabla]
+			                      }
+			                  }));
+			            	  
+			               // response( data );
+			              }
+			            } );
+			          },
+			        minLength: 0,
+			       
+			        select: function( event, ui ) {
+			          //alert( "Selected: " + ui.item.value + " aka " + ui.item.id );
+			        	var selectedObj = ui.item;
+						$('#'+opciones.campofiltrar).val(selectedObj.label);
+						$('#'+formElementName).val(selectedObj.id);
+			        }
+			      });
+		}
+			});
+	
 		
-		//$(this).attr('name', formElementName + '_autocomplete_label');
-		/* change name of orig input */
-		
-		$(this).attr('style', ' visibility: hidden;');
-		/* create new hidden input with name of orig input */
-		$(this).before("<input type=\"text\" name=\"" + opciones.campofiltrar + "\" id=\"" + opciones.campofiltrar + "\" />");
-		
-		$("#"+opciones.campofiltrar).autocomplete({
-		        source: function( request, response ) {
-		            $.ajax( {
-		              url: "libs/datacombo.php",
-		              dataType: "jsonp",
-		              data: {
-		                filtro:request.term
-		                ,control:opciones.control
-		                ,campotabla:opciones.campofiltrar
-		              },
-		              success: function( data ) {
-		            	  response( $.map( data, function(item) {
-		                      return {
-		                          label: item[opciones.campofiltrar],
-		                          value: item[opciones.campofiltrar],
-		                          id: item[opciones.clavetabla]
-		                      }
-		                  }));
-		            	  
-		               // response( data );
-		              }
-		            } );
-		          },
-		        minLength: 0,
-		       
-		        select: function( event, ui ) {
-		          //alert( "Selected: " + ui.item.value + " aka " + ui.item.id );
-		        	var selectedObj = ui.item;
-					$('#'+opciones.campofiltrar).val(selectedObj.label);
-					$('#'+formElementName).val(selectedObj.id);
-		        }
-		      });
-		  
-		});
 	
 	
 	
