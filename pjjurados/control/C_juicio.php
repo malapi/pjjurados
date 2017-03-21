@@ -73,6 +73,13 @@ class C_juicio extends Session{
 	
 	}
 	
+	public function generarListadoPartes($data){
+		
+		$objSel = new personaseleccion();
+		$resultado = $objSel->seleccionar($data);
+		
+	}
+	
 	
 	public function sortear($data){
 		//print_object($data);

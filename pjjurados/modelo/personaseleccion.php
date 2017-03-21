@@ -91,6 +91,21 @@ class personaseleccion extends BaseDatos{
 		return parent::selecionar($sql) ;
 
 	}
+	
+	public function  seleccionarListadoPartes($data){
+		//Número de Orden	Nro. Bolilla 	Apellido	Nombre	DNI
+		$where =$this->cadenaWhereSql($data,$this->prefijo);
+	
+		$sql = "SELECT psnroordenseleccion as Nro.Orden,psnrobolilla as Nro.Bolilla,Apellido,Nombre,DNI
+				 FROM ".$this->nombreTabla."
+				 natural join seleccion
+				 natural join juicio
+				 NATURAL JOIN personas 
+				 WHERE psnrobolilla not is null AND ".$where;
+		// echo $sql;
+		return parent::selecionar($sql) ;
+	
+	}
 
 	public function sortear($data) {
 		//echo "Lala";
