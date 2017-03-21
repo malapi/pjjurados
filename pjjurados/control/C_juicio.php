@@ -1,4 +1,4 @@
-<?php
+<?php include_once ('../libs/GeneraExcel.php');
 
 class C_juicio extends Session{
 
@@ -34,32 +34,32 @@ class C_juicio extends Session{
  		//Primero elimino los archivos para el juicio
  		$obj->eliminar($data);
 		
-		$objSel = new personaseleccion();
-		$resultado = $objSel->seleccionar($data);
+// 		$objSel = new personaseleccion();
+// 		$resultado = $objSel->seleccionar($data);
 		
-		$unmapeo['tagplantilla']="#NOMBRE";
-		$unmapeo['tagvalor']="Nombre";
-		$mapeo[0] = $unmapeo;
-		$unmapeo['tagplantilla']="#APELLIDO";
-		$unmapeo['tagvalor']="Apellido";
-		$mapeo[1] = $unmapeo;
-		$unmapeo['tagplantilla']="#DNI";
-		$unmapeo['tagvalor']="DNI";
-		$mapeo[2] = $unmapeo;
+// 		$unmapeo['tagplantilla']="#NOMBRE";
+// 		$unmapeo['tagvalor']="Nombre";
+// 		$mapeo[0] = $unmapeo;
+// 		$unmapeo['tagplantilla']="#APELLIDO";
+// 		$unmapeo['tagvalor']="Apellido";
+// 		$mapeo[1] = $unmapeo;
+// 		$unmapeo['tagplantilla']="#DNI";
+// 		$unmapeo['tagvalor']="DNI";
+// 		$mapeo[2] = $unmapeo;
 		
-		$nombrePlantilla = "plantilla_cedulas.rtf";
-		$nombreArchivo = $data['idjuicio']."_".$nombrePlantilla;
-		$archivo = generarArchivoRTF($resultado,$mapeo,$nombrePlantilla,$nombreArchivo);
-		//echo "<a href='".$archivo."' > Descargar </a>";
+// 		$nombrePlantilla = "plantilla_cedulas.rtf";
+// 		$nombreArchivo = $data['idjuicio']."_".$nombrePlantilla;
+// 		$archivo = generarArchivoRTF($resultado,$mapeo,$nombrePlantilla,$nombreArchivo);
+// 		//echo "<a href='".$archivo."' > Descargar </a>";
 		
  		
- 		$un['idjuicio'] = $data['idjuicio'];
- 		$un['jnfechageneracion'] = "now()";
- 		$un['jndescripcion'] = "cedulas de citacion";
- 		$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
- 		$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
- 		$un['jncamino']=$archivo;
- 		$respuesta = $obj->insertar($un);
+//  		$un['idjuicio'] = $data['idjuicio'];
+//  		$un['jnfechageneracion'] = "now()";
+//  		$un['jndescripcion'] = "cedulas de citacion";
+//  		$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
+//  		$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
+//  		$un['jncamino']=$archivo;
+//  		$respuesta = $obj->insertar($un);
 		
 //  		$un['jndescripcion'] = "Listado de Partes";
 //  		$un['jnnombrearchivo'] = "10_partes.xls.zip";
@@ -67,7 +67,7 @@ class C_juicio extends Session{
  		//$obj->insertar($un);
 		
 		
-		
+		$this->generarListadoPartes($data);
 		
 		return $respuesta;
 	
@@ -76,7 +76,10 @@ class C_juicio extends Session{
 	public function generarListadoPartes($data){
 		
 		$objSel = new personaseleccion();
-		$resultado = $objSel->seleccionar($data);
+		$resultado = $objSel->seleccionarListadoPartes($data);
+ 		$objExcel = new GeneraExcel();
+ 		$resultado['nombreArchivo']= "lala";
+ 		$objExcel->generar($resultado);
 		
 	}
 	

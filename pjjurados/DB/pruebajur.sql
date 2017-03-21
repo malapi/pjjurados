@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-03-2017 a las 16:40:48
+-- Tiempo de generación: 21-03-2017 a las 14:30:11
 -- Versión del servidor: 5.7.17-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -149,24 +149,28 @@ INSERT INTO `estadosddjj` (`idEstadoDDJJ`, `Descripcion`) VALUES
 
 CREATE TABLE `juicio` (
   `idjuicio` int(11) NOT NULL,
-  `jufecha` date NOT NULL,
+  `jufechainicio` date NOT NULL,
   `jujueces` varchar(100) NOT NULL,
   `judescripcion` varchar(100) NOT NULL,
-  `juobservacion` varchar(150) NOT NULL
+  `juobservacion` varchar(150) NOT NULL,
+  `jufechafin` date DEFAULT NULL,
+  `jufechaaudiencia` date DEFAULT NULL,
+  `junroconvocatoria` varchar(150) DEFAULT NULL,
+  `judireccionaudiencia` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `juicio`
 --
 
-INSERT INTO `juicio` (`idjuicio`, `jufecha`, `jujueces`, `judescripcion`, `juobservacion`) VALUES
-(1, '2017-03-08', 'Aun sin definir', 'Uno el que sea', 'rwrwer modificada ahora'),
-(2, '2017-03-08', 'rwer modificados', 'rwerwe', 'rwrwer'),
-(3, '2017-03-04', 'ffff', 'ffff', 'fffff'),
-(4, '2017-12-12', 'malaa', 'judescripcion', 'juobservacion'),
-(5, '2017-03-08', 'rwer', 'rwerwe modificada', 'rwrwer'),
-(6, '2017-12-12', 'malaa', 'judescripcion dsdasdasd', 'juobservacion'),
-(7, '2017-03-08', 'rwer', 'rwerwe', 'rwrwer dsadasdsadsadsadsd');
+INSERT INTO `juicio` (`idjuicio`, `jufechainicio`, `jujueces`, `judescripcion`, `juobservacion`, `jufechafin`, `jufechaaudiencia`, `junroconvocatoria`, `judireccionaudiencia`) VALUES
+(1, '2017-03-08', 'Aun sin definir', 'Uno el que sea', 'sdsdsd', '2017-03-10', '2017-03-02', '2/2017', 'Ant. Argentina Nro. 352'),
+(2, '2017-03-08', 'rwer modificados', 'rwerwe', 'rwrwer', NULL, NULL, NULL, NULL),
+(3, '2017-03-04', 'ffff', 'ffff', 'fffff', NULL, NULL, NULL, NULL),
+(4, '2017-12-12', 'malaa', 'judescripcion', 'juobservacion', NULL, NULL, NULL, NULL),
+(5, '2017-03-08', 'rwer', 'rwerwe modificada', 'rwrwer', NULL, NULL, NULL, NULL),
+(6, '2017-12-12', 'malaa', 'judescripcion dsdasdasd', 'juobservacion', NULL, NULL, NULL, NULL),
+(7, '2017-03-08', 'rwer', 'rwerwe', 'rwrwer dsadasdsadsadsadsd', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,16 +184,16 @@ CREATE TABLE `juicionotificaciones` (
   `jnnombreplantilla` varchar(150) NOT NULL,
   `jnnombrearchivo` varchar(150) NOT NULL,
   `jnfechageneracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `jndescripcion` varchar(150) NOT NULL
+  `jndescripcion` varchar(150) NOT NULL,
+  `jncamino` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `juicionotificaciones`
 --
 
-INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`) VALUES
-(15, 1, 'plantilla_cedulas.rtf', '10_cedula.rtf.zip', '2017-03-14 13:37:34', 'cÃ©dulas de citaciÃ³n'),
-(16, 1, 'plantilla_cedulas.rtf', '10_partes.xls.zip', '2017-03-14 13:37:34', 'Listado de Partes');
+INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`, `jncamino`) VALUES
+(23, 1, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/1_plantilla_cedulas.rtf.zip" > 1_plantilla_cedulas.rtf.zip </a>', '2017-03-17 20:59:55', 'cedulas de citacion', 'uploads/archivosrtf/1_plantilla_cedulas.rtf.zip');
 
 -- --------------------------------------------------------
 
@@ -2648,8 +2652,8 @@ CREATE TABLE `personaseleccion` (
 --
 
 INSERT INTO `personaseleccion` (`idPersona`, `idseleccion`, `psnroordenseleccion`, `psexcusacion`, `psrecusacioncausa`, `pscaracter`, `psasiste`, `psasisteobservacion`, `psobservacion`, `idtiposeleccionrecusacion`, `idpersonaseleccionresultadotipos`, `idjuicio`, `psnrojurado`, `psfechaexcusacion`, `idLote`, `psfechaseleccion`, `psfechafinseleccion`, `psnrobolilla`) VALUES
-(2279, 31, 2, '', '', '', NULL, '', '', NULL, NULL, 1, NULL, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 48),
-(2359, 31, 1, '', '', '', NULL, '', '', NULL, NULL, 1, NULL, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 128);
+(2279, 31, 2, 'rrr', 'zcxzc', 'cxcxzc', NULL, 'czxcxzc', 'czxczxc', 2, 2, 1, 2, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 48),
+(2359, 31, 1, 'rrrr', 'r', 'r', NULL, 'r', 'r', 2, 3, 1, 3, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 128);
 
 -- --------------------------------------------------------
 
@@ -3260,7 +3264,7 @@ ALTER TABLE `juicio`
 -- AUTO_INCREMENT de la tabla `juicionotificaciones`
 --
 ALTER TABLE `juicionotificaciones`
-  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `localidades`
 --

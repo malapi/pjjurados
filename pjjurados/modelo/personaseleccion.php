@@ -93,10 +93,10 @@ class personaseleccion extends BaseDatos{
 	}
 	
 	public function  seleccionarListadoPartes($data){
-		//Número de Orden	Nro. Bolilla 	Apellido	Nombre	DNI
+		//Numero de Orden	Nro. Bolilla 	Apellido	Nombre	DNI
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 	
-		$sql = "SELECT psnroordenseleccion as Nro.Orden,psnrobolilla as Nro.Bolilla,Apellido,Nombre,DNI
+		$sql = "SELECT psnroordenseleccion as Nro.Orden,psnrobolilla as Nro.Bolilla,Apellido,Nombre,DNI,Sexo
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
 				 natural join juicio
