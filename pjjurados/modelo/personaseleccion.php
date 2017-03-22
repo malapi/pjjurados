@@ -96,13 +96,13 @@ class personaseleccion extends BaseDatos{
 		//Numero de Orden	Nro. Bolilla 	Apellido	Nombre	DNI
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 	
-		$sql = "SELECT psnroordenseleccion as Nro.Orden,psnrobolilla as Nro.Bolilla,Apellido,Nombre,DNI,Sexo
+		$sql = "SELECT psnroordenseleccion as NroOrden,psnrobolilla as NroBolilla,Apellido,Nombre,DNI,Sexo
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
 				 natural join juicio
 				 NATURAL JOIN personas 
-				 WHERE psnrobolilla not is null AND ".$where;
-		// echo $sql;
+				 WHERE psnrobolilla is not null ".$where;
+		 echo $sql;
 		return parent::selecionar($sql) ;
 	
 	}
