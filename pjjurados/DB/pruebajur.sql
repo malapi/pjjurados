@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-03-2017 a las 14:30:11
+-- Tiempo de generación: 22-03-2017 a las 11:05:57
 -- Versión del servidor: 5.7.17-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -165,7 +165,7 @@ CREATE TABLE `juicio` (
 
 INSERT INTO `juicio` (`idjuicio`, `jufechainicio`, `jujueces`, `judescripcion`, `juobservacion`, `jufechafin`, `jufechaaudiencia`, `junroconvocatoria`, `judireccionaudiencia`) VALUES
 (1, '2017-03-08', 'Aun sin definir', 'Uno el que sea', 'sdsdsd', '2017-03-10', '2017-03-02', '2/2017', 'Ant. Argentina Nro. 352'),
-(2, '2017-03-08', 'rwer modificados', 'rwerwe', 'rwrwer', NULL, NULL, NULL, NULL),
+(2, '2017-03-08', 'rwer modificados', 'rwerwe', 'rwrwer', '2017-03-02', '2017-03-24', 'AAA', 'AAA'),
 (3, '2017-03-04', 'ffff', 'ffff', 'fffff', NULL, NULL, NULL, NULL),
 (4, '2017-12-12', 'malaa', 'judescripcion', 'juobservacion', NULL, NULL, NULL, NULL),
 (5, '2017-03-08', 'rwer', 'rwerwe modificada', 'rwrwer', NULL, NULL, NULL, NULL),
@@ -193,7 +193,8 @@ CREATE TABLE `juicionotificaciones` (
 --
 
 INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`, `jncamino`) VALUES
-(23, 1, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/1_plantilla_cedulas.rtf.zip" > 1_plantilla_cedulas.rtf.zip </a>', '2017-03-17 20:59:55', 'cedulas de citacion', 'uploads/archivosrtf/1_plantilla_cedulas.rtf.zip');
+(31, 1, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/1_plantilla_cedulas.rtf.zip" > 1_plantilla_cedulas.rtf.zip </a>', '2017-03-22 13:09:53', 'cedulas de citacion', 'uploads/archivosrtf/1_plantilla_cedulas.rtf.zip'),
+(32, 1, 'Sin Plantilla', '<a href="uploads/archivosrtf/1_partes.xlsx" > 1_partes.xlsx </a>', '2017-03-22 13:09:54', 'Listado de Partes', 'uploads/archivosrtf/1_partes.xlsx');
 
 -- --------------------------------------------------------
 
@@ -2652,8 +2653,12 @@ CREATE TABLE `personaseleccion` (
 --
 
 INSERT INTO `personaseleccion` (`idPersona`, `idseleccion`, `psnroordenseleccion`, `psexcusacion`, `psrecusacioncausa`, `pscaracter`, `psasiste`, `psasisteobservacion`, `psobservacion`, `idtiposeleccionrecusacion`, `idpersonaseleccionresultadotipos`, `idjuicio`, `psnrojurado`, `psfechaexcusacion`, `idLote`, `psfechaseleccion`, `psfechafinseleccion`, `psnrobolilla`) VALUES
+(1933, 37, 1, '', '', '', NULL, '', '', NULL, NULL, 4, NULL, '2017-03-22 13:36:56', 10, '2017-03-22', '2020-03-22', 1),
+(1935, 36, 1, '', '', '', NULL, '', '', NULL, NULL, 3, NULL, '2017-03-22 13:35:34', 10, '2017-03-22', '2020-03-22', 2),
+(2106, 38, 1, '', '', '', NULL, '', '', NULL, NULL, 7, NULL, '2017-03-22 13:38:29', 13, '2017-03-22', '2020-03-22', 172),
 (2279, 31, 2, 'rrr', 'zcxzc', 'cxcxzc', NULL, 'czxcxzc', 'czxczxc', 2, 2, 1, 2, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 48),
-(2359, 31, 1, 'rrrr', 'r', 'r', NULL, 'r', 'r', 2, 3, 1, 3, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 128);
+(2359, 31, 1, 'rrrr', 'r', 'r', NULL, 'r', 'r', 2, 3, 1, 3, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 128),
+(2405, 32, 1, '', '', '', NULL, '', '', NULL, NULL, 2, NULL, '2017-03-22 13:21:08', 13, '2017-03-22', '2020-03-22', 172);
 
 -- --------------------------------------------------------
 
@@ -2909,7 +2914,14 @@ INSERT INTO `seleccion` (`idseleccion`, `sefecha`) VALUES
 (28, '2017-03-13 18:46:56'),
 (29, '2017-03-13 19:41:58'),
 (30, '2017-03-13 20:39:46'),
-(31, '2017-03-13 20:40:58');
+(31, '2017-03-13 20:40:58'),
+(32, '2017-03-22 13:21:08'),
+(33, '2017-03-22 13:27:45'),
+(34, '2017-03-22 13:33:35'),
+(35, '2017-03-22 13:34:33'),
+(36, '2017-03-22 13:35:34'),
+(37, '2017-03-22 13:36:56'),
+(38, '2017-03-22 13:38:29');
 
 -- --------------------------------------------------------
 
@@ -3264,7 +3276,7 @@ ALTER TABLE `juicio`
 -- AUTO_INCREMENT de la tabla `juicionotificaciones`
 --
 ALTER TABLE `juicionotificaciones`
-  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `localidades`
 --
@@ -3339,7 +3351,7 @@ ALTER TABLE `respuestas`
 -- AUTO_INCREMENT de la tabla `seleccion`
 --
 ALTER TABLE `seleccion`
-  MODIFY `idseleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idseleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT de la tabla `tipodocumentos`
 --

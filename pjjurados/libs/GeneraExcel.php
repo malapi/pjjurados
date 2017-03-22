@@ -97,11 +97,11 @@ class GeneraExcel {
 	}
 		
 	public function generar($data){
-		echo "genera cabecera";
+		//echo "genera cabecera";
 		$this->generaCabecera($data);
-		echo "genera cuerpo";
+		//echo "genera cuerpo";
 		$this->generaCuerpo($data);
-		echo "genera descargar";
+		//echo "genera descargar";
 		$this->descargar($data);
 	}
 

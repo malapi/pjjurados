@@ -2,8 +2,7 @@ function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formNuevoSorteo').serialize(),control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
 		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
-		,eventos:[{titulo:"Editar",href:"juicio_nuevojuicio.php",icono:"icon-edit",accion:"editar"}
-		,{titulo:"Sortear",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
+		,eventos:[
 		]
 					}, function(data){
 						if(data.search("<tbody></tbody>")<0){

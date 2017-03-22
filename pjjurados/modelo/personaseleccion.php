@@ -102,7 +102,7 @@ class personaseleccion extends BaseDatos{
 				 natural join juicio
 				 NATURAL JOIN personas 
 				 WHERE psnrobolilla is not null ".$where;
-		 echo $sql;
+		// echo $sql;
 		return parent::selecionar($sql) ;
 	
 	}
@@ -115,7 +115,8 @@ class personaseleccion extends BaseDatos{
 			LEFT JOIN personaseleccion as ps USING(idPersona)
 			LEFT JOIN juicio as j on j.idjuicio = ".$data['idjuicio']."
 			WHERE aptojurado
-			AND TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) < 75 ";
+			AND TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) < 75 
+					AND lp.idLote = ".$data['idLote']." ";
 		$where = "	";
 		
 		if ($data ['seleccionprevia'] == 1) {
@@ -131,8 +132,8 @@ class personaseleccion extends BaseDatos{
 		$seleccionados = array ();
 		if ($data ['selmujeres'] > 0) {
 			$where = "	AND Sexo = 'F'";
-			$sqlF = $sql.$where;
-			 //echo $sqlF;
+			//$sqlF = $sql.$where;
+			// echo $sqlF;
 			$resultado = parent::selecionar ($sqlF);
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selmujeres']) {
 				for($i = 0; $i <= $data ['selmujeres'] - 1; $i ++) {
@@ -153,21 +154,25 @@ class personaseleccion extends BaseDatos{
 			//echo $sqlM;
 			$resultado = parent::selecionar ( $sqlM );
 			// echo $sql;
+			//print_object($resultado);
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selhombres']) {
 				for($i = 0; $i <= $data ['selhombres'] - 1; $i ++) {
 					$indSeleccionar = rand ( 0, count ( $resultado ) - 1 );
 					//echo "<br> sel M " . $indSeleccionar ." <br> ";
+					$un = $resultado[$indSeleccionar];
 					$un['psnrobolilla']=$indSeleccionar;
 					$seleccionados[count($seleccionados )] = $un;
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
 			}
 		}
+		//print_object($seleccionados);
 		return $seleccionados;
 	}
 	
 	
 	public function guardarSorteo($data) {
+		$resp = false;
 		$sorteo = $data['seleccionados'];
 		$i=0;
 		if(count($sorteo)>0){
@@ -184,13 +189,13 @@ class personaseleccion extends BaseDatos{
 				$un['psfechaseleccion']='CURRENT_TIMESTAMP';
 				$un['psfechafinseleccion']='DATE_ADD(CURDATE(),INTERVAL 3 YEAR)';
 				$un['idseleccion'] = $idseleccion;
-				$this->insertar($un);
+				$resp = $this->insertar($un);
 				
 			}	
 		}
 		
 		
-		return $seleccionados;
+		return $resp;
 	}
 	
 	public function consultar($dato){
@@ -276,7 +281,7 @@ class personaseleccion extends BaseDatos{
 		INNER JOIN lotes lo ON lo.idLote = LP.idLote
 		LEFT JOIN tipoimpedimentos TI ON TI.idTipoImpedimento = LP.idTipoImpedimento
 		WHERE P.idPersona = ".$dato['idPersona'] ;
-		// echo $sql;
+		//echo "Lote <br>". $sql;
 		$html = "<H1> Informacion Personal </H1>";
 		$res = parent::selecionar($sql);
 		//if($res) {
@@ -342,7 +347,7 @@ class personaseleccion extends BaseDatos{
 				LEFT JOIN centrodistribucion C ON P.idCentroDistribucion = C.idCentroDistribucion
 				WHERE LP.idPersona = ".$dato['idPersona']."
 				ORDER BY P.Apellido,P.Nombre,LPN.idlotespersonanotificacion ";
-				//echo $sql;
+				//echo "Notificaciones <br>".$sql;
 				$res = parent::selecionar($sql);
 				
 				$html="";
@@ -369,7 +374,7 @@ class personaseleccion extends BaseDatos{
 	public function mostrarInformacionPersonaSeleccion($dato){
 			
 	
-		$sql = "SELECT idjuicio, DATE_FORMAT(jufecha,'%d/%m/%Y') as jufecha, jujueces, judescripcion, juobservacion
+		$sql = "SELECT idjuicio, DATE_FORMAT(jufechainicio,'%d/%m/%Y') as jufechainicio , jujueces,judescripcion, juobservacion, DATE_FORMAT(jufechafin,'%d/%m/%Y') as jufechafin, DATE_FORMAT(jufechaaudiencia,'%d/%m/%Y') as jufechaaudiencia, junroconvocatoria, judireccionaudiencia
 				,idseleccion
 				,psnroordenseleccion
 				,psexcusacion,psrecusacioncausa,pscaracter,CASE WHEN psasiste is null THEN 'No' ELSE 'SI' END as psasiste
@@ -386,9 +391,9 @@ class personaseleccion extends BaseDatos{
 				NATURAL JOIN juicio as j 
 				LEFT JOIN  personaseleccionresultadotipos psrt USING(idpersonaseleccionresultadotipos)
 				LEFT JOIN  tiposeleccionrecusacion tsr USING(idtiposeleccionrecusacion)
-				WHERE LP.idPersona = ".$dato['idPersona']."
+				WHERE lp.idPersona = ".$dato['idPersona']."
 				ORDER BY ps.idseleccion";
-		//echo $sql;
+		//echo "Seleccion <br>".$sql;
 		//echo $sql;
 		$res = parent::selecionar($sql);
 	

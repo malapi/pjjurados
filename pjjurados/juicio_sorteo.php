@@ -49,6 +49,15 @@ $datos = data_submitted();
 					</div>
 					</div>
 			<div class="form-group">
+					<label class="col-sm-2 control-label" for="idLote" >Lote: </label>
+					<div class="col-sm-4">
+					<div class="ui-widget">
+						<input  class="ui-autocomplete-input form-control" name="idLote" id="idLote"
+						data-options='[{clavetabla:"idLote",campofiltrar:"Descripcion",campotablamostrar:"Descripcion",control:"lotes"}]'></input>
+					</div>
+					</div>
+					</div>
+			<div class="form-group">
 					<label class="col-sm-2 control-label" for="seleccionprevia" >Sorteados en otra seleccci&oacute;n?: </label>
 					<div class="col-sm-4">
 					<input class="easyui-textbox form-control" type="checkbox" name="seleccionprevia" id="seleccionprevia" data-options="required:true"></input>

@@ -8,9 +8,9 @@ class C_fichapersona extends Session{
 
 		$resp =false;
 
-		/*$obj= new juicio();
+		$obj= new personaseleccion();
 
-		if ($data['accion']=='nuevo')
+	/*	if ($data['accion']=='nuevo')
 			$resp = $obj->insertar($data);
 
 		if ($data['accion']=='editar')
@@ -20,9 +20,9 @@ class C_fichapersona extends Session{
 			$resp = $obj->eliminar($data);
 		
 		if ($data['accion']=='sortear')
-			$resp = $this->sortear($data);
-		if ($data['accion']=='listados')
-			$resp = $this->generarListados($data);*/
+			$resp = $this->sortear($data);*/
+		if ($data['accion']=='ver')
+			$resp = $obj->mostrarInformacionPersona($data);
 
 		return $resp ;
 
