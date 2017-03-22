@@ -32,7 +32,7 @@ class C_juicio extends Session{
 		//print_object($data);
  		$obj= new juicionotificaciones();
  		//Primero elimino los archivos para el juicio
- 		$obj->eliminar($data);
+// 		$obj->eliminar($data);
 		
 // 		$objSel = new personaseleccion();
 // 		$resultado = $objSel->seleccionar($data);
@@ -68,7 +68,7 @@ class C_juicio extends Session{
 		
 		
 		$this->generarListadoPartes($data);
-		
+		$respuesta = true;
 		return $respuesta;
 	
 	}
@@ -78,8 +78,10 @@ class C_juicio extends Session{
 		$objSel = new personaseleccion();
 		$resultado = $objSel->seleccionarListadoPartes($data);
  		$objExcel = new GeneraExcel();
- 		$resultado['nombreArchivo']= "lala";
- 		$objExcel->generar($resultado);
+ 		print_object($resultado);
+ 		$datos['nombreArchivo']= "lala";
+ 		$datos['datos']= $resultado;
+ 		$objExcel->generar($datos);
 		
 	}
 	

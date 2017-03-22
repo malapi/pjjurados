@@ -167,7 +167,7 @@ function __autoload($class_name){
         $directorys = array(
             $GLOBALS['ROOT'].'modelo/',
             $GLOBALS['ROOT'].'control/',
-        	$GLOBALS['ROOT'].'util/class/',
+        	$GLOBALS['ROOT'].'libs/',
         );
       //print_object($directorys) ;
         foreach($directorys as $directory){

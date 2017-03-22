@@ -3,57 +3,127 @@ include_once('../configuracion.php');
 
 $datos = data_submitted();
 // $resp = true;
-// //print_object($datos);
-// //$datos['accion'] = $datos['juicio_accion'];
-// $objws = new C_juicio();
-// $tipoMensaje='info';
-// if($objws->abm($datos)){
-// 		$respuesta =true;
-// 		$salida = " La accion ".$datos['accion']." se realizo  correctamente ";
-// 	}else {
-// 		$salida =  " La accion ". $datos['accion']." no pudo concretarse ";
-// 		$respuesta =false;
-// 	}
-// 	$objresp = array ('mensaje'=>$salida ,'veralert'=>true, 'respuesta'=>$respuesta,"msgtipo"=>$tipoMensaje,"ocultarForm"=>true);
-// 	echo json_encode($objresp);
-
+require_once dirname(__FILE__) . '/../libs/PHPExcel-1.8/Classes/PHPExcel.php';
 
 /** Error reporting */
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
+//ini_set('display_errors', TRUE);
+//ini_set('display_startup_errors', TRUE);
+//date_default_timezone_set('Europe/London');
 
+//define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
+
+/** Include PHPExcel */
+//require_once dirname(__FILE__) . '/../libs/PHPExcel-1.8/Classes/PHPExcel.php';
 
 // Create new PHPExcel object
-echo date('H:i:s') . " Create new PHPExcel object\n <br>";
-$objPHPExcel = new PHPExcel();
+//echo date('H:i:s') , " Create new PHPExcel object" , EOL;
+/*$objPHPExcel = new PHPExcel();
 
-// Set properties
-echo date('H:i:s') . " Set properties\n <br>";
-$objPHPExcel->getProperties()->setCreator("Maarten Balliauw");
-$objPHPExcel->getProperties()->setLastModifiedBy("Maarten Balliauw");
-$objPHPExcel->getProperties()->setTitle("Office 2007 XLSX Test Document");
-$objPHPExcel->getProperties()->setSubject("Office 2007 XLSX Test Document");
-$objPHPExcel->getProperties()->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.");
+// Set document properties
+echo date('H:i:s') , " Set document properties" , EOL;
+$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+->setLastModifiedBy("Maarten Balliauw")
+->setTitle("PHPExcel Test Document")
+->setSubject("PHPExcel Test Document")
+->setDescription("Test document for PHPExcel, generated using PHP classes.")
+->setKeywords("office PHPExcel php")
+->setCategory("Test result file");
 
 
 // Add some data
-echo date('H:i:s') . " Add some data\n <br>";
-$objPHPExcel->setActiveSheetIndex(0);
-$objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Hello');
-$objPHPExcel->getActiveSheet()->SetCellValue('B2', 'world!');
-$objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Hello');
-$objPHPExcel->getActiveSheet()->SetCellValue('D2', 'world!');
+echo date('H:i:s') , " Add some data" , EOL;
+$objPHPExcel->setActiveSheetIndex(0)
+->setCellValue('A1', 'Hello')
+->setCellValue('B2', 'world!')
+->setCellValue('C1', 'Hello')
+->setCellValue('D2', 'world!');
 
-// Rename sheet
-echo date('H:i:s') . " Rename sheet\n <br>";
+// Miscellaneous glyphs, UTF-8
+$objPHPExcel->setActiveSheetIndex(0)
+->setCellValue('A4', 'Miscellaneous glyphs')
+->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
+
+
+$objPHPExcel->getActiveSheet()->setCellValue('A8',"Hello\nWorld");
+$objPHPExcel->getActiveSheet()->getRowDimension(8)->setRowHeight(-1);
+$objPHPExcel->getActiveSheet()->getStyle('A8')->getAlignment()->setWrapText(true);
+
+
+$value = "-ValueA\n-Value B\n-Value C";
+$objPHPExcel->getActiveSheet()->setCellValue('A10', $value);
+$objPHPExcel->getActiveSheet()->getRowDimension(10)->setRowHeight(-1);
+$objPHPExcel->getActiveSheet()->getStyle('A10')->getAlignment()->setWrapText(true);
+$objPHPExcel->getActiveSheet()->getStyle('A10')->setQuotePrefix(true);
+
+
+
+// Rename worksheet
+echo date('H:i:s') , " Rename worksheet" , EOL;
 $objPHPExcel->getActiveSheet()->setTitle('Simple');
 
 
-// Save Excel 2007 file
-echo date('H:i:s') . " Write to Excel2007 format\n <br>";
-$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-//$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
-$objWriter->save("/var/www/html/git/pjjurados/pjjurados/uploads/lala/lala.xlsx");
+// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+$objPHPExcel->setActiveSheetIndex(0);
 
+
+// Save Excel 2007 file
+echo date('H:i:s') , " Write to Excel2007 format" , EOL;
+$callStartTime = microtime(true);
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
+$callEndTime = microtime(true);
+$callTime = $callEndTime - $callStartTime;
+
+echo date('H:i:s') , " File written to " , str_replace('.php', '.xlsx', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
+echo 'Call time to write Workbook was ' , sprintf('%.4f',$callTime) , " seconds" , EOL;
+// Echo memory usage
+echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 / 1024) , " MB" , EOL;
+
+
+// Save Excel 95 file
+echo date('H:i:s') , " Write to Excel5 format" , EOL;
+$callStartTime = microtime(true);
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+$objWriter->save(str_replace('.php', '.xls', __FILE__));
+$callEndTime = microtime(true);
+$callTime = $callEndTime - $callStartTime;
+
+echo date('H:i:s') , " File written to " , str_replace('.php', '.xls', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
+echo 'Call time to write Workbook was ' , sprintf('%.4f',$callTime) , " seconds" , EOL;
+// Echo memory usage
+echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 / 1024) , " MB" , EOL;
+
+
+// Echo memory peak usage
+echo date('H:i:s') , " Peak memory usage: " , (memory_get_peak_usage(true) / 1024 / 1024) , " MB" , EOL;
+*/
+//$obj = new GeneraExcel();
+//$obj->generar($data);
+
+$objws = new C_juicio();
+//$obj->abm($datos);
 // Echo done
-echo date('H:i:s') . " Done writing file.\r\n <br>";
+//echo date('H:i:s') , " Done writing files" , EOL;
+//echo 'Files have been created in ' , getcwd() , EOL;
+
+$tipoMensaje='info';
+if(isset($datos['accion']) && $datos['accion'] =='consultar'){
+	$respuesta = $objws->buscarInformacionCompleta($datos);
+	echo $respuesta;
+} else {
+	if($objws->abm($datos)){
+		$respuesta =true;
+		$salida = " La accion ".$datos['accion']." se realizo  correctamente ";
+	}else {
+		$salida =  " La accion ". $datos['accion']." no pudo concretarse ";
+		$respuesta =false;
+	}
+	$objresp = array ('mensaje'=>$salida ,'veralert'=>true, 'respuesta'=>$respuesta,"msgtipo"=>$tipoMensaje,"ocultarForm"=>true);
+	echo json_encode($objresp);
+
+}
+
 ?>
