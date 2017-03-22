@@ -167,12 +167,13 @@ function __autoload($class_name){
         $directorys = array(
             $GLOBALS['ROOT'].'modelo/',
             $GLOBALS['ROOT'].'control/',
-        	$GLOBALS['ROOT'].'util/class/',
+        	//$GLOBALS['ROOT'].'util/class/',
+        	$GLOBALS['ROOT'].'libs/PHPExcel/',
         );
       //print_object($directorys) ;
         foreach($directorys as $directory){
           if(file_exists($directory.$class_name . '.php')){  
-          	   //  echo "se incluyo".$directory.$class_name . '.php';
+          	    echo "se incluyo".$directory.$class_name . '.php';
             	require_once($directory.$class_name . '.php');
                 return;
             }           
