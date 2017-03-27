@@ -132,11 +132,11 @@ class personaseleccion extends BaseDatos{
 		$seleccionados = array ();
 		if ($data ['selmujeres'] > 0) {
 			$where = "	AND Sexo = 'F'";
-			//$sqlF = $sql.$where;
-			// echo $sqlF;
+			$sqlF = $sql.$where;
+			//echo $sqlF;
 			$resultado = parent::selecionar ($sqlF);
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selmujeres']) {
-				for($i = 0; $i <= $data ['selmujeres'] - 1; $i ++) {
+				for($i = 0; $i <= ($data ['selmujeres'] - 1); $i++) {
 					
 					$indSeleccionar = rand ( 0, count ( $resultado ) - 1 );
 					//echo "<br> sel F " . $indSeleccionar ." <br>";
@@ -156,7 +156,7 @@ class personaseleccion extends BaseDatos{
 			// echo $sql;
 			//print_object($resultado);
 			if (count ( $resultado ) > 0 && count ( $resultado ) >= $data ['selhombres']) {
-				for($i = 0; $i <= $data ['selhombres'] - 1; $i ++) {
+				for($i = 0; $i <= ($data ['selhombres'] - 1); $i++) {
 					$indSeleccionar = rand ( 0, count ( $resultado ) - 1 );
 					//echo "<br> sel M " . $indSeleccionar ." <br> ";
 					$un = $resultado[$indSeleccionar];

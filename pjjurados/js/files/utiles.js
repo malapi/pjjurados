@@ -97,24 +97,59 @@ function cargarCombos(){
 	
 }
 
-
 function cargarCalendario(){
-	//alert('calendarios')
-	$('input[type=date]').each(function (index, element) {
-        /* Create a hidden clone, which will contain the actual value */
+	//alert('calendarios');
+	
+	 $('input[type=date]').each(function(){
+		 	//alert($(this).attr("id"));
+	        this.type="text";
+	        //$(this).datepicker({dateFormat: 'yy-mm-dd'});
+	        
+	        var clone = $(this).clone();
+	        //clone.attr('class', '');
+	        clone.insertAfter(this);
+	        clone.hide();
+	        
+	        $(this).attr('id', $(this).attr('id') + '-displayfecha');
+	        $(this).attr('name', $(this).attr('name') + '-displayfecha');
+	    	
+	        
+	      $(this).datepicker({ dateFormat: "dd/mm/yy", altField: "#" + clone.attr("id"), altFormat: "yy-mm-dd" });
+	       
+	       
+	        //alert('calendarios 2')
+	       
+	        if ($(this).attr('value')) {
+	        	//alert($(this).attr('value'));
+	            var date = $.datepicker.parseDate("yy-mm-dd", $(this).attr('value'));
+	            $(this).attr('value', $.datepicker.formatDate("dd/mm/yy", date));
+	        }
+	        
+	    });
+	   
+	    
+	//$('.datepicker').each(function (index, element) {
+	/*$('input[type=date]').each(function (index, element) {
+		//alert('calendarios 1');
         var clone = $(this).clone();
+        //clone.attr('class', '');
         clone.insertAfter(this);
-        clone.hide();
-        /* Rename the original field, used to contain the display value */
+        //clone.hide();
+        
         $(this).attr('id', $(this).attr('id') + '-displayfecha');
         $(this).attr('name', $(this).attr('name') + '-displayfecha');
-        /* Create the datepicker with the desired display format and alt field */
-        $(this).datepicker({ dateFormat: "dd/mm/yy", altField: "#" + clone.attr("id"), altFormat: "yy-mm-dd" });
-        /* Finally, parse the value and change it to the display format */
+    	
+        
+      $(this).datepicker({ dateFormat: "dd/mm/yy", altField: "#" + clone.attr("id"), altFormat: "yy-mm-dd" });
+       
+       
+        //alert('calendarios 2')
+       
         if ($(this).attr('value')) {
+        	//alert($(this).attr('value'));
             var date = $.datepicker.parseDate("yy-mm-dd", $(this).attr('value'));
             $(this).attr('value', $.datepicker.formatDate("dd/mm/yy", date));
         }
-    });
+    });*/
 	
 }

@@ -202,8 +202,9 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   						$stvalues.="null,";
   					}else {
   						//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
+  						//echo "Date ".$dato[$arrValor['COLUMN_NAME']] ." dd".strpos($dato[$arrValor['COLUMN_NAME']], "-");
   						if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false
-  								|| strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
+  								&& strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
   							//Estoy enviando una funcion, pues no envio ni el - ni el /
   							$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
   						} else {
