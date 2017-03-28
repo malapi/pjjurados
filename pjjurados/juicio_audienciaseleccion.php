@@ -229,8 +229,6 @@ $datos = data_submitted();
 		<!-- /content -->
 <?php include("footer.php"); ?>
 <script type="text/javascript" src="js/plugins/ajaxupload.3.5.js"></script>
-<script type="text/javascript" src="js/juicio_audienciaseleccion.js"></script>
-
 <script type="text/javascript">
 $(function(){
 	var $_POST = <?php echo json_encode($datos); ?>;
@@ -240,6 +238,6 @@ $(function(){
 			
 });
 </script>
-
+<script type="text/javascript" src="js/juicio_audienciaseleccion.js"></script>
 
 

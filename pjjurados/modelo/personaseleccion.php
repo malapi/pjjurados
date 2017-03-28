@@ -4,7 +4,7 @@ class personaseleccion extends BaseDatos{
 
 		private $nombreTabla='personaseleccion';
 
-		private $prefijo= array("id","completar");
+		private $prefijo= array("id","ps","completar");
 
 		private $textoCombo = "'completartexto'";
 
@@ -75,7 +75,7 @@ class personaseleccion extends BaseDatos{
 	
 
 	public function  seleccionar($data){
-
+                //print_object($data);
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
 		$sql = "SELECT *,".$this->textoCombo." as textocombo 
@@ -87,7 +87,7 @@ class personaseleccion extends BaseDatos{
 				 LEFT JOIN tiposeleccionrecusacion USING(idtiposeleccionrecusacion)
 				 LEFT JOIN personaseleccionresultadotipos USING(idpersonaseleccionresultadotipos) 
 				 WHERE true ".$where;
-        // echo $sql;
+        //echo $sql;
 		return parent::selecionar($sql) ;
 
 	}
@@ -102,7 +102,7 @@ class personaseleccion extends BaseDatos{
 				 natural join juicio
 				 NATURAL JOIN personas 
 				 WHERE psnrobolilla is not null ".$where;
-		// echo $sql;
+		//echo $sql;
 		return parent::selecionar($sql) ;
 	
 	}

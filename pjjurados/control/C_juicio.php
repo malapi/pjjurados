@@ -23,18 +23,54 @@ class C_juicio extends Session{
 			$resp = $this->sortear($data);
 		if ($data['accion']=='listados')
 			$resp = $this->generarListados($data);
+		if ($data['accion']=='listadosPersona')
+				$resp = $this->generarListadosPersona($data);
+
+   
 
 		return $resp ;
 
 	}
 
-	public function generarListados($data){
+	public function generarListadosCedulas($data){
 		//print_object($data);
- 		$obj= new juicionotificaciones();
- 		//Primero elimino los archivos para el juicio
- 		$obj->eliminar($data);
-		
 		$objSel = new personaseleccion();
+		$resultado = $objSel->seleccionar($data);
+	
+		$unmapeo['tagplantilla']="#NOMBRE";
+		$unmapeo['tagvalor']="Nombre";
+		$mapeo[0] = $unmapeo;
+		$unmapeo['tagplantilla']="#APELLIDO";
+		$unmapeo['tagvalor']="Apellido";
+		$mapeo[1] = $unmapeo;
+		$unmapeo['tagplantilla']="#DNI";
+		$unmapeo['tagvalor']="DNI";
+		$mapeo[2] = $unmapeo;
+	
+		$nombrePlantilla = "plantilla_cedulas.rtf";
+		$nombreArchivo = $data['idPersona']."_".$data['idjuicio']."_".$nombrePlantilla;
+		$archivo = generarArchivoRTF($resultado,$mapeo,$nombrePlantilla,$nombreArchivo);
+		// 		//echo "<a href='".$archivo."' > Descargar </a>";
+	
+			
+		$un['idjuicio'] = $data['idjuicio'];
+		$un['idPersona'] = $data['idPersona'];
+		$un['jnfechageneracion'] = "now()";
+		$un['jndescripcion'] = "cedulas de citacion";
+		$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
+		$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
+		$un['jncamino']=$archivo;
+		$obj= new juicionotificaciones();
+		$respuesta = $obj->insertar($un);
+	
+		$respuesta = true;
+		return $respuesta;
+	
+	}
+	
+	public function generarListadosCedulas($data){
+		//print_object($data);
+ 		$objSel = new personaseleccion();
 		$resultado = $objSel->seleccionar($data);
 		
 		$unmapeo['tagplantilla']="#NOMBRE";
@@ -48,31 +84,48 @@ class C_juicio extends Session{
 		$mapeo[2] = $unmapeo;
 		
  		$nombrePlantilla = "plantilla_cedulas.rtf";
- 		$nombreArchivo = $data['idjuicio']."_".$nombrePlantilla;
+ 		$nombreArchivo = $data['idPersona']."_".$data['idjuicio']."_".$nombrePlantilla;
  		$archivo = generarArchivoRTF($resultado,$mapeo,$nombrePlantilla,$nombreArchivo);
 // 		//echo "<a href='".$archivo."' > Descargar </a>";
 		
  		
  		$un['idjuicio'] = $data['idjuicio'];
+ 		$un['idPersona'] = $data['idPersona'];
  		$un['jnfechageneracion'] = "now()";
  		$un['jndescripcion'] = "cedulas de citacion";
  		$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
  		$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
  		$un['jncamino']=$archivo;
+		$obj= new juicionotificaciones();
  		$respuesta = $obj->insertar($un);
 		
-//  		$un['jndescripcion'] = "Listado de Partes";
-//  		$un['jnnombrearchivo'] = "10_partes.xls.zip";
-//  		//$un['jnnombreplantilla'] = "plantilla_cedulas.rtf";
- 		//$obj->insertar($un);
-		
-		
-		$this->generarListadoPartes($data);
+		$respuesta = true;
+		return $respuesta;
+	
+	}
+
+	public function generarListados($data){
+		$obj= new juicionotificaciones();
+ 		//Primero elimino los archivos para el juicio
+ 		$obj->eliminar($data);
+		$respuesta = $this->generarListadosCedulas($data);
+		$respuesta = $this->generarListadoPartes($data);
 		$respuesta = true;
 		return $respuesta;
 	
 	}
 	
+	
+	public function generarListadosPersona($data){
+		$obj= new juicionotificaciones();
+		//Primero elimino los archivos para el juicio
+		$obj->eliminar($data);
+		$respuesta = $this->generarListadosCedulas($data);
+		//$respuesta = $this->generarListadoPartes($data);
+		$respuesta = true;
+		return $respuesta;
+	
+	}
 	public function generarListadoPartes($data){
 		
 		$objSel = new personaseleccion();
@@ -91,7 +144,8 @@ class C_juicio extends Session{
  		$un['jncamino']=$archivo;
  		$obj= new juicionotificaciones();
  		$obj->insertar($un);
- 		
+ 		$respuesta = true;
+                return $respuesta;
 		
 	}
 	

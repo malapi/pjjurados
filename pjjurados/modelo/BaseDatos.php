@@ -380,11 +380,21 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		$where ="";
 		foreach ($arreglo as $key => $valor){
 			$key = str_replace("b_", "", $key); // reemplaza en el nombre del campo b_ por "" ya que puede ser un campo de un formulario de busqueda
+			
 			if ($this->esCampo($prefijocampo,$key)and $valor<>"null"){
-				if(startsWith($key, "id") || $valor == "true" || $valor == "false")
+
+				if(startsWith($key, "id") || $valor == "true" || $valor == "false") {
 					$where .="  AND ".  $key."=". $valor;
-				else
+				}
+				else {
+					//echo $key."|".$valor;
+					if($valor == "is+not+null" || $valor == "is+null") {
+                                                $valor = str_replace("+", " ", $valor);
+						$where .="  AND ".  $key." ".$valor;
+                                        } else {
 					$where .="  AND ".  $key." like '%". $valor."%'";
+					}												
+				}
 			}
 				
 		}
