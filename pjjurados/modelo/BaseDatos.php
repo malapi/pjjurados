@@ -202,8 +202,9 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   						$stvalues.="null,";
   					}else {
   						//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
+  						//echo "Date ".$dato[$arrValor['COLUMN_NAME']] ." dd".strpos($dato[$arrValor['COLUMN_NAME']], "-");
   						if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false
-  								|| strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
+  								&& strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
   							//Estoy enviando una funcion, pues no envio ni el - ni el /
   							$stvalues.="".$dato[$arrValor['COLUMN_NAME']].",";
   						} else {
@@ -379,11 +380,21 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		$where ="";
 		foreach ($arreglo as $key => $valor){
 			$key = str_replace("b_", "", $key); // reemplaza en el nombre del campo b_ por "" ya que puede ser un campo de un formulario de busqueda
+			
 			if ($this->esCampo($prefijocampo,$key)and $valor<>"null"){
-				if(startsWith($key, "id") || $valor == "true" || $valor == "false")
+
+				if(startsWith($key, "id") || $valor == "true" || $valor == "false") {
 					$where .="  AND ".  $key."=". $valor;
-				else
+				}
+				else {
+					//echo $key."|".$valor;
+					if($valor == "is+not+null" || $valor == "is+null") {
+                                                $valor = str_replace("+", " ", $valor);
+						$where .="  AND ".  $key." ".$valor;
+                                        } else {
 					$where .="  AND ".  $key." like '%". $valor."%'";
+					}												
+				}
 			}
 				
 		}

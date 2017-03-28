@@ -2,7 +2,9 @@
 header ( 'Content-type: text/html; charset=utf-8' );
 require_once ('../libs/PDOConfig.php');
 require_once 'utilidades.php';
-require_once '../libs/PHPExcel.php';
+//require_once '../libs/PHPExcel.php';
+require_once '../libs/PHPExcel-1.8/Classes/PHPExcel.php';
+
 require_once("../libs/Login.php");
 $oLogin=new Login();
 if(!$oLogin->activa()){ exit(); }

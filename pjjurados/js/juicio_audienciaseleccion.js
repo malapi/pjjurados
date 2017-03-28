@@ -1,9 +1,10 @@
 function cargarTablaPrincipal(){
-	$.post("libs/datagridhtml.php", {dataForm:[{idjuicio:$('#idjuicio').val()}]
+        //alert($('#formAudiencia').serialize());
+	$.post("libs/datagridhtml.php", {dataForm:"idjuicio= "+$('#idjuicio').val()
 	//$('#formAudiencia').serialize()
 		,control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
-		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla#Resultado:psrtdescripcion"
 		,eventos:[{titulo:"Cargar Audiencia",href:"juicio_audienciaseleccion.php",icono:"icon-th-list",accion:"editar"}
 		,{titulo:"Cargar Documento",js:"cargarDocumento",icono:"icon-book",accion:"documento"}
 		]

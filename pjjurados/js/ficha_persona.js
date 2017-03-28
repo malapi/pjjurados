@@ -4,7 +4,7 @@ function cargarTablaPrincipal(){
 		,fichapersona_accion:"verTabla"
 		,tabla:"Apellido:Apellido#Nombre:Nombre#DNI:DNI#Lote:idLote#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
 		,eventos:[{titulo:"Ver Informacion Persona",href:"persona_verDatosPersonas.php",icono:"icon-info-sign",accion:"consultar"}
-		,{titulo:"Emitir Certificacion",href:"persona_emitirlistados.php",icono:"icon-book",accion:"documento"}
+		
 		]
 					}, function(data){
 						/*if(data.search("<tbody></tbody>")<0){

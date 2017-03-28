@@ -90,7 +90,9 @@ class GeneraExcel {
 	
 		$objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
 		$xlsName="filename.xlsx";
-		$objWriter->save(str_replace(__FILE__,$_SERVER['DOCUMENT_ROOT'] .'/git/pjjurados/pjjurados/uploads/archivosrtf/'.$nombreArchi,__FILE__));
+		//echo " Camino ".$_SESSION['ROOT'];
+               // echo "Camino ".$_SERVER['DOCUMENT_ROOT'] .'/pjjurados/uploads/archivosrtf/'.$nombreArchi;
+		$objWriter->save(str_replace(__FILE__,$_SESSION['ROOT'].'/uploads/archivosrtf/'.$nombreArchi,__FILE__));
 		
 		
 		
