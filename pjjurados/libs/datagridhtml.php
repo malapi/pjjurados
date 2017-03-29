@@ -1,5 +1,5 @@
-<?php
-include_once('../configuracion.php');
+<?php include_once('../configuracion.php');
+//echo "lala";
 $datos = data_submitted();
 $datos['accion'] = $datos[$datos['control'].'_accion'];
 $control = "C_".$datos['control'];

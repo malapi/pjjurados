@@ -1,20 +1,23 @@
-<?php
+<?php 
+
 class PDOConfig extends PDO {
   
     private $engine;
-    private $host;
+    private $host='';
     private $database;
     private $user;
     private $pass;
   	private $debug;
-    
+ 
     public function __construct(){
-        $this->engine = 'mysql';
-        $this->host = 'localhost';
-        $this->database = 'pruebajur';
-        $this->user = 'root';
-        $this->pass = '';      
-        //$this->pass = 'eelcdr';
+    	//print_object($GLOBALS);
+    	$this->engine = 'mysql';
+        //print_object($_SESSION);
+    	$this->host = $GLOBALS['HOST'];
+        $this->database = $GLOBALS['BBDD'];
+        $this->user = $GLOBALS['USUARIO'];
+        //$this->pass = '';      
+        $this->pass = $GLOBALS['PASS'];
         //$this->pass = 'eurePass';
         $this->debug = false;       
         
@@ -64,7 +67,7 @@ class PDOConfig extends PDO {
      * @return string variable escapando posibles ataques
      */
     public function filtrar($variable) {
-        // Este if se encargar� de retirar las barras en caso de que las comillas magicas estan habilitadas
+        // Este if se encargara de retirar las barras en caso de que las comillas magicas estan habilitadas
         if (get_magic_quotes_gpc()) {
             $variable = stripslashes($variable);
         }

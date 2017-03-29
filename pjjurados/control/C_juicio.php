@@ -68,7 +68,7 @@ class C_juicio extends Session{
 	
 	}
 	
-	public function generarListadosCedulas($data){
+	public function generarListadosCedulas2($data){
 		//print_object($data);
  		$objSel = new personaseleccion();
 		$resultado = $objSel->seleccionar($data);

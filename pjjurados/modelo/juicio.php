@@ -74,6 +74,7 @@ class juicio extends BaseDatos{
 	public function  seleccionar($data){
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
+		//echo $sql;
 		return parent::selecionar($sql) ;
 
 	}
