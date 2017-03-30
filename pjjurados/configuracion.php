@@ -1,8 +1,8 @@
 <?php header('Content-Type: text/html; charset=utf-8'); 
 header ("Cache-Control: no-cache, must-revalidate ");
-ini_set('display_errors', 'On');
+//ini_set('display_errors', 'On');
 //error_reporting(E_ALL);
-error_reporting(E_ALL & ~E_NOTICE);
+//error_reporting(E_ALL & ~E_NOTICE);
 
 $HOST = 'localhost';
 $BBDD = 'pruebajur';
@@ -15,7 +15,8 @@ $PASS = 'eelcdr';
 $PROYECTO ='pjjurados';
 
 //variable que almacena el directorio del proyecto
-$ROOT =$_SERVER['DOCUMENT_ROOT']."/git/pjjurados/".$PROYECTO."/";
+//$ROOT =$_SERVER['DOCUMENT_ROOT']."/git/pjjurados/".$PROYECTO."/";
+$ROOT =$_SERVER['DOCUMENT_ROOT']."/".$PROYECTO."/";
 
 include_once($ROOT.'libs/funciones.php');
 
