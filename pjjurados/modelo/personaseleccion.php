@@ -78,15 +78,23 @@ class personaseleccion extends BaseDatos{
                 //print_object($data);
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,".$this->textoCombo." as textocombo 
+		$sql = "SELECT *,".$this->textoCombo." as textocombo,EXTRACT(YEAR FROM FechaDesde) as aniocedula, 'NEUQUEN' as Localidad
+				,CASE WHEN jnnombrearchivo is null THEN 'Generar la Notificacion' ELSE jnnombrearchivo END as nombrearchivo 
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
 				 natural join lotes
 				 natural join juicio
 				 join personas  USING(idPersona)
 				 LEFT JOIN tiposeleccionrecusacion USING(idtiposeleccionrecusacion)
-				 LEFT JOIN personaseleccionresultadotipos USING(idpersonaseleccionresultadotipos) 
-				 WHERE true ".$where;
+				 LEFT JOIN personaseleccionresultadotipos USING(idpersonaseleccionresultadotipos)
+				 LEFT JOIN lotespersonas USING(idPersona,idLote) 
+				 ";
+		
+		if(isset($data["where"]) && $data["where"] == "notificacion"){
+			$sql .= " LEFT JOIN juicionotificaciones USING(idPersona,idjuicio) ";
+		}
+		$where = " WHERE true ".$where;
+		$sql .= $where;
         //echo $sql;
 		return parent::selecionar($sql) ;
 

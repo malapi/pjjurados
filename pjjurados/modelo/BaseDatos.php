@@ -388,10 +388,11 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 				}
 				else {
 					//echo $key."|".$valor;
-					if($valor == "is+not+null" || $valor == "is+null") {
-                                                $valor = str_replace("+", " ", $valor);
+					
+					if($valor == "is null" || $valor == "is not null" || $valor == "is+not+null" || $valor == "is+null") {
+                        $valor = str_replace("+", " ", $valor);
 						$where .="  AND ".  $key." ".$valor;
-                                        } else {
+                     } else {
 					$where .="  AND ".  $key." like '%". $valor."%'";
 					}												
 				}

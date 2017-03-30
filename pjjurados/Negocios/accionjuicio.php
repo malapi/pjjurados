@@ -6,7 +6,7 @@ $datos = data_submitted();
 
 $objws = new C_juicio();
 $tipoMensaje='info';
-echo "dsdsd";
+//echo "dsdsd";
 if(isset($datos['accion']) && $datos['accion'] =='consultar'){
 	echo "dsdsd 2";
 	$respuesta = $objws->buscarInformacionCompleta($datos);

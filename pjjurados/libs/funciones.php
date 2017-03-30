@@ -42,7 +42,10 @@ function generarArchivoRTF($datos,$mapeo,$nombreplantilla,$nombreArchivo){
 	foreach ($datos as $row ) {
  		$despues=$cuerpo;
  		foreach ($mapeo as $columna) {
- 			if(strrpos($despues,$columna['tagplantilla'])>0){
+ 			//echo "<br> Columna ".$columna['tagplantilla'];
+ 			$posicion=strrpos($despues,$columna['tagplantilla'])>0;
+ 			if($posicion > 0){
+ 				//echo "<br>  Valor encontrada ". $posision." ".utf8_decode($row[$columna['tagvalor']]);
  				$despues=str_replace($columna['tagplantilla'], utf8_decode($row[$columna['tagvalor']]),$despues);
  			}
  			

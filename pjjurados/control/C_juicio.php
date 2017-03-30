@@ -23,6 +23,8 @@ class C_juicio extends Session{
 			$resp = $this->sortear($data);
 		if ($data['accion']=='listados')
 			$resp = $this->generarListados($data);
+		if ($data['accion']=='juradoDefinitivo')
+			$resp = $this->generarListadoNotificacionAudienciaSeleccion($data);
 		if ($data['accion']=='listadosPersona')
 				$resp = $this->generarListadosPersona($data);
 
@@ -68,36 +70,83 @@ class C_juicio extends Session{
 	
 	}
 	
-	public function generarListadosCedulas2($data){
+	public function generarListadoNotificacionAudienciaSeleccion($data){
 		//print_object($data);
  		$objSel = new personaseleccion();
 		$resultado = $objSel->seleccionar($data);
+		$i=0;
+		
+		$unmapeo['tagplantilla']="#NROCEDULA";
+		$unmapeo['tagvalor']="NroCedula";
+		$mapeo[$i] = $unmapeo;$i++;
+		$unmapeo['tagplantilla']="#ANIO";
+		$unmapeo['tagvalor']="aniocedula";
+		$mapeo[$i] = $unmapeo;$i++;
+		$unmapeo['tagplantilla']="#CEDULAGRANDE";
+		$unmapeo['tagvalor']="NroCedula";
+		$mapeo[$i] = $unmapeo;$i++;
+		
+		$unmapeo['tagplantilla']="#NROCONVOCATORIA";
+		$unmapeo['tagvalor']="junroconvocatoria";
+		$mapeo[$i] = $unmapeo;$i++;
+		$unmapeo['tagplantilla']="#LOCALIDAD";
+		$unmapeo['tagvalor']="Localidad";
+		$mapeo[$i] = $unmapeo;$i++;
 		
 		$unmapeo['tagplantilla']="#NOMBRE";
 		$unmapeo['tagvalor']="Nombre";
-		$mapeo[0] = $unmapeo;
+		$mapeo[$i] = $unmapeo;$i++;
 		$unmapeo['tagplantilla']="#APELLIDO";
 		$unmapeo['tagvalor']="Apellido";
-		$mapeo[1] = $unmapeo;
+		$mapeo[$i] = $unmapeo;$i++;
 		$unmapeo['tagplantilla']="#DNI";
 		$unmapeo['tagvalor']="DNI";
-		$mapeo[2] = $unmapeo;
+		$mapeo[$i] = $unmapeo;$i++;
 		
- 		$nombrePlantilla = "plantilla_cedulas.rtf";
- 		$nombreArchivo = $data['idPersona']."_".$data['idjuicio']."_".$nombrePlantilla;
- 		$archivo = generarArchivoRTF($resultado,$mapeo,$nombrePlantilla,$nombreArchivo);
-// 		//echo "<a href='".$archivo."' > Descargar </a>";
+		$unmapeo['tagplantilla']="#FECHAAUDIENCIA";
+		$unmapeo['tagvalor']="jufechaaudiencia";
+		$mapeo[$i] = $unmapeo;$i++;
+		
+		$unmapeo['tagplantilla']="#DIRECCIONAUDIENCIA";
+		$unmapeo['tagvalor']="judireccionaudiencia";
+		$mapeo[$i] = $unmapeo;$i++;
+		$unmapeo['tagplantilla']="#FECHAINICIOJUICIO";
+		$unmapeo['tagvalor']="jufechainicio";
+		$mapeo[$i] = $unmapeo;$i++;
+		$unmapeo['tagplantilla']="#FECHAFINJUICIO";
+		$unmapeo['tagvalor']="jufechafin";
+		$mapeo[$i] = $unmapeo;$i++;
+		$nombrePlantilla = "30032017NotificacionAudienciaSeleccion.rtf";
+		
+		$obj= new juicionotificaciones();
+		//Primero elimino los archivos para el juicio
+		
+		
+		foreach ($resultado as $uno){
+			$lista[0] = $uno;
+			$nombreArchivo = $uno['idPersona']."_".$uno['idjuicio']."_".$nombrePlantilla;
+			$archivo = generarArchivoRTF($lista,$mapeo,$nombrePlantilla,$nombreArchivo);
+			// 		//echo "<a href='".$archivo."' > Descargar </a>";
+				
+			$un = array();
+			$un['idjuicio'] = $uno['idjuicio'];
+			$un['idPersona'] = $uno['idPersona'];
+			$obj->eliminar($un);
+			$un['jnfechageneracion'] = "now()";
+			$un['jndescripcion'] = "cedulas de notificacion audiencia";
+			$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
+			$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
+			$un['jncamino']=$archivo;
+			
+			$respuesta = $obj->insertar($un);
+		}
+		
+		
+		
+		
 		
  		
- 		$un['idjuicio'] = $data['idjuicio'];
- 		$un['idPersona'] = $data['idPersona'];
- 		$un['jnfechageneracion'] = "now()";
- 		$un['jndescripcion'] = "cedulas de citacion";
- 		$un['jnnombrearchivo'] = "<a href=\"".$archivo."\" > ".$nombreArchivo.".zip </a>";
- 		$un['jnnombreplantilla'] = "<a href=\"uploads/plantillas/".$nombrePlantilla."\" >".$nombrePlantilla." </a>";
- 		$un['jncamino']=$archivo;
-		$obj= new juicionotificaciones();
- 		$respuesta = $obj->insertar($un);
+ 		
 		
 		$respuesta = true;
 		return $respuesta;

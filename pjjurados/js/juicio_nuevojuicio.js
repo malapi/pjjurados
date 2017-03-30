@@ -7,7 +7,7 @@ function cargarTablaPrincipal(){
 		,{titulo:"Sorteo",href:"juicio_sorteo.php",icono:"icon-retweet",accion:"sortear"}
 		,{titulo:"Emitir Listados",href:"juicio_emitirlistados.php",icono:"icon-download",accion:"listados"}
 		,{titulo:"Audiencia",href:"juicio_audienciaseleccion.php",icono:"icon-eye-open",accion:"audiencia"}
-		,{titulo:"Jurado Definitivo",href:"juicio_juradodefinitivo.php",icono:"icon-comment",accion:"sortear"}
+		,{titulo:"Jurado Definitivo",href:"juicio_juradodefinitivo.php",icono:"icon-comment",accion:"juradoDefinitivo"}
 		]
 					}, function(data){      	
 		$("#listadoDatos").html(data);

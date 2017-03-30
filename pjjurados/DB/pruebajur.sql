@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-03-2017 a las 11:05:57
+-- Tiempo de generación: 30-03-2017 a las 13:15:34
 -- Versión del servidor: 5.7.17-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.15-0ubuntu0.16.04.4
 
@@ -170,7 +170,12 @@ INSERT INTO `juicio` (`idjuicio`, `jufechainicio`, `jujueces`, `judescripcion`, 
 (4, '2017-12-12', 'malaa', 'judescripcion', 'juobservacion', NULL, NULL, NULL, NULL),
 (5, '2017-03-08', 'rwer', 'rwerwe modificada', 'rwrwer', NULL, NULL, NULL, NULL),
 (6, '2017-12-12', 'malaa', 'judescripcion dsdasdasd', 'juobservacion', NULL, NULL, NULL, NULL),
-(7, '2017-03-08', 'rwer', 'rwerwe', 'rwrwer dsadasdsadsadsadsd', NULL, NULL, NULL, NULL);
+(7, '2017-03-08', 'rwer', 'rwerwe', 'rwrwer dsadasdsadsadsadsd', NULL, NULL, NULL, NULL),
+(8, '2017-03-08', 'dd', 'dd', 'ddd', '2017-03-15', '2017-03-09', 'dd', 'dd'),
+(9, '2017-03-01', 'dddd', 'asasas', 'ddd', '2017-03-15', '2017-03-09', 'asas', 'dd'),
+(10, '2017-03-09', 'sadsad', 'dsadsad', 'asdasd', '2017-03-15', '2017-03-15', 'dsadasd', 'sdasdsd'),
+(11, '2017-03-01', 'sss', 'ss', 'ss', '2017-03-01', '2017-03-01', 'ss', 'ss'),
+(12, '2017-03-10', 'ddd', 'ddd', 'null', '2017-03-09', '2017-03-10', 'null', 'null');
 
 -- --------------------------------------------------------
 
@@ -185,16 +190,67 @@ CREATE TABLE `juicionotificaciones` (
   `jnnombrearchivo` varchar(150) NOT NULL,
   `jnfechageneracion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `jndescripcion` varchar(150) NOT NULL,
-  `jncamino` varchar(150) NOT NULL
+  `jncamino` varchar(150) NOT NULL,
+  `idPersona` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `juicionotificaciones`
 --
 
-INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`, `jncamino`) VALUES
-(31, 1, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/1_plantilla_cedulas.rtf.zip" > 1_plantilla_cedulas.rtf.zip </a>', '2017-03-22 13:09:53', 'cedulas de citacion', 'uploads/archivosrtf/1_plantilla_cedulas.rtf.zip'),
-(32, 1, 'Sin Plantilla', '<a href="uploads/archivosrtf/1_partes.xlsx" > 1_partes.xlsx </a>', '2017-03-22 13:09:54', 'Listado de Partes', 'uploads/archivosrtf/1_partes.xlsx');
+INSERT INTO `juicionotificaciones` (`idjuicionotificaciones`, `idjuicio`, `jnnombreplantilla`, `jnnombrearchivo`, `jnfechageneracion`, `jndescripcion`, `jncamino`, `idPersona`) VALUES
+(31, 1, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/1_plantilla_cedulas.rtf.zip" > 1_plantilla_cedulas.rtf.zip </a>', '2017-03-22 13:09:53', 'cedulas de citacion', 'uploads/archivosrtf/1_plantilla_cedulas.rtf.zip', 0),
+(32, 1, 'Sin Plantilla', '<a href="uploads/archivosrtf/1_partes.xlsx" > 1_partes.xlsx </a>', '2017-03-22 13:09:54', 'Listado de Partes', 'uploads/archivosrtf/1_partes.xlsx', 0),
+(33, 11, '<a href="uploads/plantillas/plantilla_cedulas.rtf" >plantilla_cedulas.rtf </a>', '<a href="uploads/archivosrtf/11_plantilla_cedulas.rtf.zip" > 11_plantilla_cedulas.rtf.zip </a>', '2017-03-27 18:33:55', 'cedulas de citacion', 'uploads/archivosrtf/11_plantilla_cedulas.rtf.zip', 0),
+(34, 11, 'Sin Plantilla', '<a href="uploads/archivosrtf/11_partes.xlsx" > 11_partes.xlsx </a>', '2017-03-27 18:33:55', 'Listado de Partes', 'uploads/archivosrtf/11_partes.xlsx', 0),
+(35, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:00:26', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(36, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:04:21', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(37, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:04:57', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(38, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:05:37', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(39, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:06:44', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(40, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > _1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:07:30', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(41, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:11:52', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(42, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:11:57', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(43, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:14:46', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(44, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:14:46', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(45, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:15:55', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(46, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:15:55', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(47, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:16:52', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(48, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:16:53', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(49, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:18:27', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(50, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:18:27', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(51, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:22:25', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(52, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:22:25', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(53, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:22:58', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(54, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:22:58', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(55, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:24:18', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(56, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:24:18', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(57, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:25:18', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(58, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:25:18', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(59, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:25:43', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(60, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:25:43', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(61, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:19', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(62, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:19', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(63, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:46', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(64, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:46', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(65, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:49', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(66, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:26:49', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(67, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:27:05', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(68, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:27:05', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(69, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:27:06', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(70, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:27:06', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(71, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:24', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(72, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:24', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(73, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:43', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(74, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:43', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(75, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:45', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(76, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:28:45', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(77, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:30:09', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(78, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:30:09', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(79, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:30:40', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(80, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:30:40', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 0),
+(91, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:40:26', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2279_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 2279),
+(92, 1, '<a href="uploads/plantillas/30032017NotificacionAudienciaSeleccion.rtf" >30032017NotificacionAudienciaSeleccion.rtf </a>', '<a href="uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip" > 2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip </a>', '2017-03-30 14:40:26', 'cedulas de notificacion audiencia', 'uploads/archivosrtf/2359_1_30032017NotificacionAudienciaSeleccion.rtf.zip', 2359);
 
 -- --------------------------------------------------------
 
@@ -2653,12 +2709,26 @@ CREATE TABLE `personaseleccion` (
 --
 
 INSERT INTO `personaseleccion` (`idPersona`, `idseleccion`, `psnroordenseleccion`, `psexcusacion`, `psrecusacioncausa`, `pscaracter`, `psasiste`, `psasisteobservacion`, `psobservacion`, `idtiposeleccionrecusacion`, `idpersonaseleccionresultadotipos`, `idjuicio`, `psnrojurado`, `psfechaexcusacion`, `idLote`, `psfechaseleccion`, `psfechafinseleccion`, `psnrobolilla`) VALUES
+(1932, 39, 1, '', '', '', NULL, '', '', NULL, NULL, 10, NULL, '2017-03-27 18:23:18', 10, '2017-03-27', '2020-03-27', NULL),
 (1933, 37, 1, '', '', '', NULL, '', '', NULL, NULL, 4, NULL, '2017-03-22 13:36:56', 10, '2017-03-22', '2020-03-22', 1),
 (1935, 36, 1, '', '', '', NULL, '', '', NULL, NULL, 3, NULL, '2017-03-22 13:35:34', 10, '2017-03-22', '2020-03-22', 2),
+(1936, 39, 2, '', '', '', NULL, '', '', NULL, NULL, 10, NULL, '2017-03-27 18:23:18', 10, '2017-03-27', '2020-03-27', NULL),
+(1956, 40, 4, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:29:46', 13, '2017-03-27', '2020-03-27', 20),
+(1960, 41, 3, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:30:20', 13, '2017-03-27', '2020-03-27', 23),
+(2010, 42, 3, '', '', '', NULL, '', '', NULL, NULL, 11, NULL, '2017-03-27 18:33:27', 13, '2017-03-27', '2020-03-27', 72),
+(2080, 40, 3, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:29:46', 13, '2017-03-27', '2020-03-27', 144),
 (2106, 38, 1, '', '', '', NULL, '', '', NULL, NULL, 7, NULL, '2017-03-22 13:38:29', 13, '2017-03-22', '2020-03-22', 172),
+(2166, 42, 4, '', '', '', NULL, '', '', NULL, NULL, 11, NULL, '2017-03-27 18:33:27', 13, '2017-03-27', '2020-03-27', 225),
+(2176, 41, 4, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:30:20', 13, '2017-03-27', '2020-03-27', 236),
 (2279, 31, 2, 'rrr', 'zcxzc', 'cxcxzc', NULL, 'czxcxzc', 'czxczxc', 2, 2, 1, 2, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 48),
+(2293, 41, 1, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:30:20', 13, '2017-03-27', '2020-03-27', 61),
+(2318, 42, 1, '', '', '', NULL, '', '', NULL, NULL, 11, NULL, '2017-03-27 18:33:27', 13, '2017-03-27', '2020-03-27', 85),
+(2354, 41, 2, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:30:20', 13, '2017-03-27', '2020-03-27', 121),
 (2359, 31, 1, 'rrrr', 'r', 'r', NULL, 'r', 'r', 2, 3, 1, 3, '2017-03-13 20:40:58', 13, '2017-03-13', '2020-03-13', 128),
-(2405, 32, 1, '', '', '', NULL, '', '', NULL, NULL, 2, NULL, '2017-03-22 13:21:08', 13, '2017-03-22', '2020-03-22', 172);
+(2366, 42, 2, '', '', '', NULL, '', '', NULL, NULL, 11, NULL, '2017-03-27 18:33:27', 13, '2017-03-27', '2020-03-27', 130),
+(2405, 32, 1, '', '', '', NULL, '', '', NULL, NULL, 2, NULL, '2017-03-22 13:21:08', 13, '2017-03-22', '2020-03-22', 172),
+(2410, 40, 1, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:29:46', 13, '2017-03-27', '2020-03-27', 176),
+(2423, 40, 2, '', '', '', NULL, '', '', NULL, NULL, 8, NULL, '2017-03-27 18:29:46', 13, '2017-03-27', '2020-03-27', 188);
 
 -- --------------------------------------------------------
 
@@ -2921,7 +2991,11 @@ INSERT INTO `seleccion` (`idseleccion`, `sefecha`) VALUES
 (35, '2017-03-22 13:34:33'),
 (36, '2017-03-22 13:35:34'),
 (37, '2017-03-22 13:36:56'),
-(38, '2017-03-22 13:38:29');
+(38, '2017-03-22 13:38:29'),
+(39, '2017-03-27 18:23:18'),
+(40, '2017-03-27 18:29:46'),
+(41, '2017-03-27 18:30:20'),
+(42, '2017-03-27 18:33:27');
 
 -- --------------------------------------------------------
 
@@ -3271,12 +3345,12 @@ ALTER TABLE `estadosddjj`
 -- AUTO_INCREMENT de la tabla `juicio`
 --
 ALTER TABLE `juicio`
-  MODIFY `idjuicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idjuicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `juicionotificaciones`
 --
 ALTER TABLE `juicionotificaciones`
-  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `idjuicionotificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT de la tabla `localidades`
 --
@@ -3351,7 +3425,7 @@ ALTER TABLE `respuestas`
 -- AUTO_INCREMENT de la tabla `seleccion`
 --
 ALTER TABLE `seleccion`
-  MODIFY `idseleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idseleccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT de la tabla `tipodocumentos`
 --

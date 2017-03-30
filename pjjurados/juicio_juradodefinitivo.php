@@ -33,37 +33,12 @@ $datos = data_submitted();
 							<input type="hidden" name="liMenu" id="liMenu" value="liSorteojuicio" />
 							<input type="hidden" name="itemMenu" id="itemMenu" value="opSorteoJuicio1" />
 							<input type="hidden" name="accion" id="accion" value="juradoDefinitivo" />
+							<input type="hidden" name="where" id="accion" value="notificacion" />
 							<input  type="hidden"  name="idjuicio" id="idjuicio" value="0" ></input>
-<input  type="hidden"  name="psnrojurado" id="psnrojurado" value="is not null" ></input>
+							<input  type="hidden"  name="psnrojurado" id="psnrojurado" value="is not null" ></input>
 							<div class="well">	
 						    
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="selmujeres" > Cantidad de Mujeres:  </label>
-					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="selmujeres" id="selmujeres" data-options="required:true"></input>
-					</div>
-					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="selhombres" >Cantidad de Hombres: </label>
-					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="selhombres" id="selhombres" data-options="required:true"></input>
-					</div>
-					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="idLote" >Lote: </label>
-					<div class="col-sm-4">
-					<div class="ui-widget">
-						<input  class="ui-autocomplete-input form-control" name="idLote" id="idLote"
-						data-options='[{clavetabla:"idLote",campofiltrar:"Descripcion",campotablamostrar:"Descripcion",control:"lotes"}]'></input>
-					</div>
-					</div>
-					</div>
-			<div class="form-group">
-					<label class="col-sm-2 control-label" for="seleccionprevia" >Sorteados en otra seleccci&oacute;n?: </label>
-					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="checkbox" name="seleccionprevia" id="seleccionprevia" data-options="required:true"></input>
-					</div>
-					</div>
+			
 			 <div class="row-fluid">  
 							<div class="control-group">
 								<div id="respuesta"></div>
@@ -71,7 +46,7 @@ $datos = data_submitted();
 								</div>                         
 						        <div class="row-fluid">
 						         <div class="form-actions align-right">
-	                                <button id="btnSortearJuicio" type="button" class="btn btn-info">Sortear</button>
+	                                <button id="btnGenerar" type="button" class="btn btn-info">Generar</button>
 	                                <button id="btnCancel" type="button" class="btn">Cerrar</button>
 	                            </div>
 	                            </div>

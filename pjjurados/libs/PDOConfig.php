@@ -3,7 +3,7 @@
 class PDOConfig extends PDO {
   
     private $engine;
-    private $host='';
+    private $host;
     private $database;
     private $user;
     private $pass;
@@ -13,11 +13,15 @@ class PDOConfig extends PDO {
     	//print_object($GLOBALS);
     	$this->engine = 'mysql';
         //print_object($_SESSION);
-    	$this->host = $GLOBALS['HOST'];
-        $this->database = $GLOBALS['BBDD'];
-        $this->user = $GLOBALS['USUARIO'];
+    	//$this->host = $GLOBALS['HOST'];
+    	$this->host = 'localhost';
+        //$this->database = $GLOBALS['BBDD'];
+    	$this->database = 'pruebajur';
+        //$this->user = $GLOBALS['USUARIO'];
+    	$this->user = 'root';
         //$this->pass = '';      
-        $this->pass = $GLOBALS['PASS'];
+        //$this->pass = $GLOBALS['PASS'];
+    	$this->pass = 'eelcdr';
         //$this->pass = 'eurePass';
         $this->debug = false;       
         
