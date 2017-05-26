@@ -2,7 +2,7 @@ function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formFichaPersona').serialize()
 		,control:"fichapersona"
 		,fichapersona_accion:"verTabla"
-		,tabla:"Apellido:Apellido#Nombre:Nombre#DNI:DNI#Lote:idLote#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#DNI:DNI#Nomina:idLote#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
 		,eventos:[{titulo:"Ver Informacion Persona",href:"persona_verDatosPersonas.php",icono:"icon-info-sign",accion:"consultar"}
 		
 		]

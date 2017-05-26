@@ -13,9 +13,9 @@ if ($_GET) {
 		<!-- Breadcrumbs line -->
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
-				<li><a href="#">Lotes</a></li>
-				<li><a href="#">Lotes Activos</a></li>
-				<li><a href="#">Personas por Lote</a></li>
+				<li><a href="#">Nominas</a></li>
+				<li><a href="#">Nominas Activas</a></li>
+				<li><a href="#">Personas por Nomina</a></li>
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->
@@ -23,7 +23,7 @@ if ($_GET) {
 		<!-- Page header -->
 		<div class="page-header">
 			<div class="page-title">
-				<h5>Personas por Lote</h5>
+				<h5>Personas por Nomina</h5>
 			</div>
 		</div>
 		<!-- /page header -->
@@ -38,8 +38,8 @@ if ($_GET) {
 							type="hidden" name="hfIdSorteo" id="hfIdSorteo" value="<?php echo $id; ?>" />
 						<div class="navbar">
 							<div class="navbar-inner">
-								<!--  <h6>Lote</h6>-->
-								<h6><label for="informacionLote" style="vertical-align: middle"  >Informacion del Lote</label></h6>
+								<!--  <h6>Nomina</h6>-->
+								<h6><label for="informacionLote" style="vertical-align: middle"  >Informacion de la Nomina</label></h6>
 							</div>
 						</div>
 						<!-- <div class="well">

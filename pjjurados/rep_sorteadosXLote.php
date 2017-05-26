@@ -9,8 +9,8 @@ include ("header.php");
 		<!-- Breadcrumbs line -->
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
-				<li><a href="#">Lotes</a></li>
-				<li><a href="#">Personas por Lote</a></li>
+				<li><a href="#">Nominas</a></li>
+				<li><a href="#">Personas por Nomina</a></li>
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->
@@ -18,7 +18,7 @@ include ("header.php");
 		<!-- Page header -->
 		<div class="page-header">
 			<div class="page-title">
-				<h5>Persona incluidas en el Lote</h5>
+				<h5>Persona incluidas en la Nomina</h5>
 			</div>
 		</div>
 		<!-- /page header -->
@@ -30,7 +30,7 @@ include ("header.php");
 			<form id="formBuscarPers" class="form-inline" method="POST">
 					<input type="hidden" name="oper" id="oper" value="verPersonas" />
 					<input type="hidden" name="solover" id="solover" value="1" />
-					<label class="mr-sm-2">Lote:
+					<label class="mr-sm-2">Nomina:
 					<select style='width:auto;' class="validate[required]" name="cbLote" id="cbLote"  data-prompt-position="topLeft:-1,-5" >
                                                 <option value="">...</option>
                                             </select>

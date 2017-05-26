@@ -7,8 +7,8 @@
 			    <!-- Breadcrumbs line -->
 			    <div class="crumbs">
 		            <ul id="breadcrumbs" class="breadcrumb"> 
-		                <li><a href="#">Lotes</a></li>
-		                <li><a href="#">Lotes Activos</a></li>
+		                <li><a href="#">Nominas</a></li>
+		                <li><a href="#">Nominas Activas</a></li>
 		            </ul>
 			    </div>
 			    <!-- /breadcrumbs line -->
@@ -16,7 +16,7 @@
 			    <!-- Page header -->
 			    <div class="page-header">
 			    	<div class="page-title">
-				    	<h5>Listado de Lotes Activos</h5>
+				    	<h5>Listado de Nominas Activas</h5>
 			    	</div>
 			    </div>
 				<div id="listadoDatos" class="widget">

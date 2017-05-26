@@ -87,7 +87,7 @@ if($_GET){
 			if ($res) 
 			{
 				
-				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "Listado de Personas por Lote");
+				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "Listado de Personas por Nomina");
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 2, "Total de Personas Listadas: ". $res->rowCount());
 				$col = 0;
 				$cantCols = $res->columnCount();
@@ -120,7 +120,7 @@ if($_GET){
 			$objPHPExcel->setActiveSheetIndex(0);
 			
 			$nombreArchi = "personasXLote.xlsx";
-			// Redirect output to a client’s web browser (Excel2007)
+			// Redirect output to a clientï¿½s web browser (Excel2007)
 			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 			header('Content-Disposition: attachment;filename="'.$nombreArchi.'"');
 			header('Cache-Control: max-age=0');

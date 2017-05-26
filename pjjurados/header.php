@@ -117,13 +117,13 @@ $nomUsuario = $oLogin->getUsuario();
 			        <ul class="navigation widget">
 			            <li><a href="lot_listadoLotesActivos.php" title=""><i class="icon-home"></i>Inicio</a></li>
 			            <li id="liSor">
-			            	<a href="#" title="Lotes" id="" class="expand"><i class="icon-tasks"></i>Lotes <strong>></strong></a>
+			            	<a href="#" title="Nominas" id="" class="expand"><i class="icon-tasks"></i>Nominas <strong>></strong></a>
 			                <ul>
-			                    <li><a id="opSor3" href="lot_nuevoLote.php" title="Nuevo Sorteo" data-options='[{guardaSesion:"si"}]'>Nuevo Lote</a></li>
-			                    <li><a id="opSor1" href="lot_listadoLotesActivos.php" title="Listar Lotes activos">Listar Lotes Activos</a></li>
-			                    <li><a id="opSor2" href="lot_listadoLotes.php" title="Listar Lotes">Listar Lotes</a></li>
-			                    <li><a id="opSor4" href="rep_sorteadosXLote.php" title="Personas por Lote">Personas por Lote</a></li>
-			                    <li><a id="opSor5" href="lot_generarIntimaciones.php" title="Personas por Lote">Generar Intimaciones</a></li>
+			                    <li><a id="opSor3" href="lot_nuevoLote.php" title="Nuevo Sorteo" data-options='[{guardaSesion:"si"}]'>Nueva Nomina</a></li>
+			                    <li><a id="opSor1" href="lot_listadoLotesActivos.php" title="Listar Nominas activas">Listar Nominas Activas</a></li>
+			                    <li><a id="opSor2" href="lot_listadoLotes.php" title="Listar Nominas">Listar Nominas</a></li>
+			                    <li><a id="opSor4" href="rep_sorteadosXLote.php" title="Personas por Nomina">Personas por Nomina</a></li>
+			                    <li><a id="opSor5" href="lot_generarIntimaciones.php" title="Personas por Nomina">Generar Intimaciones</a></li>
 			                </ul>
 			            </li>
 			            <li id="liSorteojuicio">

@@ -14,8 +14,8 @@ if ($_GET) {
 		<!-- Breadcrumbs line -->
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
-				<li><a href="#">Lotes</a></li>
-				<li><a href="#">modificar Lote</a></li>
+				<li><a href="#">Nominas</a></li>
+				<li><a href="#">Modificar Nomina</a></li>
 			</ul>
 		</div>
 		<!-- /breadcrumbs line -->

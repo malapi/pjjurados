@@ -9,7 +9,7 @@ include ("header.php");
 		<!-- Breadcrumbs line -->
 		<div class="crumbs">
 			<ul id="breadcrumbs" class="breadcrumb">
-				<li><a href="#">Lotes</a></li>
+				<li><a href="#">Nominas</a></li>
 				<li><a href="#">Generar Intimaciones</a></li>
 			</ul>
 		</div>
@@ -23,7 +23,7 @@ include ("header.php");
 			<div class="well">
 			<form id="formBuscarPers" class="form-inline" method="POST">
 					<input type="hidden" name="oper" id="oper" value="verPersXIntimacion" />
-					<label class="mr-sm-2">Lote:
+					<label class="mr-sm-2">Nomina:
 										<select name="cbLote" id="cbLote" class="validate[required]" style='width:auto;' data-prompt-position="topLeft:-1,-5" >
                                                 <option value="">...</option>
                                             </select></label>

@@ -580,7 +580,7 @@ function listado($descripcion, $fechaDesde, $fechaHasta, $todo) {
 								<i class='icon-envelope-alt'></i></a></li>";
 				}
 			 	
-			 	$tabla .= "<li><a class='btn tip' title='Personas por Lote' href='lot_personasXLote.php?id=".$row["idLote"]."' href='#' data-original-title='Personas Por Lote'>
+			 	$tabla .= "<li><a class='btn tip' title='Personas por Nomina' href='lot_personasXLote.php?id=".$row["idLote"]."' href='#' data-original-title='Personas Por Lote'>
 							<i class='icon-group'></i></a></li>
 					<ul>
 				</td>

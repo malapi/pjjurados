@@ -16,7 +16,7 @@ if ($_GET) {
         <div class="crumbs">
             <ul id="breadcrumbs" class="breadcrumb">
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Lotes</a></li>
+                <li><a href="#">Nominas</a></li>
             </ul>
         </div>
         <!-- /breadcrumbs line -->
@@ -37,7 +37,7 @@ if ($_GET) {
                     <div class="widget row-fluid">						
                         <div class="navbar">
                             <div class="navbar-inner">
-                                <h6>Lote</h6>
+                                <h6>Nomina</h6>
                             </div>
                         </div>
                         <div class="well">

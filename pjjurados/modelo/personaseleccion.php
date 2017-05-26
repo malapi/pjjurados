@@ -289,7 +289,7 @@ class personaseleccion extends BaseDatos{
 		INNER JOIN lotes lo ON lo.idLote = LP.idLote
 		LEFT JOIN tipoimpedimentos TI ON TI.idTipoImpedimento = LP.idTipoImpedimento
 		WHERE P.idPersona = ".$dato['idPersona'] ;
-		//echo "Lote <br>". $sql;
+		//echo "Nomina <br>". $sql;
 		$html = "<H1> Informacion Personal </H1>";
 		$res = parent::selecionar($sql);
 		//if($res) {
@@ -330,9 +330,9 @@ class personaseleccion extends BaseDatos{
 			} $i++;
 			
 			$html .= "<div class='row'>
-  							<div class='col'><b>Lote :</b> ".$row ["Descripcion"]."</div>
+  							<div class='col'><b>Nomina :</b> ".$row ["Descripcion"]."</div>
 							<div class='col'><b>Cant.Sorteados :</b> ".$row ["CantidadSorteados"]." </div>
-							<div class='col'><b>Lote Observacion:</b> ".$row ["Observaciones"]." </div>
+							<div class='col'><b>Nomina Observacion:</b> ".$row ["Observaciones"]." </div>
 							<div class='col'> </div>
 						</div>";
 				
