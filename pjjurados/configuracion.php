@@ -15,8 +15,8 @@ $PASS = 'eelcdr';
 $PROYECTO ='pjjurados';
 
 //variable que almacena el directorio del proyecto
-//$ROOT =$_SERVER['DOCUMENT_ROOT']."/git/pjjurados/".$PROYECTO."/";
-$ROOT =$_SERVER['DOCUMENT_ROOT']."/".$PROYECTO."/";
+$ROOT =$_SERVER['DOCUMENT_ROOT']."/git/pjjurados/".$PROYECTO."/";
+//$ROOT =$_SERVER['DOCUMENT_ROOT']."/".$PROYECTO."/";
 
 include_once($ROOT.'libs/funciones.php');
 

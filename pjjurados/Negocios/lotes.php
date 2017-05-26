@@ -733,11 +733,12 @@ function listadoParaDoc() {
 // 						    	}
 // 						    	$tabla .= "</td>";
 					    	}else{
-					    		$tabla .= "	<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-					    				<td>&nbsp;</td>
-					    				<td>&nbsp;</td>";
+					    		$tabla .= "	<td>&nbsp;</td> ";
+//  											"<td>&nbsp;</td>
+//  											<td>&nbsp;</td>
+//  					    					<td>&nbsp;</td>
+//  					    					<td>&nbsp;</td>
+// 					    				";
 					    	}
 							$tabla .= "<td>
 								<ul class='table-controls'><li><a class='btn tip' title='Generar Cedulas' href='doc_generarCedulas.php?id=".$row["idLote"]."' data-original-title='Generar Cedulas'>

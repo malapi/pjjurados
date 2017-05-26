@@ -119,7 +119,7 @@ $nomUsuario = $oLogin->getUsuario();
 			            <li id="liSor">
 			            	<a href="#" title="Lotes" id="" class="expand"><i class="icon-tasks"></i>Lotes <strong>></strong></a>
 			                <ul>
-			                	 <li><a id="opSor3" href="lot_nuevoLote.php" title="Nuevo Sorteo">Nuevo Lote</a></li>
+			                    <li><a id="opSor3" href="lot_nuevoLote.php" title="Nuevo Sorteo" data-options='[{guardaSesion:"si"}]'>Nuevo Lote</a></li>
 			                    <li><a id="opSor1" href="lot_listadoLotesActivos.php" title="Listar Lotes activos">Listar Lotes Activos</a></li>
 			                    <li><a id="opSor2" href="lot_listadoLotes.php" title="Listar Lotes">Listar Lotes</a></li>
 			                    <li><a id="opSor4" href="rep_sorteadosXLote.php" title="Personas por Lote">Personas por Lote</a></li>

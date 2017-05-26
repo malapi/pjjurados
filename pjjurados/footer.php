@@ -1,4 +1,5 @@
 <script type="text/javascript" src="js/files/cargar_utiles.js"></script>
+<script type="text/javascript" src="js/files/session.js"></script>
 </div><!-- /content container -->
 	<!-- Footer -->
 	<div id="footer">

@@ -1,5 +1,3 @@
-
-
 function acceptDec(e)
 {
 	 var charCode;
