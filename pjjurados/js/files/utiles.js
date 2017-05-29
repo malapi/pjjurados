@@ -95,6 +95,7 @@ function cargarCombos(){
 						//controles();
 						if (typeof autocombo_controles == 'function') { 
 							//alert('This is a function');
+							//alert( "Selected: " + ui.item.value + " aka " + ui.item.id );
 							autocombo_controles(formElementName);
 							}
 						/*if ( $.isFunction($.fn.controles) ) {

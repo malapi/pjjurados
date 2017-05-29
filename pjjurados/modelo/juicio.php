@@ -73,7 +73,11 @@ class juicio extends BaseDatos{
 
 	public function  seleccionar($data){
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
-		$sql = "SELECT *,".$this->textoCombo." as textocombo FROM ".$this->nombreTabla." WHERE true ".$where;
+		$sql = "SELECT juicio.*,CASE WHEN cantidadpersonas is null THEN 0 ELSE cantidadpersonas END as cantidadpersonas,'completartexto' as textocombo 
+				FROM juicio 
+				LEFT JOIN (SELECT count(*) as cantidadpersonas, idjuicio FROm personaseleccion GROUP BY idjuicio) as seleccion
+				USING(idjuicio) 
+				WHERE true ".$where;
 		//echo $sql;
 		return parent::selecionar($sql) ;
 

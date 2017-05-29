@@ -1,7 +1,7 @@
 function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formJuradoDefinitivo').serialize(),control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
-		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla#Archivo:nombrearchivo"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Archivo:nombrearchivo"
 		,eventos:[]
 					}, function(data){
 						if(data.search("<tbody></tbody>")<0){

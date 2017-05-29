@@ -78,7 +78,7 @@ class personaseleccion extends BaseDatos{
                 //print_object($data);
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,".$this->textoCombo." as textocombo,EXTRACT(YEAR FROM FechaDesde) as aniocedula, 'NEUQUEN' as Localidad
+		$sql = "SELECT *,CONCAT(Nombre,' ',Apellido,' DNI:',DNI) as informacionpersona,".$this->textoCombo." as textocombo,EXTRACT(YEAR FROM FechaDesde) as aniocedula, 'NEUQUEN' as Localidad
 				,CASE WHEN jnnombrearchivo is null THEN 'Generar la Notificacion' ELSE jnnombrearchivo END as nombrearchivo 
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
@@ -90,9 +90,9 @@ class personaseleccion extends BaseDatos{
 				 LEFT JOIN lotespersonas USING(idPersona,idLote) 
 				 ";
 		
-		if(isset($data["where"]) && $data["where"] == "notificacion"){
+		//if(isset($data["where"]) && $data["where"] == "notificacion"){
 			$sql .= " LEFT JOIN juicionotificaciones USING(idPersona,idjuicio) ";
-		}
+		//}
 		$where = " WHERE true ".$where;
 		$sql .= $where;
         //echo $sql;
@@ -129,9 +129,19 @@ class personaseleccion extends BaseDatos{
 		if(isset($data['idLote'])){
 			$where =" AND lp.idLote = ".$data['idLote'];
 		}
+		
+		if (isset($data['seleccionprevia']) && ($data['seleccionprevia'] == 1 || $data['seleccionprevia'] == "on")) {
+			//-- Si se quiere usar otra seleccion, hay que verificar que no haya sido jurado
+			$where .= "	AND (ps.idseleccion is null OR ps.psnrojurado is null)
+			";
+		} else {
+			// -- Si no se quiere usar otra seleccion
+			$where .= "	AND (ps.idseleccion is null)  ";
+		}
+		
 		$sql .= $where ." GROUP BY  l.Descripcion,idLote,SEXO					";
-		//echo
-		$html="";  
+		//echo $sql;
+		$htlm="";  
 		$resultado = parent::selecionar ($sql);
 		if(count ( $resultado ) > 0){
 			for($i = 0; $i < count($resultado); $i++) {
@@ -159,7 +169,7 @@ class personaseleccion extends BaseDatos{
 					AND lp.idLote = ".$data['idLote']." ";
 		$where = "	";
 		
-		if ($data ['seleccionprevia'] == 1) {
+		if (isset($data['seleccionprevia']) && ($data['seleccionprevia'] == 1 || $data['seleccionprevia'] == "on")) {
 			//-- Si se quiere usar otra seleccion, hay que verificar que no haya sido jurado
 			$where .= "	AND (ps.idseleccion is null OR ps.psnrojurado is null) 
 			";
@@ -170,7 +180,7 @@ class personaseleccion extends BaseDatos{
 		$sql .= $where;
 		// echo "ff".$data['selmujeres'];
 		$seleccionados = array ();
-		if ($data ['selmujeres'] > 0) {
+		if ($data['selmujeres'] > 0) {
 			$where = "	AND Sexo = 'F'";
 			$sqlF = $sql.$where;
 			//echo $sqlF;
@@ -234,7 +244,7 @@ class personaseleccion extends BaseDatos{
 				$un['psfechaseleccion']='CURRENT_TIMESTAMP';
 				$un['psfechafinseleccion']='DATE_ADD(CURDATE(),INTERVAL 3 YEAR)';
 				$un['idseleccion'] = $idseleccion;
-				$resp = $this->insertar($un);
+				$resp = $this->insertar($un) >=0;
 				
 			}	
 		}

@@ -35,7 +35,25 @@ $datos = data_submitted();
 							<input  type="hidden"  name="idPersona" id="idPersona" value="0" ></input>
 							<input  type="hidden"  name="idseleccion" id="idseleccion" value="0" ></input>
 			<div class="widget row-fluid">
-			<div class="well">	
+			<div class="well">
+			<div class="row">
+				<div class="col">
+				<p> &nbsp;</p>
+				</div>
+				</div>
+					
+			<div class="row">
+			   <div class="col">
+					<input style="padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%" type="text" name="informacionpersona" id="informacionpersona" readonly="readonly" ></input>
+					
+				</div>
+				</div>
+			<div class="row">
+				<div class="col">
+				<p> &nbsp;</p>
+				</div>
+				</div>
+				
 			   <div class="row">
 			   <div class="col">
 				<div class="form-group">

@@ -1,7 +1,7 @@
 function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formNuevoSorteo').serialize(),control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
-		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion"
 		,eventos:[
 		]
 					}, function(data){
@@ -31,7 +31,7 @@ function autocombo_controles(autocombo_id){
 	$.ajax({
         url: "Negocios/accionjuicio.php",
         type: 'post',
-        data:{accion:"verificarCandidatos",idjuicio:$("#idjuicio").val(),selmujeres:$("#selmujeres").val(),selhombres:$("#selhombres").val(),idLote:$("#idLote").val()},
+        data:{accion:"verificarCandidatos",idjuicio:$("#idjuicio").val(),selmujeres:$("#selmujeres").val(),selhombres:$("#selhombres").val(),idLote:$("#idLote").val(),seleccionprevia:$("#seleccionprevia").val()},
         success: function(resp) {
         	//alert(resp);
         	var resp = eval('('+resp+')');

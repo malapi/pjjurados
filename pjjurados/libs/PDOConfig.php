@@ -19,9 +19,9 @@ class PDOConfig extends PDO {
     	$this->database = 'pruebajur';
         //$this->user = $GLOBALS['USUARIO'];
     	$this->user = 'root';
-        //$this->pass = '';      
+        $this->pass = '';      
         //$this->pass = $GLOBALS['PASS'];
-    	$this->pass = 'eelcdr';
+    	//$this->pass = 'eelcdr';
         //$this->pass = 'eurePass';
         $this->debug = false;       
         

@@ -341,7 +341,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
 		
 		}
 		$this->cerrar();
-		echo $consulta." ".$id;
+		//echo $consulta." ".$id;
 		return $id;
 	}catch(PDOException $e) {
 		echo " Ha surgido un error. Detalle: " .$e->getMessage();

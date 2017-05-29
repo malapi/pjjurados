@@ -4,7 +4,7 @@ function cargarTablaPrincipal(){
 	//$('#formAudiencia').serialize()
 		,control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
-		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Nro.Bolilla:psnrobolilla#Resultado:psrtdescripcion"
+		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Resultado:psrtdescripcion"
 		,eventos:[{titulo:"Cargar Audiencia",href:"juicio_audienciaseleccion.php",icono:"icon-th-list",accion:"editar"}
 		,{titulo:"Cargar Documento",js:"cargarDocumento",icono:"icon-book",accion:"documento"}
 		]
@@ -180,10 +180,8 @@ function cargarDocumento(cadena){
 	$('#mdlSeleccionDocumentos').show();
 }
 function autocombo_controles_idpersonaseleccionresultadotipos(){
-	
-	
-	
 	if($('#idpersonaseleccionresultadotipos').val() == '1') { //Excusado
+		
 		$('#div_psexcusacion').show();
 	} 
 	if($('#idpersonaseleccionresultadotipos').val() == '2') { //Recusado con Causa
@@ -210,14 +208,18 @@ function autocombo_controles(autocombo_id){
 	$('#div_recusacion').hide();
 	$('#div_designacion').hide();
 	$('#div_no_designacion').hide();
-	$('#div_psexcusacion').find('input:text').val('');
-	$('#div_recusacion').find('input:text').val('');
-	$('#div_designacion').find('input:text').val('');
-	$('#div_no_designacion').find('input:text').val('');
 	
-	//if( autocombo_id == 'idpersonaseleccionresultadotipos'){
-		autocombo_controles_idpersonaseleccionresultadotipos();
-	//}
+	
+	if( autocombo_id == 'idpersonaseleccionresultadotipos'){
+		
+		
+		$('#div_recusacion').find('input:text').val('');
+		$('#div_designacion').find('input:text').val('');
+		$('#div_no_designacion').find('input:text').val('');
+		$('#div_psexcusacion').find('input:text').val('');
+	}
+	
+	autocombo_controles_idpersonaseleccionresultadotipos();
 	
 	
 	
