@@ -27,9 +27,11 @@ class C_juicio extends Session{
 			$resp = $this->generarListadoNotificacionAudienciaSeleccion($data);
 		if ($data['accion']=='listadosPersona')
 				$resp = $this->generarListadosPersona($data);
+		if ($data['accion']=='verificarCandidatos')
+			$resp = $this->verificarCandidatos($data);
 
    
-
+		
 		return $resp ;
 
 	}
@@ -210,9 +212,23 @@ class C_juicio extends Session{
 			$data['seleccionados']=$respuesta;
 			$resp = $obj->guardarSorteo($data);
 			//print_object($respuesta);
+		} else {
+			echo "fallo el sorteo";
 		}
 		return $resp;
 		
+	}
+	
+	public function verificarCandidatos($data){
+		$resp = false;
+		//print_object($data);
+		$obj= new personaseleccion();
+		//$obj= new juicio();
+		//print_object($data);
+		$respuesta = $obj->verificarCandidatos($data);
+		//print_object($respuesta);
+		return $respuesta;
+	
 	}
 
 	

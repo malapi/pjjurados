@@ -19,8 +19,34 @@ function cargarTablaPrincipal(){
 						$('#data-table').dataTable();
 						$('.tip').tooltip();
 		}); 
+}
+
+function autocombo_controles(autocombo_id){
+
+	//alert(" autocombo_id "+autocombo_id);
+	//alert($("#"+autocombo_id).val());
 	
 	
+	$("#div_candidatos").html('<img src="img/elements/loaders/6.gif" alt="" style="float: left;">');
+	$.ajax({
+        url: "Negocios/accionjuicio.php",
+        type: 'post',
+        data:{accion:"verificarCandidatos",idjuicio:$("#idjuicio").val(),selmujeres:$("#selmujeres").val(),selhombres:$("#selhombres").val(),idLote:$("#idLote").val()},
+        success: function(resp) {
+        	//alert(resp);
+        	var resp = eval('('+resp+')');
+        	if(resp.respuesta)
+        	{
+        	  $("#div_candidatos").html(resp.retorna);
+        		
+        	}
+        },error: function(xhr, status, error){	
+        	var error = formatErrorMessage(xhr, error);			        	
+       	     $("#div_candidatos").html("<div class='alert alert-error'>" +
+             "<button type='button' class='close' data-dismiss='alert'>×</button>"+
+             error + "</div>");
+		} 
+    });
 	
 	
 }

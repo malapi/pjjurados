@@ -95,7 +95,7 @@ function cargarCombos(){
 						//controles();
 						if (typeof autocombo_controles == 'function') { 
 							//alert('This is a function');
-							autocombo_controles();
+							autocombo_controles(formElementName);
 							}
 						/*if ( $.isFunction($.fn.controles) ) {
 						   // $(".cs-text-cut").lettering('words');

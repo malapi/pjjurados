@@ -11,7 +11,9 @@ function cargarTablaPrincipal(){
 		]
 					}, function(data){      	
 		$("#listadoDatos").html(data);
-		$('#data-table').dataTable();
+		$('#data-table').dataTable({
+			aaSorting:[[ 0, "desc" ]]
+	    });
 		$('.tip').tooltip();
 		}); 
 }

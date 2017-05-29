@@ -115,6 +115,38 @@ class personaseleccion extends BaseDatos{
 	
 	}
 
+	public function verificarCandidatos($data){
+		$sql = "SELECT  l.Descripcion,lp.idLote,sexo,count(*) as cantidad
+			FROM personas as p
+			NATURAL JOIN lotespersonas as lp
+			JOIN lotes as l USING(idLote)
+			LEFT JOIN personaseleccion as ps USING(idPersona)
+			LEFT JOIN juicio as j on j.idjuicio = ".$data['idjuicio']."
+			WHERE aptojurado
+			AND TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) < 75				"; 
+			
+		$where =" ";
+		if(isset($data['idLote'])){
+			$where =" AND lp.idLote = ".$data['idLote'];
+		}
+		$sql .= $where ." GROUP BY  l.Descripcion,idLote,SEXO					";
+		//echo
+		$html="";  
+		$resultado = parent::selecionar ($sql);
+		if(count ( $resultado ) > 0){
+			for($i = 0; $i < count($resultado); $i++) {
+				$un = $resultado[$i];
+				$htlm.="<p>Existen ".$un["cantidad"]." cantidad de personas de Genero ".$un["sexo"]." (Lote: ".$un["idLote"]."-".$un["Descripcion"].")</p>";
+			}
+		} else {
+			$htlm="<p>No existen personas disponibles en el Lote Seleccionado.</p>";
+		}
+		
+		
+		return $htlm;
+		
+	}
+	
 	public function sortear($data) {
 		//echo "Lala";
 		$sql = "SELECT *,lp.idLote as idLotePersona, TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) as edad
@@ -153,6 +185,8 @@ class personaseleccion extends BaseDatos{
 					$seleccionados[count($seleccionados )] = $un;
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
+			} else { 
+				echo "No existen tantas mujeres ";
 			}
 		}
 		
@@ -172,6 +206,9 @@ class personaseleccion extends BaseDatos{
 					$seleccionados[count($seleccionados )] = $un;
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
+			}
+			else {
+				echo "No existen tantos Hombres";
 			}
 		}
 		//print_object($seleccionados);

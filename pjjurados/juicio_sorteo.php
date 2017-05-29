@@ -57,12 +57,24 @@ $datos = data_submitted();
 					</div>
 					</div>
 					</div>
-			<div class="form-group">
+						<div class="form-group">
+						<label class="col-sm-2 control-label" for="idLote" >Candidatos: </label>
+						<div class="col-sm-4">
+						<div class="ui-widget" id="div_candidatos" name="div_candidatos">
+							
+						</div>
+						</div>
+						</div>
+						
+						<div class="form-group">
 					<label class="col-sm-2 control-label" for="seleccionprevia" >Sorteados en otra seleccci&oacute;n?: </label>
 					<div class="col-sm-4">
 					<input class="easyui-textbox form-control" type="checkbox" name="seleccionprevia" id="seleccionprevia" data-options="required:true"></input>
 					</div>
 					</div>
+					</div>
+			
+			
 			 <div class="row-fluid">  
 							<div class="control-group">
 								<div id="respuesta"></div>

@@ -75,7 +75,9 @@ $datos = data_submitted();
 			   <div class="form-group" >
 					<label class="col-sm-2 control-label" for="psexcusacion" > Motivo Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psexcusacion" id="psexcusacion" ></input>
+					<input class="easyui-textbox form-control validate[required]" type="text" name="psexcusacion" id="psexcusacion" 
+						data-errormessage-value-missing="Ingresar el Motivo" 
+    					data-errormessage="No puede quedar vacio!" ></input>
 					</div>
 					</div>
 				</div>
@@ -83,7 +85,10 @@ $datos = data_submitted();
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="psfechaexcusacion" > Fecha  Fin Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
-					<input class="form-control validate[required]" type="date" name="psfechaexcusacion" id="psfechaexcusacion"  placeholder="99/99/9999"></input>
+					<input class="form-control validate[required]" type="date" name="psfechaexcusacion" id="psfechaexcusacion"  
+					placeholder="99/99/9999"
+					data-errormessage-value-missing="Ingresar la Fecha en la que concluye" 
+    				data-errormessage="No puede quedar vacio!"></input>
 					</div>
 					</div>
 			   
@@ -95,8 +100,11 @@ $datos = data_submitted();
 			   <div class="form-group">
 						<label class="col-sm-2 control-label" for="idtiposeleccionrecusacion" > Parte que recusa:  </label>
 						<div class="ui-widget">
-						<input class="ui-autocomplete-input form-control" type="text" name="idtiposeleccionrecusacion" id="idtiposeleccionrecusacion"
-						data-options='[{clavetabla:"idtiposeleccionrecusacion",campofiltrar:"trsdescripcion",campotablamostrar:"textocombo",control:"tiposeleccionrecusacion"}]'></input>
+						<input class="ui-autocomplete-input form-control validate[required]" type="text" name="idtiposeleccionrecusacion" id="idtiposeleccionrecusacion"
+						data-options='[{clavetabla:"idtiposeleccionrecusacion",campofiltrar:"trsdescripcion",campotablamostrar:"textocombo",control:"tiposeleccionrecusacion"}]'
+						data-errormessage-value-missing="Ingresar la Parte que Recusa" 
+    					data-errormessage="No puede quedar vacio!"
+						></input>
 						</div>
 						</div>
 			   </div>
@@ -104,7 +112,9 @@ $datos = data_submitted();
 			   <div class="form-group" id="div_recusacion_causa" name="div_recusacion_causa">
 					<label class="col-sm-2 control-label" for="psrecusacioncausa" >Recusaci&oacute;n Causa:</label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psrecusacioncausa" id="psrecusacioncausa" ></input>
+					<input class="easyui-textbox form-control" type="text" name="psrecusacioncausa" id="psrecusacioncausa" 
+						data-errormessage-value-missing="Ingresar la Causa!" 
+    					data-errormessage="No puede quedar vacio!" ></input>
 					</div>
 					</div>
 			   </div>
@@ -114,7 +124,9 @@ $datos = data_submitted();
 			   	<div class="form-group">
 					<label class="col-sm-2 control-label" for="pscaracter" > Designaci&oacute;n Efectiva:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="pscaracter" id="pscaracter" ></input>
+					<input class="easyui-textbox form-control validate[required]" type="text" name="pscaracter" id="pscaracter" 
+					data-errormessage-value-missing="Ingresar el caracter de la designacion." 
+    					data-errormessage="No puede quedar vacio!" ></input>
 					</div>
 					</div>
 			   	</div>
@@ -122,7 +134,9 @@ $datos = data_submitted();
 			   <div class="form-group">
 					<label class="col-sm-2 control-label" for="psnrojurado" > Nro. Jurado:  </label>
 					<div class="col-sm-4">
-					<input class="easyui-textbox form-control" type="text" name="psnrojurado" id="psnrojurado" ></input>
+					<input class="easyui-textbox form-control validate[required,custom[integer]]" type="text" name="psnrojurado" id="psnrojurado" 
+					    data-errormessage-value-missing="Debe ingresar el Nro de Jurado" 
+    					data-errormessage="Tiene que ser un Numero." ></input>
 					</div>
 					</div>
 			   </div>

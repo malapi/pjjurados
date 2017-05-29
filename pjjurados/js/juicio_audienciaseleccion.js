@@ -179,17 +179,9 @@ function cargarDocumento(cadena){
 	
 	$('#mdlSeleccionDocumentos').show();
 }
-
-
-function autocombo_controles(){
-	$('#div_psexcusacion').hide();
-	$('#div_recusacion').hide();
-	$('#div_designacion').hide();
-	$('#div_no_designacion').hide();
-	$('#div_psexcusacion').find('input:text').val('');
-	$('#div_recusacion').find('input:text').val('');
-	$('#div_designacion').find('input:text').val('');
-	$('#div_no_designacion').find('input:text').val('');
+function autocombo_controles_idpersonaseleccionresultadotipos(){
+	
+	
 	
 	if($('#idpersonaseleccionresultadotipos').val() == '1') { //Excusado
 		$('#div_psexcusacion').show();
@@ -209,6 +201,25 @@ function autocombo_controles(){
 	if($('#idpersonaseleccionresultadotipos').val() == '5') { //No Designado
 		$('#div_no_designacion').show();
 	} 
+	
+}
+
+function autocombo_controles(autocombo_id){
+	
+	$('#div_psexcusacion').hide();
+	$('#div_recusacion').hide();
+	$('#div_designacion').hide();
+	$('#div_no_designacion').hide();
+	$('#div_psexcusacion').find('input:text').val('');
+	$('#div_recusacion').find('input:text').val('');
+	$('#div_designacion').find('input:text').val('');
+	$('#div_no_designacion').find('input:text').val('');
+	
+	//if( autocombo_id == 'idpersonaseleccionresultadotipos'){
+		autocombo_controles_idpersonaseleccionresultadotipos();
+	//}
+	
+	
 	
 	
 	
