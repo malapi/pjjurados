@@ -58,7 +58,7 @@ $datos = data_submitted();
 				</div>
 			<div class="row">
 			<div class="col">
-					<div class="form-group">
+					<div class="form-group" name="div_idpersonaseleccionresultadotipos">
 						<label class="col-sm-2 control-label" for="idpersonaseleccionresultadotipos" > Resultado Seleccion:  </label>
 						<div class="ui-widget">
 						<input  class="ui-autocomplete-input form-control" name="idpersonaseleccionresultadotipos" id="idpersonaseleccionresultadotipos"
@@ -70,10 +70,10 @@ $datos = data_submitted();
 				<div class="col">
 				</div>
 				</div>
-			 <div class="row">
+			 <div class="row" id="div_psexcusacion" name="div_psexcusacion" >
 			   <div class="col">
-			   <div class="form-group">
-					<label class="col-sm-2 control-label" for="psexcusacion" > Excusaci&oacute;n:  </label>
+			   <div class="form-group" >
+					<label class="col-sm-2 control-label" for="psexcusacion" > Motivo Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
 					<input class="easyui-textbox form-control" type="text" name="psexcusacion" id="psexcusacion" ></input>
 					</div>
@@ -81,7 +81,7 @@ $datos = data_submitted();
 				</div>
 				 <div class="col">
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="psfechaexcusacion" > Fecha Excusaci&oacute;n:  </label>
+					<label class="col-sm-2 control-label" for="psfechaexcusacion" > Fecha  Fin Excusaci&oacute;n:  </label>
 					<div class="col-sm-4">
 					<input class="form-control validate[required]" type="date" name="psfechaexcusacion" id="psfechaexcusacion"  placeholder="99/99/9999"></input>
 					</div>
@@ -90,18 +90,18 @@ $datos = data_submitted();
 			
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="div_recusacion" name="div_recusacion">
 			   <div class="col">
 			   <div class="form-group">
-						<label class="col-sm-2 control-label" for="idtiposeleccionrecusacion" > Recusaci&oacute;n:  </label>
+						<label class="col-sm-2 control-label" for="idtiposeleccionrecusacion" > Parte que recusa:  </label>
 						<div class="ui-widget">
 						<input class="ui-autocomplete-input form-control" type="text" name="idtiposeleccionrecusacion" id="idtiposeleccionrecusacion"
 						data-options='[{clavetabla:"idtiposeleccionrecusacion",campofiltrar:"trsdescripcion",campotablamostrar:"textocombo",control:"tiposeleccionrecusacion"}]'></input>
 						</div>
 						</div>
 			   </div>
-			   <div class="col">
-			   <div class="form-group">
+			   <div class="col" >
+			   <div class="form-group" id="div_recusacion_causa" name="div_recusacion_causa">
 					<label class="col-sm-2 control-label" for="psrecusacioncausa" >Recusaci&oacute;n Causa:</label>
 					<div class="col-sm-4">
 					<input class="easyui-textbox form-control" type="text" name="psrecusacioncausa" id="psrecusacioncausa" ></input>
@@ -109,7 +109,7 @@ $datos = data_submitted();
 					</div>
 			   </div>
 			 </div>
-				<div class="row">
+				<div class="row" id="div_designacion" name="div_designacion">
 			   	<div class="col">
 			   	<div class="form-group">
 					<label class="col-sm-2 control-label" for="pscaracter" > Designaci&oacute;n Efectiva:  </label>
@@ -127,7 +127,7 @@ $datos = data_submitted();
 					</div>
 			   </div>
 			   </div>
-			<div class="row">
+			<div class="row" id="div_no_designacion" name="div_no_designacion">
 			   	<div class="col">
 			   	<div class="form-group">
 					<label class="col-sm-2 control-label" for="psobservacion" > No Designaciones:  </label>

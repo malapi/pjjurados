@@ -181,9 +181,43 @@ function cargarDocumento(cadena){
 }
 
 
+function autocombo_controles(){
+	$('#div_psexcusacion').hide();
+	$('#div_recusacion').hide();
+	$('#div_designacion').hide();
+	$('#div_no_designacion').hide();
+	$('#div_psexcusacion').find('input:text').val('');
+	$('#div_recusacion').find('input:text').val('');
+	$('#div_designacion').find('input:text').val('');
+	$('#div_no_designacion').find('input:text').val('');
+	
+	if($('#idpersonaseleccionresultadotipos').val() == '1') { //Excusado
+		$('#div_psexcusacion').show();
+	} 
+	if($('#idpersonaseleccionresultadotipos').val() == '2') { //Recusado con Causa
+		$('#div_recusacion').show();
+		$('#div_recusacion_causa').show();
+		
+	} 
+	if($('#idpersonaseleccionresultadotipos').val() == '3') { //Recusado sin Causa
+		$('#div_recusacion').show();
+		$('#div_recusacion_causa').hide();
+	} 
+	if($('#idpersonaseleccionresultadotipos').val() == '4') { //Designado
+		$('#div_designacion').show();
+	} 
+	if($('#idpersonaseleccionresultadotipos').val() == '5') { //No Designado
+		$('#div_no_designacion').show();
+	} 
+	
+	
+	
+}
+
 
 $(function(){
 	seleccionarMenuConFormulario('#formAudiencia');
+	autocombo_controles();
 	//cargarCombos();
 	//cargarCalendario();
 	//cargarTablaDocumentos();
@@ -195,8 +229,11 @@ $(function(){
 //		$('#divformAudiencia').hide();
 //	}
 	
-	
-	
+	/*$('#psrtdescripcion').bind('input', function() {
+		//alert("Lala");
+		  controles();
+	} );
+	*/
 	$("#btnDocumentos").click(function(){
 		cargarDocumento($('#formAudiencia').serialize());
 		

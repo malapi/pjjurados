@@ -53,8 +53,14 @@ function cargarCombos(){
 			/* change name of orig input */
 			
 			$(this).attr('style', ' visibility: hidden;');
+			
+			//$(this).css("border", "5px solid green");
+			
 			/* create new hidden input with name of orig input */
 			$(this).before("<input type=\"text\" name=\"" + opciones.campofiltrar + "\" id=\"" + opciones.campofiltrar + "\" />");
+			var img = $('<img class="inline" src="img/icons/stock_form-combobox.png" />');
+			$("#"+opciones.campofiltrar).after(img);
+			$("#"+opciones.campofiltrar).css("border", "1px solid #F0F8FF");
 			
 			$("#"+opciones.campofiltrar).autocomplete({
 			        source: function( request, response ) {
@@ -86,6 +92,22 @@ function cargarCombos(){
 			        	var selectedObj = ui.item;
 						$('#'+opciones.campofiltrar).val(selectedObj.label);
 						$('#'+formElementName).val(selectedObj.id);
+						//controles();
+						if (typeof autocombo_controles == 'function') { 
+							//alert('This is a function');
+							autocombo_controles();
+							}
+						/*if ( $.isFunction($.fn.controles) ) {
+						   // $(".cs-text-cut").lettering('words');
+							alert('This is a function');
+						}else{
+							alert('This is Not a function');
+						}*/
+						/*if(jQuery.isFunction("controles")) 
+							alert('This is a function');
+						else
+							alert('This is not a function');
+							*/
 			        }
 			      });
 		}
