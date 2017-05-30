@@ -78,7 +78,8 @@ class personaseleccion extends BaseDatos{
                 //print_object($data);
 		$where =$this->cadenaWhereSql($data,$this->prefijo);
 
-		$sql = "SELECT *,CONCAT(Nombre,' ',Apellido,' DNI:',DNI) as informacionpersona,".$this->textoCombo." as textocombo,EXTRACT(YEAR FROM FechaDesde) as aniocedula, 'NEUQUEN' as Localidad
+		$sql = "SELECT *,CONCAT(Nombre,' ',Apellido,' DNI:',DNI) as informacionpersona,".$this->textoCombo." as textocombo
+				,EXTRACT(YEAR FROM FechaDesde) as aniocedula, 'NEUQUEN' as Localidad
 				,CASE WHEN jnnombrearchivo is null THEN 'Generar la Notificacion' ELSE jnnombrearchivo END as nombrearchivo 
 				 FROM ".$this->nombreTabla."
 				 natural join seleccion
@@ -146,19 +147,22 @@ class personaseleccion extends BaseDatos{
 		if(count ( $resultado ) > 0){
 			for($i = 0; $i < count($resultado); $i++) {
 				$un = $resultado[$i];
-				$htlm.="<p>Existen ".$un["cantidad"]." cantidad de personas de Genero ".$un["sexo"]." (Lote: ".$un["idLote"]."-".$un["Descripcion"].")</p>";
+				$htlm.="<h6 class='alert alert-success' >Existen ".$un["cantidad"]." cantidad de personas de Genero ".$un["sexo"]." (Lote: ".$un["idLote"]."-".$un["Descripcion"].")</h6>";
 			}
 		} else {
-			$htlm="<p>No existen personas disponibles en el Lote Seleccionado.</p>";
+			$htlm="<h6 class='alert alert-error' >No existen personas disponibles en el Lote Seleccionado.</h6>";
 		}
 		
+		$respuesta['exito']=1;
+		$respuesta['comentario']=$htlm;
 		
-		return $htlm;
+		return $respuesta;
 		
 	}
 	
 	public function sortear($data) {
 		//echo "Lala";
+		$htlm="";
 		$sql = "SELECT *,lp.idLote as idLotePersona, TIMESTAMPDIFF(YEAR, FechaNacimiento, CURDATE()) as edad
 			FROM personas as p
 			NATURAL JOIN lotespersonas as lp
@@ -196,7 +200,8 @@ class personaseleccion extends BaseDatos{
 					array_splice ( $resultado, $indSeleccionar, 1 ); // Elimino el elemento del resultado
 				}
 			} else { 
-				echo "No existen tantas mujeres ";
+				//echo " ";
+				$htlm="<h6 class='alert alert-error' >No existen tantas mujeres.</h6>";
 			}
 		}
 		
@@ -218,11 +223,20 @@ class personaseleccion extends BaseDatos{
 				}
 			}
 			else {
-				echo "No existen tantos Hombres";
+				$htlm="<h6 class='alert alert-error' >No existen tantos Hombres.</h6>";
+				//echo "No existen tantos Hombres";
 			}
 		}
 		//print_object($seleccionados);
-		return $seleccionados;
+		if(count($seleccionados) > 0)
+			$respuesta['exito']=1;
+		else
+			$respuesta['exito']=0;
+		
+		$respuesta['comentario']=$htlm;
+		$respuesta['seleccionados']=$seleccionados;
+		//print_object($respuesta);
+		return $respuesta;
 	}
 	
 	
@@ -429,7 +443,9 @@ class personaseleccion extends BaseDatos{
 	public function mostrarInformacionPersonaSeleccion($dato){
 			
 	
-		$sql = "SELECT idjuicio, DATE_FORMAT(jufechainicio,'%d/%m/%Y') as jufechainicio , jujueces,judescripcion, juobservacion, DATE_FORMAT(jufechafin,'%d/%m/%Y') as jufechafin, DATE_FORMAT(jufechaaudiencia,'%d/%m/%Y') as jufechaaudiencia, junroconvocatoria, judireccionaudiencia
+		$sql = "SELECT idjuicio, DATE_FORMAT(jufechainicio,'%d/%m/%Y') as jufechainicio , jujueces,judescripcion, juobservacion
+				, DATE_FORMAT(jufechafin,'%d/%m/%Y') as jufechafin
+				, DATE_FORMAT(jufechaaudiencia,'%d/%m/%Y') as jufechaaudiencia, junroconvocatoria, judireccionaudiencia
 				,idseleccion
 				,psnroordenseleccion
 				,psexcusacion,psrecusacioncausa,pscaracter,CASE WHEN psasiste is null THEN 'No' ELSE 'SI' END as psasiste
@@ -458,7 +474,9 @@ class personaseleccion extends BaseDatos{
 			foreach($res as $row){
 				$html .= "<div class='row'>
 			  							<div class='col'><b>Juicio :</b> ".$row ["judescripcion"]."</div>
-					  					<div class='col'><b>Fecha del Juicio :</b> ".$row ["jufecha"]." </div>
+					  					<div class='col'><b>Fecha de Inicio del Juicio :</b> ".$row ["jufechainicio"]." </div>
+					  					<div class='col'><b>Fecha de Fin del Juicio :</b> ".$row ["jufechafin"]." </div>
+					  					<div class='col'><b>Fecha de Audiencia :</b> ".$row ["jufechaaudiencia"]." </div>
 					  					<div class='col'><b>Jueces :</b> ".$row ["jujueces"]." </div>
 										<div class='col'><b>Observaciones :</b> ".$row ["juobservacion"]."</div>
 							</div>";

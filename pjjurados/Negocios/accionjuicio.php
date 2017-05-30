@@ -12,15 +12,17 @@ if(isset($datos['accion']) && $datos['accion'] =='consultar'){
 	$respuesta = $objws->buscarInformacionCompleta($datos);
 	echo $respuesta;
 } else {
-	
-	if($retorna = $objws->abm($datos)){
+	$retorna = $objws->abm($datos);
+	//print_object($retorna);
+	//echo "retorna ".($retorna === true);
+	if($retorna === true || $retorna['exito']==1){
 		$respuesta =true;
 		$salida = " La accion ".$datos['accion']." se realizo  correctamente ";
 	}else {
-		$salida =  " La accion ". $datos['accion']." no pudo concretarse ";
+		$salida =  " La accion ". $datos['accion']." no pudo concretarse ".$retorna['comentario'];
 		$respuesta =false;
 	}
-	$objresp = array ('mensaje'=>$salida ,'veralert'=>true, 'respuesta'=>$respuesta,"msgtipo"=>$tipoMensaje,"ocultarForm"=>true,"retorna"=>$retorna);
+	$objresp = array ('mensaje'=>$salida ,'veralert'=>true, 'respuesta'=>$respuesta,"msgtipo"=>$tipoMensaje,"ocultarForm"=>true,"retorna"=>$retorna['comentario']);
 	echo json_encode($objresp);
 
 }

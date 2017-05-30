@@ -94,7 +94,7 @@ function generarParametrosParaSubmit($obj,$accion){
 	$cadena = "[";
 	foreach ($obj as $key=>$value){
 		if(!is_numeric($key)){
-			$cadena .="{ name: '".$key."', value:'".$value."'},";
+			$cadena .="{ name: '".$key."', value:'".htmlentities($value)."'},";
 			//echo $key." ".$value;
 		}
 	}

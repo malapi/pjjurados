@@ -196,6 +196,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   			$stsql .=$arrValor['COLUMN_NAME'].",";
   			//echo $arrValor['DATA_TYPE'];
   			if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
+  				
   				if($arrValor['DATA_TYPE']=='date' || $arrValor['DATA_TYPE']=='timestamp'){
   					if($dato[$arrValor['COLUMN_NAME']] == ''){
   						//Verifico que si es una Fecha, el nulo es el valor null
@@ -253,7 +254,30 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
   				$stsql .=$arrValor['COLUMN_NAME']."=";
   				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  					$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  					
+  					if($arrValor['DATA_TYPE']=='date' || $arrValor['DATA_TYPE']=='timestamp'){
+  						if($dato[$arrValor['COLUMN_NAME']] == ''){
+  							//Verifico que si es una Fecha, el nulo es el valor null
+  							$stvalues.="null";
+  						}else {
+  							//Si es de tipo DATE verifico que venga una fecha y no una funcion MySQL
+  							//echo "Date ".$dato[$arrValor['COLUMN_NAME']] ." dd".strpos($dato[$arrValor['COLUMN_NAME']], "-");
+  							if(strpos($dato[$arrValor['COLUMN_NAME']], "/") === false
+  									&& strpos($dato[$arrValor['COLUMN_NAME']], "-") === false){
+  								//Estoy enviando una funcion, pues no envio ni el - ni el /
+  								$stvalues.="".$dato[$arrValor['COLUMN_NAME']]."";
+  							} else {
+  								$stvalues.="'".$dato[$arrValor['COLUMN_NAME']]."'";
+  							}
+  						}
+  							
+  						$stsql.=$stvalues.",";
+  					} else {
+  						$stsql.="'".$dato[$arrValor['COLUMN_NAME']]."',";
+  					}
+  					
+  					
+  					
   				}else{
   					$stsql.="".$dato[$arrValor['COLUMN_NAME']].",";
   				}

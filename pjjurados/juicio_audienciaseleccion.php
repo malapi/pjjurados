@@ -239,6 +239,7 @@ $datos = data_submitted();
 				<div id="listadoDatosDocumentos" class="widget">
 			</div>
 			</div>  
+			
 				<!-- /basic inputs -->
 				<div id="listadoDatos" class="widget">
 				

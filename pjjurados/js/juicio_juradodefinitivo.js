@@ -2,7 +2,7 @@ function cargarTablaPrincipal(){
 	$.post("libs/datagridhtml.php", {dataForm:$('#formJuradoDefinitivo').serialize(),control:"personaseleccion"
 		,personaseleccion_accion:"verTabla"
 		,tabla:"Apellido:Apellido#Nombre:Nombre#Fecha Seleccion:psfechaseleccion#Fecha Fin Seleccion:psfechafinseleccion#Orden Sel:psnroordenseleccion#Archivo:nombrearchivo"
-		,eventos:[]
+		,eventos:[{titulo:"Desvincular",href:"juicio_juradodefinitivo.php",icono:"icon-th-list",accion:"editar"}]
 					}, function(data){
 						if(data.search("<tbody></tbody>")<0){
 							//alert("oculto");

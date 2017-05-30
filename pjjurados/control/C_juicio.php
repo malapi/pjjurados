@@ -196,7 +196,7 @@ class C_juicio extends Session{
  		$obj= new juicionotificaciones();
  		$obj->insertar($un);
  		$respuesta = true;
-                return $respuesta;
+        return $respuesta;
 		
 	}
 	
@@ -208,14 +208,16 @@ class C_juicio extends Session{
 		//$obj= new juicio();
 		//print_object($data);
 		$respuesta = $obj->sortear($data);
-		if(count($respuesta)>0){
-			$data['seleccionados']=$respuesta;
-			$resp = $obj->guardarSorteo($data);
+		if($respuesta['exito']==1){
+			//$data['seleccionados']=$respuesta;
+			$resp = $obj->guardarSorteo($respuesta);
+			//psnrojurado is not null where notificacion
+			//$data['psnrojurado']="is not null";
+			$this->generarListadoNotificacionAudienciaSeleccion($data);
 			//print_object($respuesta);
-		} else {
-			echo "fallo el sorteo";
-		}
-		return $resp;
+		} 
+		//print_object($respuesta);
+		return $respuesta;
 		
 	}
 	
