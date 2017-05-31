@@ -254,7 +254,7 @@ WHERE column_default ~ '_seq' and table_name  = trim ( split_part( replace( repl
   				//Verifico que el valor que viene para la columa sea diferente de null o blanquito
   				$stsql .=$arrValor['COLUMN_NAME']."=";
   				if($arrValor['DATA_TYPE']!='tinyint' && $arrValor['DATA_TYPE']!='int'){
-  					
+  					$stvalues="";
   					if($arrValor['DATA_TYPE']=='date' || $arrValor['DATA_TYPE']=='timestamp'){
   						if($dato[$arrValor['COLUMN_NAME']] == ''){
   							//Verifico que si es una Fecha, el nulo es el valor null

@@ -33,18 +33,23 @@ $datos = data_submitted();
 							<input type="hidden" name="liMenu" id="liMenu" value="liSorteojuicio" />
 							<input type="hidden" name="itemMenu" id="itemMenu" value="opSorteoJuicio1" />
 							<input type="hidden" name="accion" id="accion" value="juradoDefinitivo" />
-							<input type="hidden" name="where" id="accion" value="notificacion" />
+							<!-- <input type="hidden" name="where" id="accion" value="notificacion" /> -->
 							<input  type="hidden"  name="idjuicio" id="idjuicio" value="0" ></input>
 							<input  type="hidden"  name="psnrojurado" id="psnrojurado" value="is not null" ></input>
-							<div class="well">	
+			<div class="well">	
 						    
-						    <div id="mdlSeleccionDocumentos">
-			<form id="formCargarDocumento" method="POST" class="form-inline">
+			<div id="mdlSeleccionDocumentos">
 				 <input  type="hidden"  name="idpersonaselecciondocumento" id="idpersonaselecciondocumento" value="0" ></input>
 				 <input  type="hidden"  name="idseleccion" id="idseleccion" value="0" ></input>
 				 <input  type="hidden"  name="idPersona" id="idPersona" value="0" ></input>
 				 <input  type="hidden"  name="psdarchivo" id="psdarchivo" value="" ></input>
 				 <input  type="hidden" name="personaselecciondocumento_accion" id="personaselecciondocumento_accion" value="guardarDocumento"></input>
+			<div class="row">
+			   <div class="col">
+					<input style="padding:8px;display:block;border:none;border-bottom:1px solid #ccc;width:100%" type="text" name="informacionpersona" id="informacionpersona" readonly="readonly" ></input>
+					
+				</div>
+				</div>
 			<div class="row">
 			<div class="col">
 					<label class="control-label" for="psdfechafin" >Fecha Vto.Documento:  </label>
@@ -87,7 +92,6 @@ $datos = data_submitted();
 					<span id="respuestaDocumento"></span>
 					</div>
 				</div>
-				</form>	
 				<div id="listadoDatosDocumentos" class="widget">
 			</div>
 			</div>  
@@ -100,18 +104,7 @@ $datos = data_submitted();
 								<div id="respuesta"></div>
 								</div> 
 								</div> 
-								
-								
-								                        
-						        <div class="row-fluid">
-						         <div class="form-actions align-right">
-	                                <button id="btnGenerar" type="button" class="btn btn-info">Generar</button>
-	                                <button id="btnCancel" type="button" class="btn">Cerrar</button>
-	                            </div>
-	                            </div>
-	                            
-	                            
-						     </div>
+			 </div>
 						</div><!-- /general form elements -->						
 					 
  					
@@ -129,6 +122,7 @@ $datos = data_submitted();
 		</div>
 		<!-- /content -->
 <?php include("footer.php"); ?>
+<script type="text/javascript" src="js/plugins/ajaxupload.3.5.js"></script>
 <script type="text/javascript" src="js/juicio_juradodefinitivo.js"></script>
 <script type="text/javascript">
 var $_POST = <?php echo json_encode($datos); ?>;

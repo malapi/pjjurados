@@ -34,7 +34,7 @@ class personaseleccion extends BaseDatos{
 	 
 
 	function editar($data){
-		if($data['psasiste'] != "null"){
+		if(isset($data['psasiste']) && $data['psasiste'] != "null"){
 			$data['psasiste']=$data['psasiste'] - 1;
 		}
 			 

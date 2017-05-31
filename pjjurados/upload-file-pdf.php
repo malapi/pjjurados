@@ -7,6 +7,11 @@ $oLogin=new Login();
  	echo "0";
 }*/
 	
+
+	if (!file_exists($uploaddir)) {
+    	mkdir($uploaddir, 0777, true);
+	}
+
 	$archi	= $_FILES['uploadfile']['name'];
 	if($archi != "")
 	{	

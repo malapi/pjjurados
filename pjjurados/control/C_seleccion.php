@@ -23,8 +23,9 @@ class C_seleccion extends Session{
 			$resp = $obj->eliminar($data);
 		
 		if ($data['accion']=='guardarDocumento')
-			
 			$resp = $this->guardarDocumento($data);
+		if ($data['accion']=='desvincular')
+				$resp = $this->desvincularjurado($data);
 		if ($data['accion']=='consultar') {
 			$obj = new personaseleccion();
 			$resp = $obj->mostrarInformacionPersona($data);
@@ -38,6 +39,18 @@ class C_seleccion extends Session{
 
 	
 	public function guardarDocumento($data){
+		$obj = new personaselecciondocumento();
+		$resp = $obj->insertar($data);
+		return $resp;
+	}
+	
+	public function desvincularjurado($data){
+		//Blanquelo el Nro de Jurado y lo pongo con Resultado Desvinculado
+		$obj = new personaseleccion();
+		$data['idpersonaseleccionresultadotipos']="6";
+		$data['psnrojurado']="null";
+		$resp = $obj->editar($data);
+		//guardo el Documento
 		$obj = new personaselecciondocumento();
 		$resp = $obj->insertar($data);
 		return $resp;

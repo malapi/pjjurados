@@ -7,6 +7,10 @@ if(!$oLogin->activa()){
 echo "0";
 }*/
 
+if (!file_exists($uploaddir)) {
+	mkdir($uploaddir, 0777, true);
+}
+
 $archi	= $_FILES['uploadfilePlantilla']['name'];
 if($archi != "")
 {

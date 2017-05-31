@@ -154,7 +154,7 @@ function cargarDocumento(cadena){
                 	   if(resp.ocultarForm){
                 		   $('#mdlSeleccionDocumentos').hide();
                 	   }
-                		
+                	   $("#respuestaDocumento").html('');
                 	}else  {
                 		//$("#respuesta").html(resp.mensaje);
                 		$("#respuesta").html("<div class='alert alert-error'>" +
@@ -179,6 +179,7 @@ function cargarDocumento(cadena){
 	
 	$('#mdlSeleccionDocumentos').show();
 }
+
 function autocombo_controles_idpersonaseleccionresultadotipos(){
 	if($('#idpersonaseleccionresultadotipos').val() == '1') { //Excusado
 		
@@ -235,6 +236,12 @@ $(function(){
 	//cargarCalendario();
 	//cargarTablaDocumentos();
 	$('#mdlSeleccionDocumentos').hide();
+	
+	
+	if($('#idPersona').val()=='0'){
+		$('#divformAudiencia').hide();
+	}
+	
 	
 //	if($('#idPersona').val() != '0'){
 //		$('#divformAudiencia').show();
